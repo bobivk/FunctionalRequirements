@@ -83,7 +83,7 @@ requirementForm.addEventListener('submit', (event) => {
         data[field.name] = field.value;
     });
 
-    fetch('../backend/api/users/save-requirement.php', {
+    fetch('../../../backend/api/users/save-requirement.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -95,5 +95,24 @@ requirementForm.addEventListener('submit', (event) => {
         })
 
 
-    event.preventDefault(); //do not refresh page
+    event.preventDefault();
 });
+
+const deleteProjectButton = document.getElementById("delete-project");
+deleteProjectButton.addEventListener('click', (event) => {
+
+    fetch('../../../backend/api/users/delete-requirement.php&id=' + project.id, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => {
+            if (response.status == 401) {
+                //pop up message: трябва да бъдете администратор, за да можете да изтриете този проект.
+            }
+        })
+});
+
+//same for delete requirement when we have the buttons.

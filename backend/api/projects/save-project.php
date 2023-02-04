@@ -1,21 +1,10 @@
 <?php
-
-
-    function getUserRole (PDO $connection) {
-        $sql = "SELECT id FROM roles WHERE title = 'admin'";
-        $statement = $connection->query($sql);
-
-        $rows = $statement -> fetchAll();
-        return $rows[0]["id"];
-    }
-
     session_start();
 
     if(isset($_SESSION["user"])){
         $db = new DB();
         $connection = $db->getConnection();
-        $adminRoleId = getUserRole($connection);
-        if ($adminRoleId === $_SESSION["user"]["role_id"]) {
+        if (isAdmin($_SESSION["user"]["role_id"])) {
             $projectData = json_decode(file_get_contents("php://input"), true); 
             try{
                 $sql = "INSERT INTO projects (name, number, description) VALUES (?, ?, ?)";
@@ -25,7 +14,7 @@
                 echo json_encode(["message" => "Проектът е добавен успешно."]);
             } catch(PDOException $exc) {
                 http_response_code(500);
-                echo ["message" => $exc->getMessage()];
+                echo ["message" => "Грешка при запазване на проект."];
             }
         } else {
             http_response_code(403);
