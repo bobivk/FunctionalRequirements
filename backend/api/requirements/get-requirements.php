@@ -1,12 +1,12 @@
 <?php
     session_start();
-
-        try{
+    $project_id = $_GET["project_id"];
+        try {
             $db = new DB();
             $connection = $db->getConnection();
-            $sql = "SELECT username, email FROM users";
+            $sql = "SELECT * FROM requirements where project_id = ?";
             $connection -> prepare($sql);
-            $statement -> execute();     
+            $statement -> execute($project_id);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $exc) {
             http_response_code(500);
