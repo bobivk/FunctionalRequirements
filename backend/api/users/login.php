@@ -38,14 +38,13 @@
             }
             session_start(); //създава session cookie
             $_SESSION["user"] = $user; //запазваме данните за потребителя в сесията, за да не трябва да се логва отново при следващи извиквания
+            http_response_code(200);
             echo json_encode(["message" => "Входът е успешен"]);
         
         } catch (Error $ex) {
             http_response_code(500);
             echo json_encode(["message" => "Грешка при вход"]);
         }
-
-
     } else {
         http_response_code(400);
         echo json_encode(["message" => "Невалидни данни"]);

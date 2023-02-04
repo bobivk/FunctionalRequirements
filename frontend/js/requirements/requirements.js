@@ -14,9 +14,7 @@ export class Requirement {
     }
 }
 
-let projectDiv = document.getElementById("project");
-
-let project = fetch("../../../backend/api/projects/get-project.php" //+ new URLSearchParams({
+let project = fetch("../../../../backend/api/projects/get-project.php" //+ new URLSearchParams({
         //  "id":
         //})
     )
@@ -26,13 +24,12 @@ let project = fetch("../../../backend/api/projects/get-project.php" //+ new URLS
     .then((projectJson) => {
         return new Project(projectJson.name, projectJson.number, projectJson.description);
     });
-let projectName = document.createElement("h2");
-projectName.innerHTML = "Проект номер " + project.number + ". " + project.name + ".";
-let projectDesc = document.createElement("p");
+let projectName = document.getElementById("project-name");
+projectName.innerHTML = project.number + ". " + project.name;
+let projectDesc = document.getElementById("project-description");
 projectDesc.innerHTML = project.description;
-projectDiv.appendChild(projectDesc);
 
-let requirements = fetch("../../../backend/api/requirements/get-requirements.php" //+ new URLSearchParams project_id
+let requirements = fetch("../../../../backend/api/requirements/get-requirements.php" //+ new URLSearchParams project_id
     )
     .then((response) => {
         return response.json();
@@ -73,17 +70,28 @@ requirements.forEach((requirement) => {
     requirementsTable.appendChild(requirementRow);
 });
 
+if (isAdmin()) {
+    document.getElementById("edit-project").style.display = "block";
+    document.getElementById("delete-project").style.display = "block";
+    document.getElementById("save-project").style.display = "block";
+    //for each requirement row display edit/delete buttons
+}
 
+async function isAdmin() {
+    const response = await fetch("../../../../backend/api/users/is-admin.php");
+    const data = await response.json();
+    return data["isAdmin"];
+}
 
 const requirementForm = document.getElementById('requirement-form');
 requirementForm.addEventListener('submit', (event) => {
     const data = {};
     const fields = requirementForm.querySelectorAll('input');
-    fields.foreach(field => {
+    fields.forEach(field => {
         data[field.name] = field.value;
     });
 
-    fetch('../../../backend/api/users/save-requirement.php', {
+    fetch('../../../../backend/api/requirements/save-requirement.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -91,17 +99,15 @@ requirementForm.addEventListener('submit', (event) => {
             body: JSON.stringify(data)
         })
         .then((response) => {
-            //show successfully added message
-        })
-
-
+            console.log(response.json());
+        });
     event.preventDefault();
 });
 
 const deleteProjectButton = document.getElementById("delete-project");
 deleteProjectButton.addEventListener('click', (event) => {
 
-    fetch('../../../backend/api/users/delete-requirement.php&id=' + project.id, {
+    fetch('../../../../backend/api/delete-project.php&id=' + project.id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -109,10 +115,38 @@ deleteProjectButton.addEventListener('click', (event) => {
             body: JSON.stringify(data)
         })
         .then((response) => {
-            if (response.status == 401) {
-                //pop up message: трябва да бъдете администратор, за да можете да изтриете този проект.
+            if (response.status == 403) {
+                alert("Нужни са администраторски права за изтриване на този проект.");
+                //document.getElementById("admin-required-error").style.display = "block"
+            } else {
+                location = '../../../html/projects.html';
             }
-        })
+        });
+    event.preventDefault();
 });
 
+const editProjectButton = document.getElementById("edit-project");
+editProjectButton.addEventListener('click', (event) => {
+    document.getElementById('project').toggleAttribute("contenteditable");
+    document.getElementById('save-project').style.display = "block";
+    event.preventDefault();
+});
+
+const saveProjectButton = document.getElementById("save-project");
+saveProjectButton.addEventListener('click', (event) => {
+    document.getElementById('project').setAttribute('contenteditable', 'false');
+    fetch('../../../../backend/api/projects/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => {
+            if (response.status == 403) {
+                alert("Нужни са администраторски права за промяна на този проект");
+            }
+        });
+    event.preventDefault();
+});
 //same for delete requirement when we have the buttons.

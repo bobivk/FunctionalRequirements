@@ -148,10 +148,10 @@ function userExists(username, email) {
         });
 }
 
-   
+
 signInBtn.addEventListener('click', (event) => {
 
-    if(!signInBtn.classList.contains("disable")){
+    if (!signInBtn.classList.contains("disable")) {
         const data = {};
         const fields = document.querySelectorAll('input');
 
@@ -167,7 +167,7 @@ signInBtn.addEventListener('click', (event) => {
                 body: JSON.stringify(data)
             })
             .then(response => {
-                location = '../frontend/html/projects.html';
+                location = '../../../html/projects.html';
             });
 
         event.preventDefault();

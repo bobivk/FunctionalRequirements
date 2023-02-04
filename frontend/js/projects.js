@@ -15,7 +15,7 @@ let projects = fetch("../../../backend/api/projects/get-projects.php")
     })
     .then((data) => {
         let projects = [];
-        data.forEach(projectJson => {
+        data.forEach((projectJson) => {
             let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description);
             projects.push(project);
         })
@@ -38,8 +38,8 @@ function attachListener(item) {
     });
 }
 
-$(document).ready(function () {
-    $(document.body).on("click", "tr[data-href]", function (){
+$(document).ready(function() {
+    $(document.body).on("click", "tr[data-href]", function() {
         window.location.href = this.dataset.href;
     });
 });

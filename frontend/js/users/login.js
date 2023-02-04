@@ -8,7 +8,7 @@ loginForm.addEventListener('submit', (event) => {
         data[field.name] = field.value;
     });
 
-    fetch("../../backend/api/login.php", {
+    fetch("../../../../backend/api/login.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,7 +16,9 @@ loginForm.addEventListener('submit', (event) => {
             body: JSON.stringify(data)
         })
         .then(response => {
-            location = '../frontend/html/projects.html';
+            if (response.status === 200) {
+                location = '../frontend/html/projects.html';
+            }
         });
 
     event.preventDefault();
