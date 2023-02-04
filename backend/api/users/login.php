@@ -19,8 +19,9 @@
             } else {
                 return null;
             }
-        } catch (PDOException $ex) {
-            throw new Error($ex->getMessage());
+        } catch(PDOException $exc) {
+            http_response_code(500);
+            echo ["message" => $exc->getMessage()];
         }
     }
 

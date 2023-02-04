@@ -1,10 +1,7 @@
 <?php
-
-
     function getUserRole (PDO $connection) {
         $sql = "SELECT id FROM roles WHERE title = 'admin'";
         $statement = $connection->query($sql);
-
         $rows = $statement -> fetchAll();
         return $rows[0]["id"];
     }
@@ -16,13 +13,13 @@
         $connection = $db->getConnection();
         $adminRoleId = getUserRole($connection);
         if ($adminRoleId === $_SESSION["user"]["role_id"]) {
-            $projectData = json_decode(file_get_contents("php://input"), true); 
-            try{
-                $sql = "INSERT INTO projects (name, number, description) VALUES (?, ?, ?)";
+            $reqData = json_decode(file_get_contents("php://input"), true);
+            $sql = "INSERT INTO requirements (name, priority, layer, story, description, tags) VALUES (?, ?, ?, ?, ?, ?)";
+            try {
                 $statement = $connection -> prepare($sql);
-                $statement -> execute([$projectData["name"], $projectData["number"], $projectData["description"]]);
+                $statement -> execute([$reqData["name"], $reqData["priority"], $reqData["layer"], $reqData["story"], $reqData["description"], $reqData["tags"]]);
                 http_response_code(201);
-                echo json_encode(["message" => "Проектът е добавен успешно."]);
+                echo json_encode(["message" => "Изискването е добавено успешно."]);
             } catch(PDOException $exc) {
                 http_response_code(500);
                 echo ["message" => $exc->getMessage()];

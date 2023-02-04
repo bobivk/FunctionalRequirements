@@ -64,9 +64,7 @@
         } catch (PDOException $ex) {
             //if($ex["message"] e neshto si) - http 409 conflict, user exists
             http_response_code(500);
-            echo json_encode([
-                "message" => "Неуспешна регистрация"
-            ]);
+            echo json_encode(["message" => "Неуспешна регистрация"]);
         }
     } else {
         http_response_code(400);
