@@ -2,7 +2,7 @@
 
 
     function getUserRole (PDO $connection) {
-        $sql = "SELECT id FROM roles WHERE title='admin'";
+        $sql = "SELECT id FROM roles WHERE title = 'admin'";
         $statement = $connection->query($sql);
 
         $rows = $statement -> fetchAll();
@@ -16,14 +16,12 @@
         $connection = $db->getConnection();
         $adminRoleId = getUserRole($connection);
         if ($adminRoleId === $_SESSION["user"]["role_id"]) {
-            $project_id = $_GET["project_id"];
-            if (isset($project_id)) {
-                $sql = "SELECT * FROM projects where id  = ?";
-                $connection -> prepare($sql);
-                $statement -> execute(["project_id" => $project_id]); //map
-                $projects = $statement->fetchAll();
-            }
-        //    while($rpow = $statement -> fetch()) { }        
+           $projectData = json_decode(file_get_contents("php://input"), true); 
+           $sql = "INSERT INTO projects (name, number, description) VALUES (?, ?, ?)";
+           $statement = $connection -> prepare($sql);
+           $statement -> execute([$projectData["name"], $projectData["number"], $projectData["description"]]);
+           http_response_code(201);
+           echo json_encode(["message" => "Проектът е добавен успешно."]);
         } else {
             http_response_code(403);
             echo json_encode(["message" => "Невалидни права за достъп - потребителят не е администратор"]);
