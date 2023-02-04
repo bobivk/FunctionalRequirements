@@ -13,19 +13,15 @@
 
     if(isset($_SESSION["user"])){
         $db = new DB();
-        $adminRoleId = getUserRole($db->getConnection());
+        $connection = $db->getConnection();
+        $adminRoleId = getUserRole($connection);
         if ($adminRoleId === $_SESSION["user"]["role_id"]) {
             $project_id = $_GET["project_id"];
             if (isset($project_id)) {
-        
-            $db = new 
-            $connection = 
-        
-            $sql = "SELECT * FROM products where id  = ?";
-            $connection -> prepare($sql);
-            $statement -> execute(["project_id" => $project_id]); //map
-            // sql injection vulnerable - $statement = $connection -> query($sql);
-            $products = $statement->fetchAll();
+                $sql = "SELECT * FROM projects where id  = ?";
+                $connection -> prepare($sql);
+                $statement -> execute(["project_id" => $project_id]); //map
+                $projects = $statement->fetchAll();
             }
         //    while($rpow = $statement -> fetch()) { }        
         } else {
