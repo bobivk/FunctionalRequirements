@@ -16,6 +16,9 @@ body {
     position: relative;
 } 
 
+#nameField {
+    max-height: 0;
+}
 
 .form-box {
     border-radius: 20px;
@@ -55,6 +58,9 @@ body {
     border-radius: 10px;
     display: flex;
     align-items: center; 
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
 }
 
 input {
@@ -70,25 +76,19 @@ input {
     color: #999;
 }
 
-.form-box p {
-    text-align: left;
-    font-size: 15px;
-    color: #fff
+.btn-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
-.form-box a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-}
-
-button {
+.btn-field button {
+    margin-top: 20%;
     flex-basis: 48%;
     background-color: #eaeaea;
     font-weight: bold;
     color: #270047;
-    height: 60px;
+    height: 50px;
     width: 100%;
     border-radius: 15px;
     border: 0;
@@ -106,109 +106,23 @@ button:hover {
     height: 240px;
 }
 
-/* body {
-    background-color: #defdf1;
-}
-
-#form-div {
-    margin: auto;
-    margin-top: 5.5%;
-    width: 35%;
-   
-    border: #76a767 1.5px solid;
-}
-
-.form-input {
-    width: 90%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
-    padding-left: 0.75%;
-    margin: 2.5% 5.5% 2.5% 5.5%;
-    
-    box-sizing: border-box;
-    border: #c3cdc0 2px solid;
-
-    font-size: 15px;
-}
-
-.text-par {
-    width: 90%;
-    padding-top: 1.5%;
-    padding-bottom: 1%;
-    padding-left: 1%;
-    margin: 2.5% 5.5% 0.15% 5.5%;
-    font-size: 15px;
+.btn-field button.disable {
+    background: #eaeaea;
+    color: #555;
 }
 
 .error {
-    width: 90%;
-    padding-top: 1.5%;
-    padding-bottom: 1%;
-    padding-left: 1%;
-    margin: 2.5% 5.5% 0.15% 5.5%;
-    font-size: 15px;
-    color: #af0c0c;
-	background-color: #ffe0e0;
-	padding: 8px;
-	display: none;
+    color:#eaeaea;
 }
 
-#check0, #check1, #check2, #check3, #check4, #checkSamePassword {
+.password-check {
     width: 90%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
     padding-left: 0.75%;
     margin: 0.1% 5.5% 0.1% 5.5%;
-    color: red;
+    color: #555;
+    text-align: justify;
 }
 
-.form-input:hover {
-    border-color: #79a06b;
-}
-
-.form-input::placeholder {
-    padding-left: 0.75%;
-}
-
-.form-input:focus::placeholder {
-    color: transparent;
-}
-
-#form-input-fields {
-    margin-top: 3%
-}
-
-#success {
-    width: 90%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
-    margin-bottom: 3%;
-    margin: 2.5% 5.5% 2.5% 5.5%;
-    
-    border:  #c3cdc0 2px solid;
-    background-color: #cfe7d9;
-    color: #649457;
-
-    font-size: 15px;
+.password-check div.disable {
     display: none;
-
 }
-
-#register-btn {
-    width: 90%;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
-    margin-bottom: 3%;
-    margin: 2.5% 5.5% 2.5% 5.5%;
-    
-    border:  #c3cdc0 2px solid;
-    background-color: #cfe7d9;
-    color: #649457;
-
-    font-size: 15px;
-}
-
-#register-btn:hover {
-    background-color: #558d3d;
-    color: white;
-} */
