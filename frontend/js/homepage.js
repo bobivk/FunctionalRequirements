@@ -1,10 +1,10 @@
 function openProjectForm() {
-    document.getElementById("add-project-modal").style.display = "block";
+    document.getElementById("modal").style.display = "block";
 }
 
 function closeForm() {
     document.getElementById("project-form").reset();
-    document.getElementById("add-project-modal").style.display = "none";
+    document.getElementById("modal").style.display = "none";
 }
 
 document.getElementById("project-form").addEventListener('submit', (event) => {
@@ -27,7 +27,7 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
             response.json();
         })
         .then((responseJson) => {
-            //closeForm();
+            closeForm();
             //success message
         })
 });

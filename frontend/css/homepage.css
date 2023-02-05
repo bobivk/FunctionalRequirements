@@ -296,13 +296,12 @@ tr td:last-child {
     width: 90%;
     max-width: 700px;
     max-height: 580px;
-    position: fixed;
-    top: 25%;
-    left: 40%;
+    position: absolute;
+    top: 15%;
+    left: 28%;
     background: #270047;
     padding: 50px 60px 70px;
     color: #f0f0f0;
-    display: none;
     box-sizing: border-box;
     font-weight: bold;
     border-radius: 10px;
@@ -405,6 +404,23 @@ form textarea {
         width: calc(100% - 70px);
         left: 70px;
     }
+    #add-project-modal {
+        z-index: 1;
+        border-radius: 20px;
+        width: 80%;
+        max-width: 700px;
+        max-height: 580px;
+        position: absolute;
+        top: 18%;
+        left: 23%;
+        background: #270047;
+        padding: 50px 60px 70px;
+        color: #f0f0f0;
+        box-sizing: border-box;
+        font-weight: bold;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+    }
 }
 
 @media only screen and (max-width: 960px) {
@@ -413,6 +429,23 @@ form textarea {
     }
     .recent-grid {
         grid-template-columns: 60% 40%;
+    }
+    #add-project-modal {
+        z-index: 1;
+        border-radius: 20px;
+        width: 80%;
+        max-width: 700px;
+        max-height: 580px;
+        position: absolute;
+        top: 18%;
+        left: 18%;
+        background: #270047;
+        padding: 50px 60px 70px;
+        color: #f0f0f0;
+        box-sizing: border-box;
+        font-weight: bold;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
     }
 }
 
@@ -481,10 +514,39 @@ form textarea {
     #nav-toggle:checked~.main-content {
         margin-left: 0rem !important;
     }
+    #add-project-modal {
+        z-index: 1;
+        border-radius: 20px;
+        width: 80%;
+        max-width: 700px;
+        max-height: 580px;
+        position: absolute;
+        top: 25%;
+        left: 10%;
+        background: #270047;
+        padding: 50px 60px 70px;
+        color: #f0f0f0;
+        box-sizing: border-box;
+        font-weight: bold;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+    }
 }
 
 @media only screen and (max-width: 560px) {
     .tiles {
         grid-template-columns: 100%;
     }
+}
+
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: opacity 300ms ease-in-out;
 }

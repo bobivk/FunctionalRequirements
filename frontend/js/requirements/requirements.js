@@ -180,3 +180,12 @@ function fetchRequirements() {
         });
 
 }
+
+function addRequirements() {
+    document.getElementById("reqModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("form-container").reset();
+    document.getElementById("reqModal").style.display = "none";
+}
