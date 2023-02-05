@@ -186,6 +186,16 @@
                         <label class="form-label" for="description">Описание:</label>
                         <textarea type="text" class="project-input" placeholder="Подробно описание на проекта" name="description" required rows="10" cols="20"></textarea>
 
+                        <label class="form-label" for="status">Статус:</label>
+                        <input type="radio" id="not-started" name="status" value="незапочнат" required>
+                        <label for="not-started">незапочнат</label>
+                            
+                        <input type="radio" id="draft" name="status" value="чернова" required>
+                        <label for="draft">чернова</label>
+                        
+                        <input type="radio" id="finished" name="status" value="завършен" required>
+                        <label for="finished">завършен</label>
+                         
                         <div class="add-project-btns">
                             <button id="add-project-btn" type="submit" class="btn">Добави <i class="fa-solid fa-plus"></i></button>
                             <button id="cancel-add-project-btn" type="button" class="btn cancel" onclick="closeForm()">Затвори <i class="fa-solid fa-xmark"></i></button>

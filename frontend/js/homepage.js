@@ -77,14 +77,3 @@ function attachListener(item, projectId) {
         location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.html?id=' + projectId; //open page of this project with its id
     });
 }
-
-
-//search bar in homepage:
-const searchInput = document.querySelector("[data-search]");
-
-let projects2 = [];
-
-searchInput.addEventListener("input", (e) => {
-    const value = e.target.value;
-
-});
