@@ -95,7 +95,7 @@ function checkPassword() {
         document.getElementById("check0").style.color = "#555";
     }
 
-    if (len <= 10) {
+    if (len <= 10 && input != "") {
         document.getElementById("check1").style.color = "green";
     } else {
         document.getElementById("check1").style.color = "#555";

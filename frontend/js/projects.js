@@ -1,4 +1,4 @@
-export class Project {
+class Project {
     constructor(id, name, number, description) {
         this.id = id;
         this.name = name;
@@ -9,37 +9,43 @@ export class Project {
 
 let projectsDiv = document.getElementById("projects");
 
-let projects = fetch("../../../backend/api/projects/get-projects.php")
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-        let projects = [];
-        data.forEach((projectJson) => {
-            let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description);
-            projects.push(project);
-        })
-        return projects;
-    });
+// let projects = fetch("../../../backend/api/projects/get-projects.php")
+//     .then((response) => {
+//         return response.json();
+//     })
+//     .then((data) => {
+//         let projects = [];
+//         data.forEach((projectJson) => {
+//             let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description);
+//             projects.push(project);
+//         })
+//         return projects;
+//     });
 let projectsUl = document.createElement("ul");
 
-for (i = 0; i < projects.length; i++) {
-    let projectItem = document.createElement("li");
-    projectItem.innerHTML = projects[i].number + ". " + projects[i].name;
-    attachListener(projectItem);
-    projectsUl.appendChild(projectItem);
-}
+// for (i = 0; i < projects.length; i++) {
+//     let projectItem = document.createElement("li");
+//     projectItem.innerHTML = projects[i].number + ". " + projects[i].name;
+//     attachListener(projectItem);
+//     projectsUl.appendChild(projectItem);
+// }
 
 projectsDiv.appendChild(projectsUl);
 
-function attachListener(item) {
+
+function attachListener(item, projectId) {
     item.addEventListener('click', event => {
-        //window.open(''); open page of this project with its id
+        window.open('../../html/projects&id=' + projectId); //open page of this project with its id
     });
 }
 
-$(document).ready(function() {
-    $(document.body).on("click", "tr[data-href]", function() {
-        window.location.href = this.dataset.href;
-    });
-});
+function openProj() {
+    window.open('https://google.com/');
+}
+
+
+// $(document).ready(function() {
+//     $(document.body).on("click", "tr[data-href]", function() {
+//         window.location.href = this.dataset.href;
+//     });
+// });

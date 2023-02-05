@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проекти</title>
-    <script src="../js/projects.js" defer></script>
     <link rel="stylesheet" href="../css/projects.css">
 </head>
 
@@ -25,7 +24,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-href="http://google.com/">
+                <!-- <tr data-href="http://google.com/"> -->
+                <tr onClick=openProj()>
                     <td>
                         1
                     </td>
@@ -33,6 +33,7 @@
                         Система за функционални изисквания
                     </td>
                 </tr>
+        
                 <tr data-href="#" class="active-row">
                     <td>
                         2
@@ -53,5 +54,6 @@
         </table>
     </div>
 </body>
+<script src="../js/projects.js" defer></script>
 
 </html>
