@@ -56,8 +56,10 @@ signUpBtn.addEventListener('click', (event) => {
         data[field.name] = field.value;
     });
 
-    if (isEmailValid(data.email) && !userExists(data.username, data.email)) {
-        fetch('../backend/api/users/register-user.php', {
+    if (isEmailValid(data.email) && !userExists(data)) {
+        //http://localhost/FunctionalRequirements/backend/api/users/get-users.php
+        //../../../../backend/api/users/register-user.php
+        fetch('http://localhost/FunctionalRequirements/backend/api/users/register-user.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -65,7 +67,7 @@ signUpBtn.addEventListener('click', (event) => {
                 body: JSON.stringify(data)
             })
             .then((response) => {
-                location = "../frontend/html/login.html";
+                // location.reload();
             })
     }
 
@@ -121,30 +123,33 @@ function checkPassword() {
 
 }
 
-function userExists(username, email) {
-    fetch('../../../../backend/api/users/get-users.php')
+function userExists(data) {
+    //http://localhost/FunctionalRequirements/backend/api/users/get-users.php
+    fetch('http://localhost/FunctionalRequirements/backend/api/users/user-exists.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
         .then((res) => {
             return res.json();
         })
-        .then((data) => {
-            exists = false;
-            data.forEach(user => {
-                if (user.username === username) {
+        .then((resultJson) => {
+            if (resultJson["exists"]) {
+                if (resultJson["sameUsername"]) {
                     document.getElementById('username-exists-error').innerHTML = "Потребител с име '" + username + "' вече съществува.";
                     document.getElementById('username-exists-error').style.display = "block";
-                    exists = true;
                 }
-                if (user.email === email) {
+                if (resultJson["sameEmail"]) {
                     document.getElementById('email-exists-error').innerHTML = "Потребител с имейл адрес '" + email + " вече съществува.";
                     document.getElementById('email-exists-error').style.display = "block";
-                    exists = true;
                 }
-            })
-            if (!exists) {
-                document.getElementById('username-exists-error').style.display = "none";
-                document.getElementById('email-exists-error').style.display = "none";
+                return true;
             }
-            return exists;
+            document.getElementById('username-exists-error').style.display = "none";
+            document.getElementById('email-exists-error').style.display = "none";
+            return false;
         });
 }
 

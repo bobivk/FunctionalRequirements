@@ -39,10 +39,6 @@ function attachListener(item, projectId) {
     });
 }
 
-function openProj() {
-    window.open('https://google.com/');
-}
-
 
 // $(document).ready(function() {
 //     $(document.body).on("click", "tr[data-href]", function() {

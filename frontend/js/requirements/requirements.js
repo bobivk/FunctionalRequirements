@@ -16,7 +16,7 @@ export class Requirement {
 // /projects&id=1
 
 let project = fetch("../../../../backend/api/projects/get-project.php" //+ new URLSearchParams({
-          //"id": 
+        //"id": 
         //})
     )
     .then((response) => {

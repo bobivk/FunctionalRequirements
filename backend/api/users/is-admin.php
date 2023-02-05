@@ -1,4 +1,10 @@
 <?php
+session_start();
+$userRoleId = $_SESSION["user"]["role_id"]
+if(isAdmin($userRoleId)) {
+        http_response_code(200);
+        echo encode_json(["isAdmin" => true]);
+}
 public function isAdmin($userRoleId) {
         $db = new DB();
         $connection = $db->getConnection();
