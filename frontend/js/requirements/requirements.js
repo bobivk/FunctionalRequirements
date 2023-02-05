@@ -69,17 +69,24 @@ deleteProjectButton.addEventListener('click', (event) => {
     console.log("deleting");
     let sureToDelete = confirm("Сигурни ли сте, че искате да изтриете този проект?");
     if (sureToDelete) {
-        fetch('http://localhost/FunctionalRequirements/backend/api/projects/delete-project.php?id=' + params.id, {
-                method: 'DELETE'
-            })
-            .then((response) => {
-                if (response.status == 403) {
-                    alert("Нужни са администраторски права за изтриване на този проект.");
-                    //document.getElementById("admin-required-error").style.display = "block"
-                } else {
+        let ableToDelete = true;
+        fetch('http://localhost/FunctionalRequirements/backend/api/requirements/delete-project-requirements.php?id=' + params.id, {
+            method: 'DELETE'
+        }).then((response) => {
+            if (response.status == 403) {
+                ableToDelete = false;
+            }
+        });
+        if (ableToDelete) {
+            fetch('http://localhost/FunctionalRequirements/backend/api/projects/delete-project.php?id=' + params.id, {
+                    method: 'DELETE'
+                })
+                .then((response) => {
                     location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
-                }
-            });
+                });
+        } else {
+            alert("Нужни са администраторски права за изтриване на този проект.");
+        }
     }
     event.preventDefault();
 });
@@ -135,12 +142,14 @@ function fetchRequirements() {
         .then((data) => {
             let requirements = [];
             data.forEach((req) => {
-                let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.description, req.tags);
+                //id, name, projectId, priority, layer, story, number, description, tags
+                let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.number, req.description, req.tags);
                 requirements.push(requirement);
             });
             let requirementsTable = document.getElementById("functional-requirements");
             requirements.forEach((requirement) => {
                 let requirementRow = document.createElement("tr");
+                let number = document.createElement("td");
                 let name = document.createElement("td");
                 let priority = document.createElement("td");
                 let layer = document.createElement("td");
@@ -148,6 +157,7 @@ function fetchRequirements() {
                 let description = document.createElement("td");
                 let tags = document.createElement("td");
 
+                number.innerHTML = requirement.number;
                 name.innerHTML = requirement.name;
                 priority.innerHTML = requirement.priority;
                 layer.innerHTML = requirement.layer;
@@ -155,6 +165,7 @@ function fetchRequirements() {
                 description.innerHTML = requirement.description;
                 tags.innerHTML = requirement.tags;
 
+                requirementRow.appendChild(number);
                 requirementRow.appendChild(name);
                 requirementRow.appendChild(priority);
                 requirementRow.appendChild(layer);

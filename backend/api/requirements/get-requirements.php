@@ -5,7 +5,7 @@ require_once("../../db/db.php");
         try {
             $db = new DB();
             $connection = $db->getConnection();
-            $sql = "SELECT * FROM requirements where project_id = :project_id";
+            $sql = "SELECT * FROM requirements WHERE project_id = :project_id";
             $statement = $connection -> prepare($sql);
             $statement -> execute(array("project_id" =>$project_id));
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);

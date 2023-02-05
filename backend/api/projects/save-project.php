@@ -8,9 +8,9 @@
         //if (isAdmin($_SESSION["user"]["role_id"])) {
             $projectData = json_decode(file_get_contents("php://input"), true); 
             try {
-                $sql = "INSERT INTO projects (name, number, description) VALUES (:name, :number, :description)";
+                $sql = "INSERT INTO projects (name, number, description, status) VALUES (:name, :number, :description, :status)";
                 $statement = $connection -> prepare($sql);
-                $statement -> execute(array("name" => $projectData["name"], "number" => $projectData["number"], "description" => $projectData["description"]));
+                $statement -> execute(array("name" => $projectData["name"], "number" => $projectData["number"], "description" => $projectData["description"], "status" => $projectData["status"]));
                 http_response_code(201);
                 echo json_encode(["message" => "Project added."]);
             } catch(PDOException $exc) {

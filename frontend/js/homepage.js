@@ -13,7 +13,6 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
     fields.forEach(field => {
         data[field.name] = field.value;
     });
-    data["status"] = "незапочнат";
     fetch("http://localhost/FunctionalRequirements/backend/api/projects/save-project.php", {
             method: 'POST',
             headers: {
@@ -33,15 +32,6 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
         })
 });
 
-class Project {
-    constructor(id, name, number, description) {
-        this.id = id;
-        this.name = name;
-        this.number = number;
-        this.description = description
-    }
-}
-
 let projectsTableBody = document.getElementById("project-table-body");
 
 const projects = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects.php")
@@ -51,7 +41,7 @@ const projects = fetch("http://localhost/FunctionalRequirements/backend/api/proj
     .then((data) => {
         let projects = [];
         data.forEach((projectJson) => {
-            let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description);
+            let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description, projectJson.status);
             let projectRow = document.createElement("tr");
             attachListener(projectRow, project.id);
 
@@ -62,8 +52,19 @@ const projects = fetch("http://localhost/FunctionalRequirements/backend/api/proj
             const projectNameTd = document.createElement("td");
             projectNameTd.innerHTML = project.name;
             projectRow.appendChild(projectNameTd);
-
-            //status
+            const projectStatusTd = document.createElement("td");
+            const projectStatusColor = document.createElement("span");
+            projectStatusColor.classList.add("status");
+            if (project.status == "незапочнат") {
+                projectStatusColor.classList.add("grey");
+            } else if (project.status == "чернова") {
+                projectStatusColor.classList.add("purple");
+            } else {
+                projectStatusColor.classList.add("light-purple");
+            }
+            projectStatusTd.appendChild(projectStatusColor);
+            projectStatusTd.innerHTML += project.status;
+            projectRow.appendChild(projectStatusTd);
 
             projectsTableBody.appendChild(projectRow);
             projects.push(project);

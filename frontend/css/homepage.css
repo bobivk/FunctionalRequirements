@@ -67,31 +67,31 @@
     padding-right: 1rem;
 }
 
-#nav-toggle:checked + .sidebar {
+#nav-toggle:checked+.sidebar {
     cursor: pointer;
     width: 70px;
 }
 
-#nav-toggle:checked + .sidebar .sidebar-brand,
-#nav-toggle:checked + .sidebar li {
-   padding-left: 1rem;
-   text-align: center;
+#nav-toggle:checked+.sidebar .sidebar-brand,
+#nav-toggle:checked+.sidebar li {
+    padding-left: 1rem;
+    text-align: center;
 }
 
-#nav-toggle:checked + .sidebar li a {
+#nav-toggle:checked+.sidebar li a {
     padding-left: 0rem;
 }
 
-#nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
-#nav-toggle:checked + .sidebar li a span:last-child {
+#nav-toggle:checked+.sidebar .sidebar-brand h2 span:last-child,
+#nav-toggle:checked+.sidebar li a span:last-child {
     display: none;
 }
 
-#nav-toggle:checked ~ .main-content {
+#nav-toggle:checked~.main-content {
     margin-left: 70px;
 }
 
-#nav-toggle:checked ~ .main-content header {
+#nav-toggle:checked~.main-content header {
     width: calc(100% - 70px);
     left: 70px;
 }
@@ -306,9 +306,8 @@ tr td:last-child {
 }
 
 #add-project-modal h2 {
-    text-align: center;  
+    text-align: center;
     color: #f0f0f0;
-
 }
 
 #add-project-modal h2::after {
@@ -343,7 +342,7 @@ tr td:last-child {
     display: flex;
 }
 
-#add-project-btn, 
+#add-project-btn,
 #cancel-add-project-btn {
     background: var(--text-on-dark-background);
     border-radius: 10px;
@@ -355,8 +354,7 @@ tr td:last-child {
     cursor: pointer;
 }
 
-
-#add-project-btn:hover, 
+#add-project-btn:hover,
 #cancel-add-project-btn:hover {
     transition: background 1s;
     background-color: #6601B0;
@@ -380,26 +378,21 @@ form textarea {
     .sidebar {
         width: 70px;
     }
-    
     .sidebar .sidebar-brand,
     .sidebar li {
-       padding-left: 1rem;
-       text-align: center;
+        padding-left: 1rem;
+        text-align: center;
     }
-    
-   .sidebar li a {
+    .sidebar li a {
         padding-left: 0rem;
     }
-    
     .sidebar .sidebar-brand h2 span:last-child,
     .sidebar li a span:last-child {
         display: none;
     }
-    
     .main-content {
         margin-left: 70px;
     }
-    
     .main-content header {
         width: calc(100% - 70px);
         left: 70px;
@@ -410,7 +403,6 @@ form textarea {
     .tiles {
         grid-template-columns: (3, 1fr);
     }
-
     .recent-grid {
         grid-template-columns: 60% 70%;
     }
