@@ -16,7 +16,6 @@ function getAndDisableAllPasswordChecks() {
     check3.style.display = "none";
     check4.style.display = "none";
 }
-debugger;
 
 function getAndEnableAllPasswordChecks() {
     const check0 = document.getElementById("check0");
@@ -168,7 +167,7 @@ signInBtn.addEventListener('click', (event) => {
             body: JSON.stringify(data)
         })
         .then(response => {
-            location = '../../../html/projects.html';
+            location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
         });
 
     event.preventDefault();

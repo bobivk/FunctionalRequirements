@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/4d3f93d2d2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/homepage.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-   
+
 </head>
 
 <body>
@@ -42,59 +42,58 @@
             <h2>
                 <label for="">
                     <span class="las la-bars"></span>
-                </label>
-            Меню
+                </label> Меню
             </h2>
             <div class="search-wrapper">
                 <span class="las la-search"></span>
                 <input type="search" placeholder="Търсене">
             </div>
-               
+
             <div class="user-wrapper">
-                <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->  
-                <i class="fa-solid fa-user-graduate" id="accountIcon"></i> 
+                <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
+                <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
                 <div>
                     <h4>John Doe</h4>
                     <!-- should change this too; directly take it from the db as user role?-->
-                    <small>User</small> 
+                    <small>User</small>
                 </div>
             </div>
         </header>
 
         <main>
             <div class="tiles">
-            <div class="single-tile">
-                <div>
-                    <!-- take number of projects from db? -->
-                    <h1>54</h1> 
-                    <span>Проекти</span>
+                <div class="single-tile">
+                    <div>
+                        <!-- take number of projects from db? -->
+                        <h1>54</h1>
+                        <span>Проекти</span>
+                    </div>
+                    <div>
+                        <span class="las la-clipboard-list"></span>
+                    </div>
                 </div>
-                <div>
-                    <span class="las la-clipboard-list"></span>
-                </div>
-            </div>
 
-            <div class="single-tile">
-                <div>
-                    <!-- take number of projects from db? -->
-                    <h1>102</h1> 
-                    <span>Функционални изисквания</span>
+                <div class="single-tile">
+                    <div>
+                        <!-- take number of projects from db? -->
+                        <h1>102</h1>
+                        <span>Функционални изисквания</span>
+                    </div>
+                    <div>
+                        <span class="las la-clipboard-list"></span>
+                    </div>
                 </div>
-                <div>
-                    <span class="las la-clipboard-list"></span>
-                </div>
-            </div>
 
-            <div class="single-tile">
-                <div>
-                    <!-- take number of projects from db? -->
-                    <h1>21</h1> 
-                    <span>Нефункционални изисквания</span>
+                <div class="single-tile">
+                    <div>
+                        <!-- take number of projects from db? -->
+                        <h1>21</h1>
+                        <span>Нефункционални изисквания</span>
+                    </div>
+                    <div>
+                        <span class="las la-clipboard-list"></span>
+                    </div>
                 </div>
-                <div>
-                    <span class="las la-clipboard-list"></span>
-                </div>
-            </div>
             </div>
 
             <div class="recent-grid">
@@ -104,7 +103,7 @@
                             <h3> Проекти </h3>
                             <!-- <button> Виж всички <span class="las la-arrow-right"></span></button> -->
                             <!-- трябва да се направи неактивен, ако юзър.роля==юзър; активен, ако юзър.роля==админ -->
-                            <button> Добави проект <span class="las la-plus"></span></button>
+                            <button onclick="openProjectForm()"> Добави проект <span class="las la-plus"></span></button>
                         </div>
 
                         <div class="card-body">
@@ -121,8 +120,7 @@
                                         <td>1</td>
                                         <td>Система за управление на изисквания</td>
                                         <td>
-                                            <span class="status purple"></span>
-                                            чернова
+                                            <span class="status purple"></span> чернова
                                         </td>
                                     </tr>
 
@@ -130,8 +128,7 @@
                                         <td>2</td>
                                         <td>Escape room</td>
                                         <td>
-                                            <span class="status light-purple"></span>
-                                            завършен
+                                            <span class="status light-purple"></span> завършен
                                         </td>
                                     </tr>
 
@@ -139,8 +136,7 @@
                                         <td>3</td>
                                         <td>Алумни клуб</td>
                                         <td>
-                                            <span class="status grey"></span>
-                                            незапочнат
+                                            <span class="status grey"></span> незапочнат
                                         </td>
                                     </tr>
 
@@ -148,8 +144,7 @@
                                         <td>1</td>
                                         <td>Система за управление на изисквания</td>
                                         <td>
-                                            <span class="status purple"></span>
-                                            чернова
+                                            <span class="status purple"></span> чернова
                                         </td>
                                     </tr>
 
@@ -157,8 +152,7 @@
                                         <td>2</td>
                                         <td>Escape room</td>
                                         <td>
-                                            <span class="status light-purple"></span>
-                                            завършен
+                                            <span class="status light-purple"></span> завършен
                                         </td>
                                     </tr>
 
@@ -166,8 +160,7 @@
                                         <td>3</td>
                                         <td>Алумни клуб</td>
                                         <td>
-                                            <span class="status grey"></span>
-                                            незапочнат
+                                            <span class="status grey"></span> незапочнат
                                         </td>
                                     </tr>
                                 </tbody>
@@ -178,6 +171,24 @@
 
             </div>
 
+            <div id="add-project-modal">
+                <h2>Добави проект</h2>
+                <div>
+                    <form id="project-form" class="form-container">
+                        <label class="form-label" for="name">Тема</label>
+                        <input type="text" class="project-input" placeholder="Тема на проекта" name="name" required>
+
+                        <label class="form-label" for="number">Номер</label>
+                        <input type="number" min=0 class="project-input" placeholder="Номер на темата" name="number" required>
+
+                        <label class="form-label" for="description">Описание</label>
+                        <textarea type="text" class="project-input" placeholder="Подробно описание на проекта" name="description" required rows="10" cols="20"></textarea>
+
+                        <button id="add-project-btn" type="submit" class="btn">Добави</button>
+                        <button id="cancel-add-project-btn" type="button" class="btn cancel" onclick="closeForm()">Затвори</button>
+                    </form>
+                </div>
+            </div>
         </main>
     </div>
 </body>
