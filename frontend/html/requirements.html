@@ -32,6 +32,43 @@
             </th>
         </table>
     </div>
+
+    <div class="form-popup" id="requirement-form">
+        <form class="form-container">
+            <h1>Ново изискване</h1>
+
+            <label for="name">Име</label>
+            <input type="text" class="requirement-input" placeholder="Име на изискването" name="name" required>
+
+            <label for="priority">Приоритет</label>
+            <select name="priority" class="requirement-input" id="priority">
+                <option value="MUST_HAVE">MUST HAVE</option>
+                <option value="NICE_TO_HAVE">NICE TO HAVE</option>
+                <option value="IMPROVEMENT">IMPROVEMENT</option>
+            </select>
+
+            <label for="layer">Слой</label>
+            <select name="layer" class="requirement-input" id="layer">
+                <option value="BUSINESS">Бизнес логика</option>
+                <option value="CLIENT">Клиентски</option>
+                <option value="ROUTING">Рутиране</option>
+                <option value="DATABASE">Бази данни</option>
+                <option value="TEST/INSTALL">Тестване/инсталиране</option>
+            </select>
+
+            <label for="story">User story</label>
+            <input type="text" class="requirement-input" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
+
+            <label for="description">Описание</label>
+            <input type="text" class="requirement-input" placeholder="Описание на изискването" name="description" required>
+
+            <label for="tags">Тагове</label>
+            <input type="text" class="requirement-input" placeholder="Въведете име на изискването" name="tags">
+
+            <button id="add-requirement-btn" type="submit" class="btn">Добави</button>
+            <button id="cancel-add-requirement-btn" type="button" class="btn cancel" onclick="closeForm()">Затвори</button>
+        </form>
+    </div>
 </body>
 
 </html>

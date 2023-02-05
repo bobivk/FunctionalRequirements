@@ -29,46 +29,6 @@ projectName.innerHTML = project.number + ". " + project.name;
 let projectDesc = document.getElementById("project-description");
 projectDesc.innerHTML = project.description;
 
-let requirements = fetch("../../../../backend/api/requirements/get-requirements.php" //+ new URLSearchParams project_id
-    )
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-        let requirements = [];
-        data.forEach((req) => {
-            let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.description, req.tags);
-            requirements.push(requirement);
-        })
-        return requirements;
-    });
-
-let requirementsTable = document.getElementById("functional-requirements");
-requirements.forEach((requirement) => {
-    let requirementRow = document.createElement("tr");
-    let name = document.createElement("td");
-    let priority = document.createElement("td");
-    let layer = document.createElement("td");
-    let story = document.createElement("td");
-    let description = document.createElement("td");
-    let tags = document.createElement("td");
-
-    name.innerHTML = requirement.name;
-    priority.innerHTML = requirement.priority;
-    layer.innerHTML = requirement.layer;
-    story.innerHTML = requirement.story;
-    description.innerHTML = requirement.description;
-    tags.innerHTML = requirement.tags;
-
-    requirementRow.appendChild(name);
-    requirementRow.appendChild(priority);
-    requirementRow.appendChild(layer);
-    requirementRow.appendChild(story);
-    requirementRow.appendChild(description);
-    requirementRow.appendChild(tags);
-
-    requirementsTable.appendChild(requirementRow);
-});
 
 if (isAdmin()) {
     document.getElementById("edit-project").style.display = "block";
@@ -82,6 +42,8 @@ async function isAdmin() {
     const data = await response.json();
     return data["isAdmin"];
 }
+
+fetchRequirements();
 
 const requirementForm = document.getElementById('requirement-form');
 requirementForm.addEventListener('submit', (event) => {
@@ -111,8 +73,7 @@ deleteProjectButton.addEventListener('click', (event) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            }
         })
         .then((response) => {
             if (response.status == 403) {
@@ -135,12 +96,13 @@ editProjectButton.addEventListener('click', (event) => {
 const saveProjectButton = document.getElementById("save-project");
 saveProjectButton.addEventListener('click', (event) => {
     document.getElementById('project').setAttribute('contenteditable', 'false');
+    let projectInput = document.querySelectorAll("project-input");
     fetch('../../../../backend/api/projects/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(projectInput)
         })
         .then((response) => {
             if (response.status == 403) {
@@ -150,3 +112,63 @@ saveProjectButton.addEventListener('click', (event) => {
     event.preventDefault();
 });
 //same for delete requirement when we have the buttons.
+
+const addRequirementButton = document.getElementById("add-requirement-btn");
+addRequirementButton.addEventListener('click', (event) => {
+    let requirementInput = document.querySelectorAll("requirement-input");
+    fetch('../../../../backend/api/requirements/save-requirement.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: json.stringify(requirementInput)
+        })
+        .then((response) => {
+            console.log(response.json());
+            fetchRequirements();
+        })
+})
+
+function fetchRequirements() {
+    let requirements = fetch("../../../../backend/api/requirements/get-requirements.php" //+ new URLSearchParams project_id
+        )
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            let requirements = [];
+            data.forEach((req) => {
+                let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.description, req.tags);
+                requirements.push(requirement);
+            })
+            return requirements;
+        });
+
+    let requirementsTable = document.getElementById("functional-requirements");
+    requirements.forEach((requirement) => {
+        let requirementRow = document.createElement("tr");
+        let name = document.createElement("td");
+        let priority = document.createElement("td");
+        let layer = document.createElement("td");
+        let story = document.createElement("td");
+        let description = document.createElement("td");
+        let tags = document.createElement("td");
+
+        name.innerHTML = requirement.name;
+        priority.innerHTML = requirement.priority;
+        layer.innerHTML = requirement.layer;
+        story.innerHTML = requirement.story;
+        description.innerHTML = requirement.description;
+        tags.innerHTML = requirement.tags;
+
+        requirementRow.appendChild(name);
+        requirementRow.appendChild(priority);
+        requirementRow.appendChild(layer);
+        requirementRow.appendChild(story);
+        requirementRow.appendChild(description);
+        requirementRow.appendChild(tags);
+
+        requirementsTable.appendChild(requirementRow);
+    });
+
+}
