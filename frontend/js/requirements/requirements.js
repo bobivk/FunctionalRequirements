@@ -19,15 +19,14 @@ let project = fetch("http://localhost/FunctionalRequirements/backend/api/project
         return response.json();
     })
     .then((projectJson) => {
-        return new Project(projectJson.name, projectJson.number, projectJson.description);
+        let projectObj = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description, projectJson.status);
+        let projectName = document.getElementById("project-name");
+        projectName.innerHTML = projectObj.number + ". " + projectObj.name;
+        let projectDesc = document.getElementById("project-description");
+        projectDesc.innerHTML = projectObj.description;
+        let projectStatus = document.getElementById("project-status");
+        projectStatus.innerHTML = projectObj.status;
     });
-let projectName = document.getElementById("project-name");
-projectName.innerHTML = project.number + ". " + project.name;
-let projectDesc = document.getElementById("project-description");
-projectDesc.innerHTML = project.description;
-let projectStatus = document.getElementById("project-status");
-projectStatus.innerHTML = project.status;
-
 
 if (isAdmin()) {
     document.getElementById("edit-project").style.display = "block";
