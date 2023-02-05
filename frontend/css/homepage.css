@@ -331,7 +331,7 @@ tr td:last-child {
     display: block;
 }
 
-.project-input {
+.project-input-text {
     width: 100%;
     padding-top: 1%;
     padding-bottom: 1%;
@@ -420,24 +420,19 @@ form textarea {
     .tiles {
         grid-template-columns: repeat(1, 1fr);
     }
-
     .recent-grid {
         grid-template-columns: 100%;
     }
-
     .search-wrapper {
         display: none;
     }
-
     .sidebar {
         left: -100% !important;
     }
-
     header h2 {
         display: flex;
         align-items: center;
     }
-
     header h2 label {
         display: inline-block;
         background: var(--main-color);
@@ -451,48 +446,39 @@ form textarea {
         align-items: center;
         justify-content: center !important;
     }
-
     header h2 span {
-       text-align: center;
-       padding-right: 0rem;
+        text-align: center;
+        padding-right: 0rem;
     }
-
     header h2 {
         font-size: 1.1rem;
     }
-
     .main-content {
         width: 100%;
         margin-left: 0rem;
     }
-
     header {
         width: 100% !important;
         left: 0 !important;
     }
-
-    #nav-toggle:checked + .sidebar {
+    #nav-toggle:checked+.sidebar {
         left: 0 !important;
         z-index: 100;
         width: 345px;
     }
-    
-    #nav-toggle:checked + .sidebar .sidebar-brand,
-    #nav-toggle:checked + .sidebar li {
-       padding-left: 2rem;
-       text-align: left;
+    #nav-toggle:checked+.sidebar .sidebar-brand,
+    #nav-toggle:checked+.sidebar li {
+        padding-left: 2rem;
+        text-align: left;
     }
-    
-    #nav-toggle:checked + .sidebar li a {
+    #nav-toggle:checked+.sidebar li a {
         padding-left: 1rem;
     }
-    
-    #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
-    #nav-toggle:checked + .sidebar li a span:last-child {
+    #nav-toggle:checked+.sidebar .sidebar-brand h2 span:last-child,
+    #nav-toggle:checked+.sidebar li a span:last-child {
         display: inline;
     }
-
-    #nav-toggle:checked ~ .main-content {
+    #nav-toggle:checked~.main-content {
         margin-left: 0rem !important;
     }
 }
@@ -501,5 +487,4 @@ form textarea {
     .tiles {
         grid-template-columns: 100%;
     }
-
 }

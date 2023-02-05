@@ -27,7 +27,7 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
             response.json();
         })
         .then((responseJson) => {
-            closeForm();
+            //closeForm();
             //success message
         })
 });

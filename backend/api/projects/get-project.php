@@ -16,7 +16,7 @@
                 echo json_encode($project);
             } catch(PDOException $exc) {
                 http_response_code(500);
-                echo ["message" => $exc.getMessage()];
+                echo ["message" => $exc->getMessage()];
             }
         } else {
             http_response_code(400);

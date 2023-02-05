@@ -58,7 +58,6 @@ function validateUserData($user_data) {
             ]);
 
         } catch (PDOException $ex) {
-            //if($ex["message"] e neshto si) - http 409 conflict, user exists
             http_response_code(500);
             echo json_encode(["message" => $ex->getMessage()]);
         }

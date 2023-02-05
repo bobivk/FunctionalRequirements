@@ -128,22 +128,22 @@
                     <div>
                         <form id="project-form" class="form-container">
                             <label class="form-label" for="name">Тема:</label>
-                            <input type="text" class="project-input" placeholder="Тема на проекта" name="name" required>
+                            <input type="text" class="project-input project-input-text" placeholder="Тема на проекта" name="name" required>
 
                             <label class="form-label" for="number">Номер:</label>
-                            <input type="number" min=0 class="project-input" placeholder="Номер на темата" name="number" required>
+                            <input type="number" min=0 class="project-input project-input-text" placeholder="Номер на темата" name="number" required>
 
                             <label class="form-label" for="description">Описание:</label>
-                            <textarea type="text" class="project-input" placeholder="Подробно описание на проекта" name="description" required rows="10" cols="20"></textarea>
+                            <textarea type="text" class="project-input project-input-text" placeholder="Подробно описание на проекта" name="description" required rows="10" cols="20"></textarea>
 
                             <label class="form-label" for="status">Статус:</label>
-                            <input type="radio" id="not-started" name="status" value="незапочнат" required>
+                            <input type="radio" class="project-input project-input-radio" id="not-started" name="status" value="незапочнат" required>
                             <label for="not-started">незапочнат</label>
 
-                            <input type="radio" id="draft" name="status" value="чернова" required>
+                            <input type="radio" class="project-input project-input-radio" id="draft" name="status" value="чернова" required>
                             <label for="draft">чернова</label>
 
-                            <input type="radio" id="finished" name="status" value="завършен" required>
+                            <input type="radio" class="project-input project-input-radio" id="finished" name="status" value="завършен" required>
                             <label for="finished">завършен</label>
 
                             <div class="add-project-btns">
