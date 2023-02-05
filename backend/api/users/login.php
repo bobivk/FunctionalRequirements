@@ -38,6 +38,8 @@
             }
             session_start(); //създава session cookie
             $_SESSION["user"] = $user; //запазваме данните за потребителя в сесията, за да не трябва да се логва отново при следващи извиквания
+            setcookie('email', $userData['email'], time() + 6000, '/');
+            setcookie('password', $userData['password'], time() + 6000, '/');
             http_response_code(200);
             echo json_encode(["message" => "Входът е успешен"]);
         

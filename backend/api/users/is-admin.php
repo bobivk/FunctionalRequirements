@@ -1,4 +1,5 @@
 <?php
+require_once("../../db/db.php");
 session_start();
 $userRoleId = $_SESSION["user"]["role_id"]
 if(isAdmin($userRoleId)) {

@@ -1,4 +1,5 @@
 <?php
+require_once("../../db/db.php");
     session_start();
     $project_id = $_GET["project_id"];
         try {

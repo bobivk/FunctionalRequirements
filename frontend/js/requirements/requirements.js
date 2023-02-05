@@ -1,6 +1,4 @@
-import { Project } from '../projects.js';
-
-export class Requirement {
+class Requirement {
     constructor(id, name, projectId, priority, layer, story, number, description, tags) {
         this.id = id;
         this.name = name;
@@ -13,11 +11,13 @@ export class Requirement {
         this.tags = tags;
     }
 }
-// /projects&id=1
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
 
-let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php" //+ new URLSearchParams({
-        //"id": 
-        //})
+let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?id=" + params.id
+        // new URLSearchParams({
+        //     "id": params.id
+        // })
     )
     .then((response) => {
         return response.json();

@@ -1,4 +1,5 @@
 <?php
+    require_once("../../db/db.php");
     session_start();
 
     if(isset($_SESSION["user"])){

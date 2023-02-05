@@ -6,3 +6,73 @@ function closeForm() {
     document.getElementById("project-form").reset();
     document.getElementById("add-project-modal").style.display = "none";
 }
+
+document.getElementById("project-form").addEventListener('submit', (event) => {
+    const fields = document.querySelectorAll(".project-input");
+    const data = {};
+    fields.forEach(field => {
+        data[field.name] = field.value;
+    });
+    fetch("http://localhost/FunctionalRequirements/backend/api/projects/save-project.php", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => {
+            if (response.status == 403 || response.status == 401) {
+                alert("Нужни са администраторски права за извършване на това действие.");
+            }
+            response.json();
+        })
+        .then((responseJson) => {
+            closeForm();
+            //success message
+        })
+});
+
+class Project {
+    constructor(id, name, number, description) {
+        this.id = id;
+        this.name = name;
+        this.number = number;
+        this.description = description
+    }
+}
+
+let projectsTableBody = document.getElementById("project-table-body");
+
+const projects = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects.php")
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        let projects = [];
+        data.forEach((projectJson) => {
+            let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description);
+            let projectRow = document.createElement("tr");
+            attachListener(projectRow, project.id);
+
+            const projectNumberTd = document.createElement("td");
+            projectNumberTd.innerHTML = project.number;
+            projectRow.appendChild(projectNumberTd);
+
+            const projectNameTd = document.createElement("td");
+            projectNameTd.innerHTML = project.name;
+            projectRow.appendChild(projectNameTd);
+
+            //status
+
+            projectsTableBody.appendChild(projectRow);
+            projects.push(project);
+        })
+        return projects;
+    });
+
+
+function attachListener(item, projectId) {
+    item.addEventListener('click', (event) => {
+        location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.html?id=' + projectId; //open page of this project with its id
+    });
+}
