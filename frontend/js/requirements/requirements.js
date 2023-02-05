@@ -14,11 +14,7 @@ class Requirement {
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
-let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?id=" + params.id
-        // new URLSearchParams({
-        //     "id": params.id
-        // })
-    )
+let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?id=" + params.id)
     .then((response) => {
         return response.json();
     })
@@ -29,6 +25,8 @@ let projectName = document.getElementById("project-name");
 projectName.innerHTML = project.number + ". " + project.name;
 let projectDesc = document.getElementById("project-description");
 projectDesc.innerHTML = project.description;
+let projectStatus = document.getElementById("project-status");
+projectStatus.innerHTML = project.status;
 
 
 if (isAdmin()) {
