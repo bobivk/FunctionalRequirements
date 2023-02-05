@@ -1,11 +1,13 @@
 <?php
     require_once("../../db/db.php");
+    require_once("../../db/is-admin.php");
     session_start();
 
     if(isset($_SESSION["user"])){
         $db = new DB();
+        $adminCheck = new AdminCheck();
         $connection = $db->getConnection();
-        if (isAdmin($_SESSION["user"]["role_id"])) {
+        if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
             $projectData = json_decode(file_get_contents("php://input"), true); 
             try{
                 $sql = "UPDATE projects SET name=?, number=?, description=? where id = ?";

@@ -28,18 +28,18 @@ let project = fetch("http://localhost/FunctionalRequirements/backend/api/project
         projectStatus.innerHTML = projectObj.status;
     });
 
-if (isAdmin()) {
-    document.getElementById("edit-project").style.display = "block";
-    document.getElementById("delete-project").style.display = "block";
-    document.getElementById("save-project").style.display = "block";
-    //for each requirement row display edit/delete buttons
-}
+// if (isAdmin()) {
+//     document.getElementById("edit-project").style.display = "block";
+//     document.getElementById("delete-project").style.display = "block";
+//     document.getElementById("save-project").style.display = "block";
+//     //for each requirement row display edit/delete buttons
+// }
 
-async function isAdmin() {
-    const response = await fetch("http://localhost/FunctionalRequirements/backend/api/users/is-admin.php");
-    const data = await response.json();
-    return data["isAdmin"];
-}
+// async function isAdmin() {
+//     const response = await fetch("http://localhost/FunctionalRequirements/backend/api/users/is-admin.php");
+//     const data = await response.json();
+//     return data["isAdmin"];
+// }
 
 fetchRequirements();
 
@@ -66,21 +66,21 @@ requirementForm.addEventListener('submit', (event) => {
 
 const deleteProjectButton = document.getElementById("delete-project");
 deleteProjectButton.addEventListener('click', (event) => {
-
-    fetch('http://localhost/FunctionalRequirements/backend/delete-project.php&id=' + project.id, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => {
-            if (response.status == 403) {
-                alert("Нужни са администраторски права за изтриване на този проект.");
-                //document.getElementById("admin-required-error").style.display = "block"
-            } else {
-                location = '../../../html/projects.html';
-            }
-        });
+    console.log("deleting");
+    let sureToDelete = confirm("Сигурни ли сте, че искате да изтриете този проект?");
+    if (sureToDelete) {
+        fetch('http://localhost/FunctionalRequirements/backend/api/projects/delete-project.php?id=' + params.id, {
+                method: 'DELETE'
+            })
+            .then((response) => {
+                if (response.status == 403) {
+                    alert("Нужни са администраторски права за изтриване на този проект.");
+                    //document.getElementById("admin-required-error").style.display = "block"
+                } else {
+                    location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
+                }
+            });
+    }
     event.preventDefault();
 });
 
@@ -128,8 +128,7 @@ addRequirementButton.addEventListener('click', (event) => {
 })
 
 function fetchRequirements() {
-    let requirements = fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php" //+ new URLSearchParams project_id
-        )
+    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?id=" + params.id)
         .then((response) => {
             return response.json();
         })
@@ -138,35 +137,35 @@ function fetchRequirements() {
             data.forEach((req) => {
                 let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.description, req.tags);
                 requirements.push(requirement);
-            })
-            return requirements;
+            });
+            let requirementsTable = document.getElementById("functional-requirements");
+            requirements.forEach((requirement) => {
+                let requirementRow = document.createElement("tr");
+                let name = document.createElement("td");
+                let priority = document.createElement("td");
+                let layer = document.createElement("td");
+                let story = document.createElement("td");
+                let description = document.createElement("td");
+                let tags = document.createElement("td");
+
+                name.innerHTML = requirement.name;
+                priority.innerHTML = requirement.priority;
+                layer.innerHTML = requirement.layer;
+                story.innerHTML = requirement.story;
+                description.innerHTML = requirement.description;
+                tags.innerHTML = requirement.tags;
+
+                requirementRow.appendChild(name);
+                requirementRow.appendChild(priority);
+                requirementRow.appendChild(layer);
+                requirementRow.appendChild(story);
+                requirementRow.appendChild(description);
+                requirementRow.appendChild(tags);
+
+                requirementsTable.appendChild(requirementRow);
+            });
+
+
         });
-
-    let requirementsTable = document.getElementById("functional-requirements");
-    requirements.forEach((requirement) => {
-        let requirementRow = document.createElement("tr");
-        let name = document.createElement("td");
-        let priority = document.createElement("td");
-        let layer = document.createElement("td");
-        let story = document.createElement("td");
-        let description = document.createElement("td");
-        let tags = document.createElement("td");
-
-        name.innerHTML = requirement.name;
-        priority.innerHTML = requirement.priority;
-        layer.innerHTML = requirement.layer;
-        story.innerHTML = requirement.story;
-        description.innerHTML = requirement.description;
-        tags.innerHTML = requirement.tags;
-
-        requirementRow.appendChild(name);
-        requirementRow.appendChild(priority);
-        requirementRow.appendChild(layer);
-        requirementRow.appendChild(story);
-        requirementRow.appendChild(description);
-        requirementRow.appendChild(tags);
-
-        requirementsTable.appendChild(requirementRow);
-    });
 
 }

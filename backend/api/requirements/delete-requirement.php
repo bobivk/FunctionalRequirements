@@ -1,11 +1,13 @@
 <?php
 require_once("../../db/db.php");
+require_once("../../db/is-admin.php");
     session_start();
 
     if(isset($_SESSION["user"])){
         $db = new DB();
+        $adminCheck = new AdminCheck();
         $connection = $db->getConnection();
-        if (isAdmin($_SESSION["user"]["role_id"])) {
+        if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
             $requirementId = $_DELETE["id"];
             try {
                 $sql = "DELETE FROM requirements WHERE id = ?";

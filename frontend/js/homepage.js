@@ -13,6 +13,7 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
     fields.forEach(field => {
         data[field.name] = field.value;
     });
+    data["status"] = "незапочнат";
     fetch("http://localhost/FunctionalRequirements/backend/api/projects/save-project.php", {
             method: 'POST',
             headers: {
