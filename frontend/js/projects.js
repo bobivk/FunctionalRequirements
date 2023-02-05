@@ -9,26 +9,26 @@ class Project {
 
 let projectsDiv = document.getElementById("projects");
 
-// let projects = fetch("../../../backend/api/projects/get-projects.php")
-//     .then((response) => {
-//         return response.json();
-//     })
-//     .then((data) => {
-//         let projects = [];
-//         data.forEach((projectJson) => {
-//             let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description);
-//             projects.push(project);
-//         })
-//         return projects;
-//     });
+let projects = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects.php")
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        let projects = [];
+        data.forEach((projectJson) => {
+            let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description);
+            projects.push(project);
+        })
+        return projects;
+    });
 let projectsUl = document.createElement("ul");
 
-// for (i = 0; i < projects.length; i++) {
-//     let projectItem = document.createElement("li");
-//     projectItem.innerHTML = projects[i].number + ". " + projects[i].name;
-//     attachListener(projectItem);
-//     projectsUl.appendChild(projectItem);
-// }
+for (i = 0; i < projects.length; i++) {
+    let projectItem = document.createElement("li");
+    projectItem.innerHTML = projects[i].number + ". " + projects[i].name;
+    attachListener(projectItem);
+    projectsUl.appendChild(projectItem);
+}
 
 projectsDiv.appendChild(projectsUl);
 

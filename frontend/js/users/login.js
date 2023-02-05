@@ -8,7 +8,7 @@ loginForm.addEventListener('submit', (event) => {
         data[field.name] = field.value;
     });
 
-    fetch("../../../../backend/api/login.php", {
+    fetch("http://localhost/FunctionalRequirements/backend/api/login.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ export class Requirement {
 }
 // /projects&id=1
 
-let project = fetch("../../../../backend/api/projects/get-project.php" //+ new URLSearchParams({
+let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php" //+ new URLSearchParams({
         //"id": 
         //})
     )
@@ -39,7 +39,7 @@ if (isAdmin()) {
 }
 
 async function isAdmin() {
-    const response = await fetch("../../../../backend/api/users/is-admin.php");
+    const response = await fetch("http://localhost/FunctionalRequirements/backend/api/users/is-admin.php");
     const data = await response.json();
     return data["isAdmin"];
 }
@@ -54,7 +54,7 @@ requirementForm.addEventListener('submit', (event) => {
         data[field.name] = field.value;
     });
 
-    fetch('../../../../backend/api/requirements/save-requirement.php', {
+    fetch('http://localhost/FunctionalRequirements/backend/api/requirements/save-requirement.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ requirementForm.addEventListener('submit', (event) => {
 const deleteProjectButton = document.getElementById("delete-project");
 deleteProjectButton.addEventListener('click', (event) => {
 
-    fetch('../../../../backend/api/delete-project.php&id=' + project.id, {
+    fetch('http://localhost/FunctionalRequirements/backend/delete-project.php&id=' + project.id, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ const saveProjectButton = document.getElementById("save-project");
 saveProjectButton.addEventListener('click', (event) => {
     document.getElementById('project').setAttribute('contenteditable', 'false');
     let projectInput = document.querySelectorAll("project-input");
-    fetch('../../../../backend/api/projects/', {
+    fetch('http://localhost/FunctionalRequirements/backend/api/projects/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -117,7 +117,7 @@ saveProjectButton.addEventListener('click', (event) => {
 const addRequirementButton = document.getElementById("add-requirement-btn");
 addRequirementButton.addEventListener('click', (event) => {
     let requirementInput = document.querySelectorAll("requirement-input");
-    fetch('../../../../backend/api/requirements/save-requirement.php', {
+    fetch('http://localhost/FunctionalRequirements/backend/requirements/save-requirement.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -131,7 +131,7 @@ addRequirementButton.addEventListener('click', (event) => {
 })
 
 function fetchRequirements() {
-    let requirements = fetch("../../../../backend/api/requirements/get-requirements.php" //+ new URLSearchParams project_id
+    let requirements = fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php" //+ new URLSearchParams project_id
         )
         .then((response) => {
             return response.json();

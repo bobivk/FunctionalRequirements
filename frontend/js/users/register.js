@@ -16,6 +16,7 @@ function getAndDisableAllPasswordChecks() {
     check3.style.display = "none";
     check4.style.display = "none";
 }
+debugger;
 
 function getAndEnableAllPasswordChecks() {
     const check0 = document.getElementById("check0");
@@ -31,25 +32,17 @@ function getAndEnableAllPasswordChecks() {
     check4.style.display = "block";
 }
 
-signInBtn.onclick = function() {
-    nameField.style.maxHeight = "0";
-    title.innerHTML = "Вход";
-    signUpBtn.classList.add("disable");
-    signInBtn.classList.remove("disable");
-    getAndDisableAllPasswordChecks();
-}
-
-signUpBtn.onclick = function() {
-    nameField.style.maxHeight = "60px";
-    title.innerHTML = "Регистрация";
-    signUpBtn.classList.remove("disable");
-    signInBtn.classList.add("disable");
-    getAndEnableAllPasswordChecks();
-}
-
 signUpBtn.addEventListener('click', (event) => {
-    debugger;
-
+    if (signUpBtn.classList.contains("disable")) {
+        //if clicked while disabled, enable
+        nameField.style.maxHeight = "60px";
+        title.innerHTML = "Регистрация";
+        signUpBtn.classList.remove("disable");
+        signInBtn.classList.add("disable");
+        getAndEnableAllPasswordChecks();
+        return;
+    }
+    //if enabled, try register
     const data = {};
     const fields = document.querySelectorAll('input');
     fields.forEach(field => {
@@ -57,8 +50,6 @@ signUpBtn.addEventListener('click', (event) => {
     });
 
     if (isEmailValid(data.email) && !userExists(data)) {
-        //http://localhost/FunctionalRequirements/backend/api/users/get-users.php
-        //../../../../backend/api/users/register-user.php
         fetch('http://localhost/FunctionalRequirements/backend/api/users/register-user.php', {
                 method: 'POST',
                 headers: {
@@ -70,7 +61,6 @@ signUpBtn.addEventListener('click', (event) => {
                 // location.reload();
             })
     }
-
     event.preventDefault();
 });
 
@@ -124,7 +114,6 @@ function checkPassword() {
 }
 
 function userExists(data) {
-    //http://localhost/FunctionalRequirements/backend/api/users/get-users.php
     fetch('http://localhost/FunctionalRequirements/backend/api/users/user-exists.php', {
             method: 'POST',
             headers: {
@@ -155,26 +144,32 @@ function userExists(data) {
 
 
 signInBtn.addEventListener('click', (event) => {
+    if (signInBtn.classList.contains("disable")) {
+        //if clicked while disabled, enable
+        nameField.style.maxHeight = "0";
+        title.innerHTML = "Вход";
+        signUpBtn.classList.add("disable");
+        signInBtn.classList.remove("disable");
+        getAndDisableAllPasswordChecks();
+        return;
+    }
+    const data = {};
+    const fields = document.querySelectorAll('input');
 
-    if (!signInBtn.classList.contains("disable")) {
-        const data = {};
-        const fields = document.querySelectorAll('input');
+    fields.forEach(field => {
+        data[field.name] = field.value;
+    });
 
-        fields.forEach(field => {
-            data[field.name] = field.value;
+    fetch("http://localhost/FunctionalRequirements/backend/api/login.php", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            location = '../../../html/projects.html';
         });
 
-        fetch("../../backend/api/login.php", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                location = '../../../html/projects.html';
-            });
-
-        event.preventDefault();
-    }
+    event.preventDefault();
 });
