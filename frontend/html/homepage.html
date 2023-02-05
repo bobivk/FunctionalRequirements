@@ -51,7 +51,7 @@
             </div>
                
             <div class="user-wrapper">
-                <!-- <i class="fa-solid fa-user-tie"></i> for admin user something in JS to change icon depending on role? -->  
+                <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->  
                 <i class="fa-solid fa-user-graduate" id="accountIcon"></i> 
                 <div>
                     <h4>John Doe</h4>
@@ -101,16 +101,14 @@
                 <div class="projects">
                     <div class="card">
                         <div class="card-header">
-                            <h2>
-                                Проекти
-                            </h2>
-                            <button> Виж всички <span class="las la-arrow-right"></span></button>
+                            <h3> Проекти </h3>
+                            <!-- <button> Виж всички <span class="las la-arrow-right"></span></button> -->
                             <!-- трябва да се направи неактивен, ако юзър.роля==юзър; активен, ако юзър.роля==админ -->
-                            <button> Добави проект</button>
+                            <button> Добави проект <span class="las la-plus"></span></button>
                         </div>
 
                         <div class="card-body">
-                            <table>
+                            <table width="100%">
                                 <thead>
                                     <tr>
                                         <td>№</td>
@@ -123,7 +121,7 @@
                                         <td>1</td>
                                         <td>Система за управление на изисквания</td>
                                         <td>
-                                            <span class="status"></span>
+                                            <span class="status purple"></span>
                                             чернова
                                         </td>
                                     </tr>
@@ -132,8 +130,44 @@
                                         <td>2</td>
                                         <td>Escape room</td>
                                         <td>
-                                            <span class="status"></span>
+                                            <span class="status light-purple"></span>
                                             завършен
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Алумни клуб</td>
+                                        <td>
+                                            <span class="status grey"></span>
+                                            незапочнат
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Система за управление на изисквания</td>
+                                        <td>
+                                            <span class="status purple"></span>
+                                            чернова
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Escape room</td>
+                                        <td>
+                                            <span class="status light-purple"></span>
+                                            завършен
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Алумни клуб</td>
+                                        <td>
+                                            <span class="status grey"></span>
+                                            незапочнат
                                         </td>
                                     </tr>
                                 </tbody>
