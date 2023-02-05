@@ -1,5 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Ppoppins:wght@300;400;500;600&display=swap'); */
-
 :root {
     --main-color: #270047;
     --color-dark: #1D2231;
@@ -25,6 +23,7 @@
     background: var(--main-color);
     color: var(--text-on-dark-background);
     z-index: 100;
+    transition: width 300ms;
 }
 
 .sidebar-brand {
@@ -68,11 +67,46 @@
     padding-right: 1rem;
 }
 
+#nav-toggle:checked + .sidebar {
+    cursor: pointer;
+    width: 70px;
+}
+
+#nav-toggle:checked + .sidebar .sidebar-brand,
+#nav-toggle:checked + .sidebar li {
+   padding-left: 1rem;
+   text-align: center;
+}
+
+#nav-toggle:checked + .sidebar li a {
+    padding-left: 0rem;
+}
+
+#nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
+#nav-toggle:checked + .sidebar li a span:last-child {
+    display: none;
+}
+
+#nav-toggle:checked ~ .main-content {
+    margin-left: 70px;
+}
+
+#nav-toggle:checked ~ .main-content header {
+    width: calc(100% - 70px);
+    left: 70px;
+}
+
 .main-content {
+    transition: margin-left 300ms;
     margin-left: 345px;
 }
 
+.main-content h2 .las.la-bars {
+    cursor: pointer;
+}
+
 header {
+    background: #fff;
     display: flex;
     justify-content: space-between;
     padding: 1rem 1.5rem;
@@ -82,6 +116,11 @@ header {
     width: calc(100% - 345px);
     top: 0;
     z-index: 100;
+    transition: left 300ms;
+}
+
+#nav-toggle {
+    display: none;
 }
 
 header h2 {
@@ -118,7 +157,6 @@ header label span {
     display: flex;
     align-items: center;
     text-align: center;
-    /*center the text or not?*/
 }
 
 #accountIcon {
@@ -249,7 +287,7 @@ tr td:last-child {
     border-radius: 20px;
     width: 90%;
     max-width: 700px;
-    max-height: 650px;
+    max-height: 580px;
     position: fixed;
     top: 25%;
     left: 40%;
@@ -258,23 +296,71 @@ tr td:last-child {
     color: #f0f0f0;
     display: none;
     box-sizing: border-box;
+    font-weight: bold;
     border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#project-form {
+    margin-top: 2rem;
 }
 
 #add-project-modal h2 {
-    text-align: center;
+    text-align: center;  
+    color: #f0f0f0;
+
+}
+
+#add-project-modal h2::after {
+    content: '';
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: #fff;
+    position: relative;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
 }
 
 .project-input {
-    width: 90%;
+    width: 100%;
     padding-top: 1%;
     padding-bottom: 1%;
     padding-left: 1%;
-    margin: 2% 5% 2% 0%;
+    margin: 0% 5% 2% 0%;
     font-size: 15px;
     box-sizing: border-box;
     border: 3px solid #222;
     border-radius: 5px;
+}
+
+.add-project-btns {
+    margin-top: 2rem;
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+}
+
+#add-project-btn, 
+#cancel-add-project-btn {
+    background: var(--text-on-dark-background);
+    border-radius: 10px;
+    color: var(--main-color);
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    border: 1px solid #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+#add-project-btn:hover, 
+#cancel-add-project-btn:hover {
+    transition: background 1s;
+    background-color: #6601B0;
+    color: #fff;
 }
 
 .project-input:hover {
@@ -286,5 +372,46 @@ form textarea {
 }
 
 .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+@media only screen and (max-width: 1200px) {
+    .sidebar {
+        width: 70px;
+    }
     
+    .sidebar .sidebar-brand,
+    .sidebar li {
+       padding-left: 1rem;
+       text-align: center;
+    }
+    
+   .sidebar li a {
+        padding-left: 0rem;
+    }
+    
+    .sidebar .sidebar-brand h2 span:last-child,
+    .sidebar li a span:last-child {
+        display: none;
+    }
+    
+    .main-content {
+        margin-left: 70px;
+    }
+    
+    .main-content header {
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .tiles {
+        grid-template-columns: (3, 1fr);
+    }
+
+    .recent-grid {
+        grid-template-columns: 60% 70%;
+    }
 }

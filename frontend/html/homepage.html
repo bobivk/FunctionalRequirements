@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
     <title>Начална страница</title>
     <script src="../js/homepage.js" defer></script>
     <script src="https://kit.fontawesome.com/4d3f93d2d2.js" crossorigin="anonymous"></script>
@@ -14,9 +14,10 @@
 </head>
 
 <body>
+    <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
-            <h1><span class="lab la-accusoft"> Проекти</span></h1>
+            <h2><span class="lab la-accusoft"></span> <span>Проекти</span></h2>
         </div>
 
         <div class="sidebar-menu">
@@ -40,7 +41,7 @@
     <div class="main-content">
         <header>
             <h2>
-                <label for="">
+                <label for="nav-toggle">
                     <span class="las la-bars"></span>
                 </label> Меню
             </h2>
@@ -101,9 +102,8 @@
                     <div class="card">
                         <div class="card-header">
                             <h3> Проекти </h3>
-                            <!-- <button> Виж всички <span class="las la-arrow-right"></span></button> -->
                             <!-- трябва да се направи неактивен, ако юзър.роля==юзър; активен, ако юзър.роля==админ -->
-                            <button onclick="openProjectForm()"> Добави проект <span class="las la-plus"></span></button>
+                            <button onclick="openProjectForm()"> Добави проект <i class="fa-regular fa-square-plus"></i></button>
                         </div>
 
                         <div class="card-body">
@@ -177,17 +177,19 @@
                 <h2>Добави проект</h2>
                 <div>
                     <form id="project-form" class="form-container">
-                        <label class="form-label" for="name">Тема</label>
+                        <label class="form-label" for="name">Тема:</label>
                         <input type="text" class="project-input" placeholder="Тема на проекта" name="name" required>
 
-                        <label class="form-label" for="number">Номер</label>
+                        <label class="form-label" for="number">Номер:</label>
                         <input type="number" min=0 class="project-input" placeholder="Номер на темата" name="number" required>
 
-                        <label class="form-label" for="description">Описание</label>
+                        <label class="form-label" for="description">Описание:</label>
                         <textarea type="text" class="project-input" placeholder="Подробно описание на проекта" name="description" required rows="10" cols="20"></textarea>
 
-                        <button id="add-project-btn" type="submit" class="btn">Добави</button>
-                        <button id="cancel-add-project-btn" type="button" class="btn cancel" onclick="closeForm()">Затвори</button>
+                        <div class="add-project-btns">
+                            <button id="add-project-btn" type="submit" class="btn">Добави <i class="fa-solid fa-plus"></i></button>
+                            <button id="cancel-add-project-btn" type="button" class="btn cancel" onclick="closeForm()">Затвори <i class="fa-solid fa-xmark"></i></button>
+                        </div>
                     </form>
                 </div>
             </div>
