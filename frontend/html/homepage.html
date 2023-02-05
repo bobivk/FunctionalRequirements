@@ -47,7 +47,7 @@
             </h2>
             <div class="search-wrapper">
                 <span class="las la-search"></span>
-                <input type="search" placeholder="Търсене">
+                <input type="search" id="search" data-search placeholder="Търсене">
             </div>
 
             <div class="user-wrapper">
@@ -99,76 +99,76 @@
 
             <div class="recent-grid">
                 <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3> Проекти </h3>
-                            <!-- трябва да се направи неактивен, ако юзър.роля==юзър; активен, ако юзър.роля==админ -->
-                            <button onclick="openProjectForm()"> Добави проект <i class="fa-regular fa-square-plus"></i></button>
-                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3> Проекти </h3>
+                                <!-- трябва да се направи неактивен, ако юзър.роля==юзър; активен, ако юзър.роля==админ -->
+                                <button onclick="openProjectForm()"> Добави проект <i class="fa-regular fa-square-plus"></i></button>
+                            </div>
 
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>№</td>
-                                            <td>Име на проект</td>
-                                            <td>Статус</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="project-table-body">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Система за управление на изисквания</td>
-                                            <td>
-                                                <span class="status purple"></span> чернова
-                                            </td>
-                                        </tr>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table width="100%">
+                                        <thead>
+                                            <tr>
+                                                <td>№</td>
+                                                <td>Име на проект</td>
+                                                <td>Статус</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="project-table-body">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Система за управление на изисквания</td>
+                                                <td>
+                                                    <span class="status purple"></span> чернова
+                                                </td>
+                                            </tr>
 
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Escape room</td>
-                                            <td>
-                                                <span class="status light-purple"></span> завършен
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Escape room</td>
+                                                <td>
+                                                    <span class="status light-purple"></span> завършен
+                                                </td>
+                                            </tr>
 
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Алумни клуб</td>
-                                            <td>
-                                                <span class="status grey"></span> незапочнат
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Алумни клуб</td>
+                                                <td>
+                                                    <span class="status grey"></span> незапочнат
+                                                </td>
+                                            </tr>
 
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Система за управление на изисквания</td>
-                                            <td>
-                                                <span class="status purple"></span> чернова
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Система за управление на изисквания</td>
+                                                <td>
+                                                    <span class="status purple"></span> чернова
+                                                </td>
+                                            </tr>
 
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Escape room</td>
-                                            <td>
-                                                <span class="status light-purple"></span> завършен
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Escape room</td>
+                                                <td>
+                                                    <span class="status light-purple"></span> завършен
+                                                </td>
+                                            </tr>
 
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Алумни клуб</td>
-                                            <td>
-                                                <span class="status grey"></span> незапочнат
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Алумни клуб</td>
+                                                <td>
+                                                    <span class="status grey"></span> незапочнат
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
 
             </div>
