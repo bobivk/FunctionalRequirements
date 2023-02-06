@@ -298,7 +298,7 @@ td {
 }
 
 /*add new requirement pop-up */
-#reqModal, #project-modal {
+#req-modal, #project-modal {
     display: none;
     position: fixed;
     z-index: 100;
@@ -311,6 +311,7 @@ td {
 }
 
 #requirement-form {
+    /* , #project-form { */
     z-index: 1;
     border-radius: 20px;
     width: 90%;
@@ -328,7 +329,7 @@ td {
     font-family: 'Poppins', sans-serif;
 }
 
-#requirement-form h2 {
+#requirement-form, #project-form h2 {
     text-align: center;
     color: #f0f0f0;
 }
@@ -347,7 +348,7 @@ td {
     margin-bottom:2rem;
 }
 
-.add-requirement-btns {
+.add-requirement-btns, .edit-requirement-btns {
     display: inline-block;
     margin-top: 2rem;
     justify-content: space-between;
@@ -358,7 +359,9 @@ td {
 #add-requirement-btn,
 #cancel-add-requirement-btn,
 #save-project-btn,
-#cancel-save-project-btn {
+#cancel-save-project-btn,
+#edit-save-requirement-btn,
+#cancel-save-requirement-btn {
     background: var(--text-on-dark-background);
     border-radius: 10px;
     color: var(--main-color);
@@ -430,7 +433,9 @@ td {
 #delete-project:hover,
 #edit-project:hover,
 #save-project:hover,
-#close-edit-project:hover  {
+#close-edit-project:hover,
+#edit-save-requirement-btn:hover,
+#cancel-edit-requirement-btn:hover  {
     transition: background 1s;
     background-color: #6601B0;
     color: #fff;
@@ -448,7 +453,7 @@ td {
     border-radius: 5px;
 }
 
-.requirement-input:hover, .project-input:hover {
+.form-input-field:hover {
     border: 3px solid #735c86;
 }
 
@@ -498,7 +503,7 @@ header {
         width: calc(100% - 70px);
         left: 70px;
     }
-    #add-project-modal {
+    #project-modal {
         z-index: 1;
         border-radius: 20px;
         width: 80%;
@@ -524,7 +529,7 @@ header {
     .recent-grid {
         grid-template-columns: 60% 40%;
     }
-    #add-project-modal {
+    #project-modal {
         z-index: 1;
         border-radius: 20px;
         width: 80%;
@@ -608,7 +613,7 @@ header {
     #nav-toggle:checked~.main-content {
         margin-left: 0rem !important;
     }
-    #add-project-modal {
+    #project-modal {
         z-index: 1;
         border-radius: 20px;
         width: 80%;
@@ -633,7 +638,7 @@ header {
     }
 }
 
-#modal {
+/* #modal {
     display: none;
     position: fixed;
     z-index: 100;
@@ -643,9 +648,50 @@ header {
     left: 0;
     background-color: rgba(0, 0, 0, 0.2);
     transition: opacity 300ms ease-in-out;
-}
+} */
 
 .deleted-msg {
     display: none;
     color: #222;
+}
+
+#project-modal {
+    z-index: 1;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 580px;
+    position: absolute;
+    top: 15%;
+    left: 28%;
+    background: #270047;
+    padding: 50px 60px 70px;
+    color: #f0f0f0;
+    box-sizing: border-box;
+    font-weight: bold;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#project-modal h2 {
+    text-align: center;
+    color: #f0f0f0;
+}
+
+#project-modal h2::after {
+    content: '';
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: #fff;
+    position: relative;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.deleted-msg {
+    margin-top:1rem;
 }
