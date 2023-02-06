@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
     <title>Тема</title>
     <script src="https://kit.fontawesome.com/4d3f93d2d2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/requirements.css">
@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <input type="checkbox" id="nav-toggle">
     <div class="sidebar">
         <div class="sidebar-brand">
@@ -37,60 +36,83 @@
         </div>
 
     </div>
-    <header>
-        <h2>
-            <label for="nav-toggle">
-                <span class="las la-bars"></span>
-            </label> Меню
-        </h2>
-        <div class="search-wrapper">
-            <span class="las la-search"></span>
-            <input type="search" id="search" data-search placeholder="Търсене">
-        </div>
-
-        <div class="user-wrapper">
-            <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
-            <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
-            <div>
-                <h4>John Doe</h4>
-                <!-- should change this too; directly take it from the db as user role?-->
-                <small>User</small>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label> Меню
+            </h2>
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" id="search" data-search placeholder="Търсене">
             </div>
+
+            <div class="user-wrapper">
+                <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
+                <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
+                <div>
+                    <h4 id="userName"></h4>
+                    <small id="userRole"></small>
+                </div>
+            </div>
+        </header>
+
+        <main>
+    <div class="card" >
+        <div class="modify-project-info-btns">
+            <button id="delete-project"><i class="las la-trash-alt"></i> Изтрий проект</button>
+            <button id="edit-project" onclick="inEditMode()"><i class="las la-edit"></i> Редактирай проект</button>
+            <button class="disable" id="save-project" onclick="saveProject()"><i class="las la-save"></i></i> Запази</button>
+            <button class="disable" id="close-edit-project" onclick="notInEditMode()"><i class="fa-solid fa-xmark"></i></i> Затвори</button>
         </div>
-    </header>
+        <div id="project">
+            <div class="card-header">
+                <h2 id="project-name"></h2>
+            </div>
 
-    <div id="project">
-        <h2 id="project-name"></h2>
-        <p id="project-description"></p>
-        <p id="project-status"><span class="status light-purple"></span></p>
-        <button id="delete-project">Изтрий проект</button>
-        <button id="edit-project">Редактирай проект</button>
-        <button id="save-project">Запази</button>
+            <p id="project-description"></p>
+            <p id="project-status"></p>
+        </div>
     </div>
-    <div class="error" id="admin-required-error"></div>
-    <button id="create-requirement-btn" onclick="addRequirements()">Добави изискване</button>
+ 
+    <div class="recent-grid">
+        <div class="projects">
+            <div class="card">
+                <div class="card-header">
+                    <h3> Изисквания </h3>
+                    <div class="error" id="admin-required-error"></div>
+                    <button id="create-requirement-btn" onclick="addRequirements()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
+                </div>
 
-    <div id="requirements-container">
-        <table id="functional-requirements">
-            <th>
-                <td>Номер</td>
-                <td>Име</td>
-                <td>Приоритет</td>
-                <td>Слой</td>
-                <td>User Story</td>
-                <td>Описание</td>
-                <td>Тагове</td>
-                <td>Тип</td>
-            </th>
-        </table>
-    </div>
+                <div class="card-body">
+                    <div class="table-responsive" id="requirements-container">
+                        <table width="100%" id="functional-requirements">
+                            <thead>
+                                <tr>
+                                    <td>Номер</td>
+                                    <td>Име</td>
+                                    <td>Приоритет</td>
+                                    <td>Слой</td>
+                                    <td>User Story</td>
+                                    <td>Описание</td>
+                                    <td>Тагове</td>
+                                    <td>Тип</td>
+                                    <td>Действие</td>
+                                </tr>
+                            </thead>
+                            <tbody id="project-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     <div id="reqModal">
         <div class="form-popup" id="requirement-form">
             <form id="form-container">
-                <h1>Ново изискване</h1>
-
-            
+                <h2>Ново изискване</h2>
 
             <label for="type">Тип:</label>
             <select name="type" class="requirement-input" id="type">
@@ -127,11 +149,12 @@
                 <input type="text" class="requirement-input" placeholder="Напр. #login" name="tags">
 
                 <div class="add-requirement-btns">
-                    <button id="add-requirement-btn" type="submit" class="btn">Добави <i class="fa-solid fa-plus"></i></button>
-                    <button id="cancel-add-requirement-btn" type="button" class="btn cancel" onclick="closeModal()">Затвори <i class="fa-solid fa-xmark"></i></button>
+                    <button id="add-requirement-btn" type="submit" class="btn"><i class="fa-solid fa-plus"></i> Добави</button>
+                    <button id="cancel-add-requirement-btn" type="button" class="btn cancel" onclick="closeModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
                 </div>
             </form>
         </div>
+    </main>
     </div>
 </body>
 <script src="../js/requirements/requirements.js" defer></script>
