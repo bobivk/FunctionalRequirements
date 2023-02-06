@@ -20,15 +20,15 @@
 
         <div class="sidebar-menu">
             <ul>
-                <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.html" class="active"><span class="las la-igloo"></span>
+                <li class="list">
+                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.html" ><span class="las la-igloo"></span>
                         <span>Табло</span></a>
                 </li>
-                <li>
+                <li class="list active">
                     <a href="#"><span class="las la-question"></span>
                         <span>Функционални изисквания</span></a>
                 </li>
-                <li>
+                <li class="list">
                     <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.html"><span class="las la-question"></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
@@ -59,7 +59,7 @@
         </header>
 
         <main>
-            <h1>Функционални изисквания</h1>
+            <h1><i class="las la-clipboard-list"></i> Функционални изисквания</h1>
 
             <div class="about">
                 
@@ -71,18 +71,60 @@
             </div>
 
             
-            <div class="about">
+            <div class="examples">
                 
                 <h2>Примери</h2>
                 
-                <p>Потребителят ще може да търси било в целия набор от бази от данни, било в избрана от него част от тях.</p>
+                <p>Потребителят ще може да търси било то в целия набор от бази от данни, било то в избрана от него част от тях.</p>
                 <p>Системата ще осигури подходящи средства за изобразяване (вюъри) на потребителите, за да четат намерените документи.</p>
                 <p>На всяка поръчка ще бъде даден уникален идентификатор (ORDER_ID), който ще може да бъде копиран от потребителя в постоянната област на акаунта. </p>
+            </div>
+
+            <div class="examples">
+                
+                <h2>Неточност на изискванията</h2>
+                
+                <p>Когато изискванията не са формулирани прецизно, могат да възникнат проблеми. </p>
+                <p>Разработчиците и потребителите могат да интерпретират двусмислените изисквания по различен начин. </p>
+                <p>Да разгледаме термина подходящи вюъри:</p>
+                <ul>
+                    <li class="normal">Намерения на потребителя – за всеки тип документ – вюър със специално предназначение. </li>
+                    <li class="normal">Интерпретация на разработчика – прилага текстов вюър, който показва съдържанието на документа.</li>
+                </ul>
+            </div>
+
+            <div class="examples">
+                
+                <h2>Пълнота и съвместимост на изискванията</h2>
+                
+                <p><span class="definition">Пълнота:</span> Трябва да се включат описания на всички изисквани функции. </p>
+                <p><span class="definition">Съвместимост:</span> Не трябва да има конфликти и противоречия при описанието на системните функции. </p>
+                <p>На практика е невъзможно да се състави пълен и непротиворечив документ на изискванията (техническо задание). </p>
+            </div>
+
+            <div class="examples">
+                
+                <h2>Инженеринг на изискванията</h2>
+                
+                <p>Процесът на определяне на услугите, които клиентът изисква от системата и на ограниченията, при които тя работи и са разработва.</p>
+                <p>Самите изисквания са описания на системните услуги и на ограниченията възникнали по време на процеса на инженеринга на изискванията.</p>
+            </div>
+
+            <div class="examples">
+                
+                <h2>Допълителна литература</h2>
+                <ul>
+                    <li>[1] "Функционални изисквания". 
+                        [<a href="https://www-it.fmi.uni-sofia.bg/courses/HCI/book/c19/functional.htm" target="_blank">https://www-it.fmi.uni-sofia.bg/</a>]
+                    </li>
+                    <li>[2] "Изисквания - методи и техники за определяне на изискванията".
+                        [<a href="https://elearn.uni-sofia.bg/mod/resource/view.php?id=12790" target="_blank">https://elearn.uni-sofia.bg</a>]
+                    </li>   
+                </ul>
             </div>
         </main>
     </div>
 </body>
-<script src="../js/homepage.js" defer></script>
-<script src="../js/project.js" defer></script>
+<script src="../js/requirements/functional-requirements.js" defer></script>
 
 </html>
