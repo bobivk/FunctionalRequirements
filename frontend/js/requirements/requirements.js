@@ -124,6 +124,8 @@ saveProjectButton.addEventListener('click', (event) => {
                 alert("Нужни са администраторски права за промяна на този проект");
             }
         });
+    notInEditMode();
+
     event.preventDefault();
 });
 
@@ -240,8 +242,7 @@ function notInEditMode() {
 }
 
 function saveProject() {
-    //fetch for update-project
-    notInEditMode();
+    
 }
 
 function attachDeleteRequirementListener(deleteRequirementButton, id) {

@@ -103,6 +103,7 @@ function switchToSignIn() {
     signUpBtn.classList.add("disable");
     signInBtn.classList.remove("disable");
     document.getElementById("email-error").style.display = "none";
+    document.getElementById("username-exists-error").style.display = "none";
     disablePasswordChecks();
 }
 
