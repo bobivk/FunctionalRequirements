@@ -112,7 +112,8 @@ saveProjectButton.addEventListener('click', (event) => {
     fields.forEach(field => {
         data[field.name] = field.value;
     });
-    fetch('http://localhost/FunctionalRequirements/backend/api/projects/', {
+    data["projectId"] = params.projectId;
+    fetch('http://localhost/FunctionalRequirements/backend/api/projects/update-project.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -123,8 +124,11 @@ saveProjectButton.addEventListener('click', (event) => {
             if (response.status == 403) {
                 alert("Нужни са администраторски права за промяна на този проект");
             }
+            else if (response.status == 200) {
+                //location.reload();
+            }
         });
-    notInEditMode();
+    //notInEditMode();
 
     event.preventDefault();
 });

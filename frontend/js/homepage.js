@@ -13,6 +13,9 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
     fields.forEach(field => {
         data[field.name] = field.value;
     });
+    const form = document.getElementById("project-form");
+    const checked = form.querySelector('input[name=status]:checked');
+    data["status"] = checked.value;
     fetch("http://localhost/FunctionalRequirements/backend/api/projects/save-project.php", {
             method: 'POST',
             headers: {
