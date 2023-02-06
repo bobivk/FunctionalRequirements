@@ -7,6 +7,12 @@ require_once("../../db/db.php");
         $connection = $db->getConnection();
         //if (isAdmin($_SESSION["user"]["role_id"])) {
             $reqData = json_decode(file_get_contents("php://input"), true);
+            if(!isset($reqData["name"]) || $reqData["name"] == "" ||
+                !isset($reqData["projectId"]) || $reqData["projectId"] == "" ||
+                !isset($reqData["id"]) || $reqData["id"] == "") {
+                http_response_code(400);
+                echo json_encode(["message" => "One or more empty required fields."]);
+            }
             $sql = "UPDATE requirements SET name = :name, priority = :priority, layer = :layer, story= :story, description= :description, tags= :tags, type= :type WHERE id= :id";
             try {
                 $statement = $connection -> prepare($sql);

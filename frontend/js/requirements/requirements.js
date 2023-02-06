@@ -146,6 +146,8 @@ function fetchRequirements() {
             let requirementsTable = document.getElementById("functional-requirements");
             requirements.forEach((requirement) => {
                 let requirementRow = document.createElement("tr");
+                requirementRow.id = "requirement-" + requirement.id;
+
                 let number = document.createElement("td");
                 let name = document.createElement("td");
                 let priority = document.createElement("td");
@@ -169,6 +171,7 @@ function fetchRequirements() {
                 let iconDelete = document.createElement("i");
                 iconDelete.classList.add("las");
                 iconDelete.classList.add("la-trash-alt");
+                attachDeleteRequirementListener(deleteBtn, requirement.id);
                 editBtn.appendChild(iconEdit);
                 deleteBtn.appendChild(iconDelete);
                 btns.appendChild(editBtn);
@@ -230,3 +233,20 @@ function saveProject() {
     //fetch for update-project
     notInEditMode();
 }
+
+function attachDeleteRequirementListener(deleteRequirementButton, id) {
+    deleteRequirementButton.addEventListener('click' , (event) => {
+        fetch("http://localhost/FunctionalRequirements/backend/api/requirements/delete-requirement.php?id=" + id)
+        .then((response) => {
+            if(response.status == 201) {
+                document.getElementById("req-deleted-msg").style.display = "block";
+                let requirementRow = document.getElementById("requirement-"+id);
+                requirementRow.parentElement.removeChild(requirementRow);
+                setTimeout(() => {
+                    document.getElementById("req-deleted-msg").style.display = "none";
+                }, "2000");
+            }
+            else alert("Could not delete requirement.");
+        })
+    })
+} 

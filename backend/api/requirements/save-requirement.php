@@ -7,6 +7,16 @@ require_once("../../db/db.php");
         $connection = $db->getConnection();
         //if (isAdmin($_SESSION["user"]["role_id"])) {
             $reqData = json_decode(file_get_contents("php://input"), true);
+            if(!isset($reqData["name"]) || $reqData["name"] == "" ||
+            !isset($reqData["projectId"]) || $reqData["projectId"] == "" ||
+            !isset($reqData["priority"]) || $reqData["priority"] == "" ||
+            !isset($reqData["layer"]) || $reqData["layer"] == "" ||
+            !isset($reqData["story"]) || $reqData["description"] == "" ||
+            !isset($reqData["tags"]) || $reqData["tags"] == "" ||
+            !isset($reqData["type"]) || $reqData["type"] == "") {
+                http_response_code(400);
+                echo json_encode(["message" => "One or more empty required fields."]);
+            }
             $sql = "INSERT INTO requirements (name, project_id, priority, layer, story, description, tags, type) VALUES
                 (:name, :project_id, :priority, :layer, :story, :description, :tags, :type)";
             try {

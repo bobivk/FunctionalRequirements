@@ -8,14 +8,24 @@
     //    $adminCheck = new AdminCheck();
         $connection = $db->getConnection();
         //if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
-            $projectData = json_decode(file_get_contents("php://input"), true); 
+            $projectData = json_decode(file_get_contents("php://input"), true);
             try{
-                $sql = "UPDATE projects SET name=?, number=?, description=? where id = ?";
-                $statement = $connection -> prepare($sql);
-                $statement -> execute([$projectData["name"], $projectData["number"], $projectData["description"], $projectData["id"]]);
-                http_response_code(201);
-                echo json_encode(["message" => "Проектът е променен успешно."]);
-            } catch(PDOException $exc) {
+                if(!isset($projectData["name"]) || $projectData["name"] == "" ||
+                    !isset($projectData["number"]) || $projectData["number"] <= 0 ||
+                    !isset($projectData["description"]) || $projectData["description"] == "" ||
+                    !isset($projectData["status"]) || $projectData["status"] == "" ||
+                    !isset($projectData["projectId"]) || $projectData["projectId"] == "") {
+                        http_response_code(400);
+                        echo json_encode(["message" => "One or more empty fields."]);
+                    }
+                    $sql = "UPDATE projects SET name = :name, number = :number, description = :description, status = :status where id = :project_id";
+                    $statement = $connection -> prepare($sql);
+                    $statement -> execute(array("name" => $projectData["name"], "number" => $projectData["number"], 
+                        "description" => $projectData["description"], "status" => $projectData["status"], "project_id" => $projectData["id"]));
+                    http_response_code(201);
+                    echo json_encode(["message" => "Project edited."]);
+                }
+                catch(PDOException $exc) {
                 http_response_code(500);
                 echo json_encode(["message" => $exc->getMessage()]);
             }
