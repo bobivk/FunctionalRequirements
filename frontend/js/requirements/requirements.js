@@ -26,7 +26,18 @@ let project = fetch("http://localhost/FunctionalRequirements/backend/api/project
         let projectDesc = document.getElementById("project-description");
         projectDesc.innerHTML = projectObj.description;
         let projectStatus = document.getElementById("project-status");
-        projectStatus.innerHTML = projectObj.status;
+
+        const projectStatusColor = document.createElement("span");
+        projectStatusColor.classList.add("status");
+        if (projectObj.status == "незапочнат") {
+            projectStatusColor.classList.add("grey");
+        } else if (projectObj.status == "чернова") {
+            projectStatusColor.classList.add("purple");
+        } else {
+            projectStatusColor.classList.add("light-purple");
+        }
+        projectStatus.appendChild(projectStatusColor);
+        projectStatus.innerHTML += projectObj.status;
     });
 
 // if (isAdmin()) {
@@ -97,7 +108,7 @@ deleteProjectButton.addEventListener('click', (event) => {
 const editProjectButton = document.getElementById("edit-project");
 editProjectButton.addEventListener('click', (event) => {
     document.getElementById('project').toggleAttribute("contenteditable");
-    document.getElementById('save-project').style.display = "block";
+    document.getElementById('save-project').style.display = "inline-block";
     event.preventDefault();
 });
 
@@ -142,7 +153,27 @@ function fetchRequirements() {
                 let story = document.createElement("td");
                 let description = document.createElement("td");
                 let tags = document.createElement("td");
-                let type = document.createElement("type");
+                let type = document.createElement("td");
+                let action = document.createElement("td");
+
+                let btns = document.createElement("div");
+                btns.id = "action-btns";
+                let editBtn = document.createElement("button");
+                editBtn.id = "edit-requirement";
+                let deleteBtn = document.createElement("button");
+                deleteBtn.id = "delete-requirement";
+              
+                let iconEdit = document.createElement("i");
+                iconEdit.classList.add("las");
+                iconEdit.classList.add("la-edit");
+                let iconDelete = document.createElement("i");
+                iconDelete.classList.add("las");
+                iconDelete.classList.add("la-trash-alt");
+                editBtn.appendChild(iconEdit);
+                deleteBtn.appendChild(iconDelete);
+                btns.appendChild(editBtn);
+                btns.appendChild(deleteBtn);
+                action.appendChild(btns);
 
                 number.innerHTML = requirement.number;
                 name.innerHTML = requirement.name;
@@ -161,6 +192,8 @@ function fetchRequirements() {
                 requirementRow.appendChild(description);
                 requirementRow.appendChild(tags);
                 requirementRow.appendChild(type);
+                requirementRow.appendChild(action);
+
 
                 requirementsTable.appendChild(requirementRow);
             });
@@ -182,13 +215,13 @@ function closeModal() {
 function inEditMode() {
     document.getElementById("edit-project").style.display = "none";
     document.getElementById("delete-project").style.display = "none";
-    document.getElementById("save-project").style.display = "block";
-    document.getElementById("close-edit-project").style.display = "block";
+    document.getElementById("save-project").style.display = "inline-block";
+    document.getElementById("close-edit-project").style.display = "inline-block";
 }
 
 function notInEditMode() {
-    document.getElementById("edit-project").style.display = "block";
-    document.getElementById("delete-project").style.display = "block";
+    document.getElementById("edit-project").style.display = "inline-block";
+    document.getElementById("delete-project").style.display = "inline-block";
     document.getElementById("save-project").style.display = "none";
     document.getElementById("close-edit-project").style.display = "none";
 }
