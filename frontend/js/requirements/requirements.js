@@ -1,12 +1,11 @@
 class Requirement {
-    constructor(id, name, projectId, priority, layer, story, number, description, tags, type) {
+    constructor(id, name, projectId, priority, layer, story, description, tags, type) {
         this.id = id;
         this.name = name;
         this.projectId = projectId;
         this.priority = priority;
         this.layer = layer;
         this.story = story
-        this.number = number;
         this.description = description;
         this.tags = tags;
         this.type = type;
@@ -133,8 +132,7 @@ function fetchRequirements() {
         .then((data) => {
             let requirements = [];
             data.forEach((req) => {
-                //id, name, projectId, priority, layer, story, number, description, tags, type
-                let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.number, req.description, req.tags, req.type);
+                let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.description, req.tags, req.type);
                 requirements.push(requirement);
             });
             let requirementsTable = document.getElementById("functional-requirements");
@@ -142,7 +140,6 @@ function fetchRequirements() {
                 let requirementRow = document.createElement("tr");
                 requirementRow.id = "requirement-" + requirement.id;
 
-                let number = document.createElement("td");
                 let name = document.createElement("td");
                 let priority = document.createElement("td");
                 let layer = document.createElement("td");
@@ -172,7 +169,6 @@ function fetchRequirements() {
                 btns.appendChild(deleteBtn);
                 action.appendChild(btns);
 
-                number.innerHTML = requirement.number;
                 name.innerHTML = requirement.name;
                 priority.innerHTML = requirement.priority;
                 layer.innerHTML = requirement.layer;
@@ -181,7 +177,6 @@ function fetchRequirements() {
                 tags.innerHTML = requirement.tags;
                 type.innerHTML = requirement.type;
 
-                requirementRow.appendChild(number);
                 requirementRow.appendChild(name);
                 requirementRow.appendChild(priority);
                 requirementRow.appendChild(layer);

@@ -328,6 +328,7 @@ tr td:last-child {
     left: 50%;
     transform: translateX(-50%);
     display: block;
+    margin-bottom: 2rem;
 }
 
 .project-input-text {

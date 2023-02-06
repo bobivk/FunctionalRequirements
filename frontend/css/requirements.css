@@ -261,10 +261,6 @@ thead tr {
     border-bottom: 2px solid #f0f0f0;
 }
 
-tr td:first-child {
-    text-align: center;
-}
-
 thead td {
     font-weight: 700;
 }
@@ -348,6 +344,7 @@ td {
     left: 50%;
     transform: translateX(-50%);
     display: block;
+    margin-bottom:2rem;
 }
 
 .add-requirement-btns {
@@ -439,7 +436,7 @@ td {
     color: #fff;
 }
 
-.requirement-input {
+.requirement-input, .project-input {
     width: 100%;
     padding-top: 1%;
     padding-bottom: 1%;
@@ -451,7 +448,7 @@ td {
     border-radius: 5px;
 }
 
-.requirement-input:hover {
+.requirement-input:hover, .project-input:hover {
     border: 3px solid #735c86;
 }
 
