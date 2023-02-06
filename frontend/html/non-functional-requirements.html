@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
     <title>Функционални изисквания</title>
     <script src="https://kit.fontawesome.com/4d3f93d2d2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/non-functional-requirements.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 
@@ -20,15 +20,15 @@
 
         <div class="sidebar-menu">
             <ul>
-                <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.html" class="active"><span class="las la-igloo"></span>
+                <li class="list">
+                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.html" ><span class="las la-igloo"></span>
                         <span>Табло</span></a>
                 </li>
-                <li>
+                <li class="list">
                     <a href="http://localhost/FunctionalRequirements/frontend/html/functional-requirements.html"><span class="las la-question"></span>
                         <span>Функционални изисквания</span></a>
                 </li>
-                <li>
+                <li class="list active">
                     <a href="#"><span class="las la-question"></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
@@ -57,102 +57,70 @@
                 </div>
             </div>
         </header>
-
+        
         <main>
-            <div class="tiles">
-                <div class="single-tile">
-                    <div>
-                        <h1 id="numberOfProjects"></h1>
-                        <span>Проекти</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard-list"></span>
-                    </div>
-                </div>
+            <h1><i class="las la-clipboard-list"></i> Нефункционални изисквания</h1>
 
-                <div class="single-tile">
-                    <div>
-                        <h1 id="numberOfFuncRequirements"></h1>
-                        <span>Функционални изисквания</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard-list"></span>
-                    </div>
-                </div>
-
-                <div class="single-tile">
-                    <div>
-                        <h1 id="numberOfNonFuncRequirements"></h1>
-                        <span>Нефункционални изисквания</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard-list"></span>
-                    </div>
-                </div>
+            <div class="about">
+                
+                <h2>Що е то нефункционално изискване?</h2>
+                
+                <p> Дефинира свойствата и ограниченията на системата, напр. надеждност, време на реакция, изисквания към външната памет. Ограничения са капацитетът на входно-изходните устройства, представянето на системата и т.н.</p>
+                <p> Нефункционалните изисквания могат също да се специфицират изисквания за процеса на разработка. Например, задължително използване на дадена CASE система, програмен език или метод за разработка. </p>
+                <p> Те може да са по-важни от функционалните - неизпълнението им може да направи системата безполезна. </p>
             </div>
 
-            <div class="recent-grid">
-                <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3> Проекти </h3>
-                            <button onclick="openProjectForm()"> <i class="fa-regular fa-square-plus"></i> Добави проект</button>
-                        </div>
+            <div class="examples">
+                
+                <h2>Класификация на нефункционалните изисквания</h2>
+                
+                <p>Изисквания към продукта:</p>
+                <ul>
+                    <li class="normal">Изисквания, които специфицират че продуктът трябва да има определено поведение, например: скорост на изпълнение, надеждност и т.н.</li>
+                </ul>
+                <p>Организационни изисквания:</p>
+                <ul>
+                    <li class="normal">Изисквания, които са следствие от политиката и процедурите на организацията, например: използвани стандарти, изисквания на внедряването и т.н.</li>
+                </ul>
+                <p>Външни изисквания:</p>
+                <ul>
+                    <li class="normal">Изисквания, които възникват от фактори, външни на системата и процеса на разработка, например: изисквания за съвместимост с други системи, юридически изисквания и т.н.</li>
+                </ul>
+            </div>
 
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>№</td>
-                                            <td>Име на проект</td>
-                                            <td>Статус</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="project-table-body"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+            <div class="examples">
+                
+                <h2>Типове нефункционални изисквания</h2>
+                
+               
+                <figure>
+                    <img src="../css/schema.jpg">
+                    <figcaption id="fig1">Фигура 1. Схема на типовете нефункционални изисквания</figcaption>
+                </figure>
+            </div>
 
-                </div>
+            <div class="examples">
+                
+                <h2>Примери</h2>
+                
+                <p>Достъпност, архивиране, капацитет, съответствие, целостта на данните, задържане на данни, зависимост, внедряване, документация, трайност, ефективност, експлоатабилност, разширяемост, управление на неизправности, толерантност към грешки, оперативна съвместимост, модифицируемост, оперативност, поверителност, четливост, докладване, устойчивост, повторна употреба, мащабируемост, стабилност, проверяемост, производителност, прозрачност, интегративност.</p>
+            </div>
 
-                <div id="modal">
-                    <div id="add-project-modal">
-                        <h2>Добави проект</h2>
-                        <div>
-                            <form id="project-form" class="form-container">
-                                <label class="form-label" for="name">Тема:</label>
-                                <input type="text" class="project-input project-input-text" placeholder="Тема на проекта" name="name" required>
-
-                                <label class="form-label" for="number">Номер:</label>
-                                <input type="number" min=0 class="project-input project-input-text" placeholder="Номер на темата" name="number" required>
-
-                                <label class="form-label" for="description">Описание:</label>
-                                <textarea type="text" class="project-input project-input-text" placeholder="Подробно описание на проекта" name="description" required rows="10" cols="20"></textarea>
-
-                                <label class="form-label" for="status">Статус:</label>
-                                <input type="radio" class="project-input project-input-radio" id="not-started" name="status" value="незапочнат" required>
-                                <label for="not-started">незапочнат</label>
-
-                                <input type="radio" class="project-input project-input-radio" id="draft" name="status" value="чернова" required>
-                                <label for="draft">чернова</label>
-
-                                <input type="radio" class="project-input project-input-radio" id="finished" name="status" value="завършен" required>
-                                <label for="finished">завършен</label>
-
-                                <div class="add-project-btns">
-                                    <button id="add-project-btn" type="submit" class="btn"><i class="fa-solid fa-plus"></i> Добави</button>
-                                    <button id="cancel-add-project-btn" type="button" class="btn cancel" onclick="closeForm()"><i class="fa-solid fa-xmark"></i> Затвори</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="examples">
+                
+                <h2>Допълителна литература</h2>
+                <ul>
+                    <li>[1] "Функционални изисквания". 
+                        [<a href="https://www-it.fmi.uni-sofia.bg/courses/HCI/book/c19/functional.htm" target="_blank">https://www-it.fmi.uni-sofia.bg/</a>]
+                    </li>
+                    <li>[2] "Изисквания - методи и техники за определяне на изискванията".
+                        [<a href="https://elearn.uni-sofia.bg/mod/resource/view.php?id=12790" target="_blank">https://elearn.uni-sofia.bg</a>]
+                    </li>   
+                </ul>
+            </div>
         </main>
         </div>
 </body>
-<script src="../js/homepage.js" defer></script>
-<script src="../js/project.js" defer></script>
+<script src="../js/requirements/non-functional-requirements.js" defer></script>
 
 </html>
