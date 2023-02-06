@@ -3,7 +3,7 @@
 
     // $projectData = json_decode(file_get_contents("php://input"), true); 
     $userInput = json_decode(file_get_contents("php://input"), true);
-    if(isset($userInput) && $userInput["email"] && $userInput["password"]) {
+    if(isset($userInput) && isset($userInput["email"]) && isset($userInput["password"])) {
         try {
             $user = login($userInput);
             if(!isset($user)) {

@@ -81,7 +81,7 @@ signInBtn.addEventListener('click', (event) => {
             if (response.status == 404) {
                 document.getElementById("wrong-credentials-msg").style.display = "block";
                 //грешен email или парола.
-            } else {
+            } else if(response.status == 200) {
                 location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
             }
         });
