@@ -550,3 +550,21 @@ form textarea {
     background-color: rgba(0, 0, 0, 0.2);
     transition: opacity 300ms ease-in-out;
 }
+
+
+/* make table rows interactive */
+
+.card-body tr:hover td {
+    color: #fff;
+    cursor: pointer;
+    transition: background .1s;
+    background-color: var(--main-color);
+    font-weight: bold;
+}
+
+.card-body thead tr:hover td {
+    color: #222;
+    cursor: auto;
+    transition: none;
+    background-color: #ffff;
+}

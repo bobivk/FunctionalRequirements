@@ -49,7 +49,6 @@
             </div>
 
             <div class="user-wrapper">
-                <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
                 <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
                 <div>
                     <h4 id="userName"></h4>
@@ -58,105 +57,133 @@
             </div>
         </header>
 
-        <main>
-    <div class="card" >
-        <div class="modify-project-info-btns">
-            <button id="delete-project"><i class="las la-trash-alt"></i> Изтрий проект</button>
-            <button id="edit-project" onclick="inEditMode()"><i class="las la-edit"></i> Редактирай проект</button>
-            <button class="disable" id="save-project" onclick="saveProject()"><i class="las la-save"></i></i> Запази</button>
-            <button class="disable" id="close-edit-project" onclick="notInEditMode()"><i class="fa-solid fa-xmark"></i></i> Затвори</button>
-        </div>
-        <div id="project">
-            <div class="card-header">
-                <h2 id="project-name"></h2>
+    <main>
+        <div class="card" >
+            <div class="modify-project-info-btns">
+                <button id="delete-project"><i class="las la-trash-alt"></i> Изтрий проект</button>
+                <button id="edit-project" onclick="editProjectModal()"><i class="las la-edit"></i> Редактирай проект</button>
             </div>
-
-            <p id="project-description"></p>
-            <p id="project-status"></p>
-        </div>
-    </div>
-    <h4 class="deleted-msg" id="req-deleted-msg">Изискването е изтрито успешно.</h4>
-
-    <div class="recent-grid">
-        <div class="projects">
-            <div class="card">
+            <div id="project">
                 <div class="card-header">
-                    <h3> Изисквания </h3>
-                    <div class="error" id="admin-required-error"></div>
-                    <button id="create-requirement-btn" onclick="addRequirements()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
+                    <h2 id="project-name"></h2>
                 </div>
 
-                <div class="card-body">
-                    <div class="table-responsive" id="requirements-container">
-                        <table width="100%" id="functional-requirements">
-                            <thead>
-                                <tr>
-                                    <td>Номер</td>
-                                    <td>Име</td>
-                                    <td>Приоритет</td>
-                                    <td>Слой</td>
-                                    <td>User Story</td>
-                                    <td>Описание</td>
-                                    <td>Тагове</td>
-                                    <td>Тип</td>
-                                    <td>Действие</td>
-                                </tr>
-                            </thead>
-                            <tbody id="requirements-table-body"></tbody>
-                        </table>
+                <p id="project-description"></p>
+                <p id="project-status"></p>
+            </div>
+        </div>
+    
+        <div class="recent-grid">
+            <div class="projects">
+                <div class="card">
+                    <div class="card-header">
+                        <h3> Изисквания </h3>
+                        <div class="error" id="admin-required-error"></div>
+                        <button id="create-requirement-btn" onclick="addRequirements()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive" id="requirements-container">
+                            <table width="100%" id="functional-requirements">
+                                <thead>
+                                    <tr>
+                                        <td>Номер</td>
+                                        <td>Име</td>
+                                        <td>Приоритет</td>
+                                        <td>Слой</td>
+                                        <td>User Story</td>
+                                        <td>Описание</td>
+                                        <td>Тагове</td>
+                                        <td>Тип</td>
+                                        <td>Действие</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="project-table-body"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
+            <div id="reqModal">
+                <div class="form-popup" id="requirement-form">
+                    <form id="form-container">
+                        <h2>Ново изискване</h2>
 
-    <div id="reqModal">
-        <div class="form-popup" id="requirement-form">
-            <form id="form-container">
-                <h2>Ново изискване</h2>
+                        <label for="type">Тип:</label>
+                        <select name="type" class="requirement-input" id="type">
+                            <option value="Функционално">Функционално</option>
+                            <option value="Нефункционално">Нефункционално</option>
+                        </select>
 
-            <label for="type">Тип:</label>
-            <select name="type" class="requirement-input" id="type">
-                <option value="Функционално">Функционално</option>
-                <option value="Нефункционално">Нефункционално</option>
-            </select>
+                        <label for="name">Име:</label>
+                        <input type="text" class="requirement-input" placeholder="Име на изискването" name="name" required>
 
-                <label for="name">Име:</label>
-                <input type="text" class="requirement-input" placeholder="Име на изискването" name="name" required>
+                        <label for="priority">Приоритет:</label>
+                        <select name="priority" class="requirement-input" id="priority">
+                            <option value="MUST_HAVE">MUST HAVE</option>
+                            <option value="NICE_TO_HAVE">NICE TO HAVE</option>
+                            <option value="IMPROVEMENT">IMPROVEMENT</option>
+                        </select>
 
-                <label for="priority">Приоритет:</label>
-                <select name="priority" class="requirement-input" id="priority">
-                    <option value="MUST_HAVE">MUST HAVE</option>
-                    <option value="NICE_TO_HAVE">NICE TO HAVE</option>
-                    <option value="IMPROVEMENT">IMPROVEMENT</option>
-            </select>
+                        <label for="layer">Слой:</label>
+                        <select name="layer" class="requirement-input" id="layer">
+                            <option value="Бизнес логика">Бизнес логика</option>
+                            <option value="Клиентски">Клиентски</option>
+                            <option value="Рутиране">Рутиране</option>
+                            <option value="Бази данни">Бази данни</option>
+                            <option value="Тестване/Инсталиране">Тестване/Инсталиране</option>
+                         </select>
 
-                <label for="layer">Слой:</label>
-                <select name="layer" class="requirement-input" id="layer">
-                    <option value="Бизнес логика">Бизнес логика</option>
-                    <option value="Клиентски">Клиентски</option>
-                    <option value="Рутиране">Рутиране</option>
-                    <option value="Бази данни">Бази данни</option>
-                    <option value="Тестване/Инсталиране">Тестване/Инсталиране</option>
-            </select>
+                        <label for="story">User story:</label>
+                        <input type="text" class="requirement-input" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
 
-                <label for="story">User story:</label>
-                <input type="text" class="requirement-input" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
+                        <label for="description">Описание:</label>
+                        <input type="text" class="requirement-input" placeholder="Описание на изискването" name="description" required>
 
-                <label for="description">Описание:</label>
-                <input type="text" class="requirement-input" placeholder="Описание на изискването" name="description" required>
+                        <label for="tags">Тагове:</label>
+                        <input type="text" class="requirement-input" placeholder="Напр. #login" name="tags">
 
-                <label for="tags">Тагове:</label>
-                <input type="text" class="requirement-input" placeholder="Напр. #login" name="tags">
-
-                <div class="add-requirement-btns">
-                    <button id="add-requirement-btn" type="submit" class="btn"><i class="fa-solid fa-plus"></i> Добави</button>
-                    <button id="cancel-add-requirement-btn" type="button" class="btn cancel" onclick="closeModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                        <div class="add-requirement-btns">
+                            <button id="add-requirement-btn" type="submit" class="btn"><i class="fa-solid fa-plus"></i> Добави</button>
+                            <button id="cancel-add-requirement-btn" type="button" class="btn cancel" onclick="closeModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
+    
+             </div>
+
+
+
+             <div id="reqModal">
+                <div class="form-popup" id="requirement-form">
+                    <form id="form-container">
+                        <h2>Редактиране на проект</h2>
+
+                        <label for="name">Име:</label>
+                        <input type="text" class="requirement-input" placeholder="Име на проекта" name="name" required>
+
+                        <label for="description">Описание:</label>
+                        <input type="text" class="requirement-input" placeholder="Описание на проекта" name="description" required>
+
+                        <label for="proj-status">Статус:</label>
+                        <select name="proj-status" class="requirement-input" id="proj-status">
+                            <option value="нзапочнат">незапочнат</option>
+                            <option value="чернова">чернова</option>
+                            <option value="завършен">завършен</option>
+                        </select>
+
+                        <div class="add-requirement-btns">
+                            <button id="add-requirement-btn" type="submit" class="btn"><i class="las la-save"></i></i> Запази</button>
+                            <button id="cancel-add-requirement-btn" type="button" class="btn cancel" onclick="closeModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                        </div>
+                    </form>
+                </div>
+    
+             </div>
     </main>
-    </div>
+
 </body>
 <script src="../js/requirements/requirements.js" defer></script>
 <script src="../js/project.js" defer></script>

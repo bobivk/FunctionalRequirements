@@ -373,7 +373,6 @@ td {
 /* action buttons in requirement row */
 #action-btns {
     display: inline-block;
-    margin-top: 1rem;
     margin-left: 1rem;
     justify-content: space-between;
     width: 100%;
@@ -389,6 +388,7 @@ td {
     border: 1px solid #fff;
     font-weight: bold;
     cursor: pointer;
+    margin-top: .7rem;
 }
 
 #edit-requirement:hover,
