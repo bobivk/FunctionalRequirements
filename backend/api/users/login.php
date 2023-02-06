@@ -8,7 +8,7 @@
         try {
             $user = login($userInput);
             if(!isset($user)) {
-                http_response_code(401);
+                http_response_code(404);
                 echo json_encode(["message" => "No user found with the credentials."]);
             } else {
                 session_start(); //създава session cookie

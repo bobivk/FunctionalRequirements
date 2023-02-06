@@ -131,3 +131,8 @@ button:hover {
     display:none;
     color:#eaeaea;
 }
+
+#wrong-credentials-msg {
+    display: none;
+    color: #eaeaea;
+}

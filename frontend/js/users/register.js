@@ -28,7 +28,7 @@ signUpBtn.addEventListener('click', (event) => {
         data[field.name] = field.value;
     });
 
-    if (isEmailValid(data.email) && !userExists(data)) {
+    if (isEmailValid(data.email) && isPasswordValid(data.password)) {
         fetch('http://localhost/FunctionalRequirements/backend/api/users/register-user.php', {
                 method: 'POST',
                 headers: {
@@ -37,16 +37,29 @@ signUpBtn.addEventListener('click', (event) => {
                 body: JSON.stringify(data)
             })
             .then((response) => {
+                let responseJson = response.json();
                 if(response.status == 400) {
                     alert("Невалидни данни.");
                 } else if(response.status == 500) {
                     alert("Възникна грешка, моля опитайте отново.");
+                    document.querySelectorAll("input").values = "";
                     location.reload();
-                } else if(response.status == 201){
+                } else if(response.status == 409) {
+                    if (responseJson["sameUsername"]) {
+                        document.getElementById('username-exists-error').innerHTML = "Потребител с име '" + username + "' вече съществува.";
+                        document.getElementById('username-exists-error').style.display = "block";
+                    }
+                    if (responseJson["sameEmail"]) {
+                        document.getElementById('email-exists-error').innerHTML = "Потребител с имейл адрес '" + email + " вече съществува.";
+                        document.getElementById('email-exists-error').style.display = "block";
+                    }
+                } else if(response.status == 201) {
                     document.getElementById("registration-success").style.display = "block";
+                    document.getElementById('username-exists-error').style.display = "none";
+                    document.getElementById('email-exists-error').style.display = "none";
                     switchToSignIn();
                 }
-            })
+            });
     }
     event.preventDefault();
 });
@@ -72,7 +85,8 @@ signInBtn.addEventListener('click', (event) => {
             body: JSON.stringify(data)
         })
         .then(response => {
-            if (response.status == 401) {
+            if (response.status == 404) {
+                document.getElementById("wrong-credentials-msg").style.display = "block";
                 //грешен email или парола.
             } else {
                 location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
@@ -86,6 +100,7 @@ function switchToSignUp() {
     title.innerHTML = "Регистрация";
     signUpBtn.classList.remove("disable");
     signInBtn.classList.add("disable");
+    document.getElementById("wrong-credentials-msg").style.display = "none";
     enablePasswordChecks();
 }
 
@@ -105,6 +120,16 @@ function isEmailValid(email) {
     }
     document.getElementById('email-error').style.display = "none";
     return true;
+}
+
+function isPasswordValid() {
+    let valid = true
+    document.querySelectorAll(".password-check-field").forEach((element) =>{
+        if(element.style.color != "green"){
+            valid = false;
+        }
+    });
+    return valid;
 }
 
 function checkPassword() {
@@ -144,33 +169,4 @@ function checkPassword() {
         document.getElementById("check2").style.color = "#555";
     }
 
-}
-
-function userExists(data) {
-    fetch('http://localhost/FunctionalRequirements/backend/api/users/user-exists.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then((res) => {
-            return res.json();
-        })
-        .then((resultJson) => {
-            if (resultJson["exists"]) {
-                if (resultJson["sameUsername"]) {
-                    document.getElementById('username-exists-error').innerHTML = "Потребител с име '" + username + "' вече съществува.";
-                    document.getElementById('username-exists-error').style.display = "block";
-                }
-                if (resultJson["sameEmail"]) {
-                    document.getElementById('email-exists-error').innerHTML = "Потребител с имейл адрес '" + email + " вече съществува.";
-                    document.getElementById('email-exists-error').style.display = "block";
-                }
-                return true;
-            }
-            document.getElementById('username-exists-error').style.display = "none";
-            document.getElementById('email-exists-error').style.display = "none";
-            return false;
-        });
 }

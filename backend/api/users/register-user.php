@@ -47,16 +47,34 @@ function validateUserData($user_data) {
         try {
             $db = new DB();
             $connection = $db->getConnection();
-            $userRoleId = getUserRoleId($connection);
-            $passwordHash = password_hash($userData["password"], PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (username, email, role_id, password) VALUES (:username, :email, :role_id, :password)";
-            $statement = $connection->prepare($sql);
-            $statement -> execute(array("username" => $userData["username"], "email" => $userData["email"], "role_id" => $userRoleId, "password" => $passwordHash));
-            http_response_code(201); //201 created
-            echo json_encode([
-                "message" => "Регистрацията е успешна"
-            ]);
-
+            //check user exists
+            $sql = "SELECT username, email FROM users WHERE username=:username OR email=:email";
+            $statement = $connection -> prepare($sql);
+            $statement -> execute(["username" => $userData["username"], "email" => $userData["email"]]);
+            $exists = false;
+            while ($user = $statement->fetch(PDO::FETCH_ASSOC)) {
+                if($user["email"] == $userData["email"]) {
+                    $exists = true;
+                    http_response_code(409); //conflict - already exists
+                    echo json_encode(array("exists" => true, "sameUsername"=> false, "sameEmail"=> true));
+                } else if($user["username"] == $userData["username"]) {
+                    $exists = true;
+                    http_response_code(409); //conflict - already exists
+                    echo json_encode(array("exists" => true, "sameUsername"=> true, "sameEmail"=> false));
+                }
+            }
+            if (!$exists) {
+                $userRoleId = 2;//getUserRoleId($connection);
+                $passwordHash = password_hash($userData["password"], PASSWORD_DEFAULT);
+                $insertSql = "INSERT INTO users (username, email, role_id, password) VALUES (:username, :email, :role_id, :password)";
+                $insertStatement = $connection->prepare($sql);
+                var_dump(array("username" => $userData["username"], "email" => $userData["email"], "role_id" => $userRoleId, "password" => $passwordHash));
+                //$insertStatement -> execute(array("username" => $userData["username"], "email" => $userData["email"], "role_id" => $userRoleId, "password" => $passwordHash));
+                http_response_code(201); //201 created
+                echo json_encode([
+                    "message" => "Registration successful."
+                ]);
+            }
         } catch (PDOException $ex) {
             http_response_code(500);
             echo json_encode(["message" => $ex->getMessage()]);
