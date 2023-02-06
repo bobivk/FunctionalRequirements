@@ -45,14 +45,7 @@ signUpBtn.addEventListener('click', (event) => {
                     document.querySelectorAll("input").values = "";
                     location.reload();
                 } else if(response.status == 409) {
-                    if (responseJson["sameUsername"]) {
-                        document.getElementById('username-exists-error').innerHTML = "Потребител с име '" + username + "' вече съществува.";
-                        document.getElementById('username-exists-error').style.display = "block";
-                    }
-                    if (responseJson["sameEmail"]) {
-                        document.getElementById('email-exists-error').innerHTML = "Потребител с имейл адрес '" + email + " вече съществува.";
-                        document.getElementById('email-exists-error').style.display = "block";
-                    }
+                    document.getElementById("username-exists-error").style.display="block";
                 } else if(response.status == 201) {
                     document.getElementById("registration-success").style.display = "block";
                     document.getElementById('username-exists-error').style.display = "none";

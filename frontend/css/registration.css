@@ -136,3 +136,9 @@ button:hover {
     display: none;
     color: #eaeaea;
 }
+
+#username-exists-error {
+    display:none;
+    color:#eaeaea;
+    margin-top: 2rem;
+}
