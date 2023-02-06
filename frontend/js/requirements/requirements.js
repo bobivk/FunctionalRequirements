@@ -105,14 +105,7 @@ deleteProjectButton.addEventListener('click', (event) => {
     event.preventDefault();
 });
 
-const editProjectButton = document.getElementById("edit-project");
-editProjectButton.addEventListener('click', (event) => {
-    document.getElementById('project').toggleAttribute("contenteditable");
-    document.getElementById('save-project').style.display = "inline-block";
-    event.preventDefault();
-});
-
-const saveProjectButton = document.getElementById("save-project");
+const saveProjectButton = document.getElementById("save-project-btn");
 saveProjectButton.addEventListener('click', (event) => {
     document.getElementById('project').setAttribute('contenteditable', 'false');
     let projectInput = document.querySelectorAll("project-input");
@@ -130,6 +123,7 @@ saveProjectButton.addEventListener('click', (event) => {
         });
     event.preventDefault();
 });
+
 
 function fetchRequirements() {
     fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?projectId=" + params.projectId)
@@ -210,9 +204,18 @@ function addRequirements() {
     document.getElementById("reqModal").style.display = "block";
 }
 
+function editProjectModal() {
+    document.getElementById("project-modal").style.display = "block";
+}
+
 function closeModal() {
     document.getElementById("form-container").reset();
     document.getElementById("reqModal").style.display = "none";
+}
+
+function closeProjectModal() {
+    document.getElementById("form-container").reset();
+    document.getElementById("project-modal").style.display = "none";
 }
 
 function inEditMode() {

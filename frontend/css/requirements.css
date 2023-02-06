@@ -302,7 +302,7 @@ td {
 }
 
 /*add new requirement pop-up */
-#reqModal {
+#reqModal, #project-modal {
     display: none;
     position: fixed;
     z-index: 100;
@@ -359,7 +359,9 @@ td {
 }
 
 #add-requirement-btn,
-#cancel-add-requirement-btn {
+#cancel-add-requirement-btn,
+#save-project-btn,
+#cancel-save-project-btn {
     background: var(--text-on-dark-background);
     border-radius: 10px;
     color: var(--main-color);
