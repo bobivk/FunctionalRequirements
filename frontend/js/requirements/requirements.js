@@ -178,3 +178,22 @@ function closeModal() {
     document.getElementById("form-container").reset();
     document.getElementById("reqModal").style.display = "none";
 }
+
+function inEditMode() {
+    document.getElementById("edit-project").style.display = "none";
+    document.getElementById("delete-project").style.display = "none";
+    document.getElementById("save-project").style.display = "block";
+    document.getElementById("close-edit-project").style.display = "block";
+}
+
+function notInEditMode() {
+    document.getElementById("edit-project").style.display = "block";
+    document.getElementById("delete-project").style.display = "block";
+    document.getElementById("save-project").style.display = "none";
+    document.getElementById("close-edit-project").style.display = "none";
+}
+
+function saveProject() {
+    //fetch for update-project
+    notInEditMode();
+}
