@@ -206,15 +206,17 @@
                 <div class="form-popup" id="project-form">
                     <form id="form-container">
                         <h2>Редактиране на проект</h2>
+                        <label for="number">Номер на тема:</label>
+                        <input type="text" id="project-input-number" class="project-input form-input-field" name="number" required>
 
                         <label for="name">Име:</label>
-                        <input type="text" class="project-input form-input-field" placeholder="Име на проекта" name="name" required>
+                        <input type="text" id="project-input-name" class="project-input form-input-field" placeholder="Име на проекта" name="name" required>
 
                         <label for="description">Описание:</label>
-                        <input type="text" class="project-input form-input-field" placeholder="Описание на проекта" name="description" required>
+                        <input type="text" id="project-input-description" class="project-input form-input-field" placeholder="Описание на проекта" name="description" required>
 
                         <label for="proj-status">Статус:</label>
-                        <select name="status" class="project-input form-input-field" id="proj-status">
+                        <select name="status" id="project-input-status" class="project-input form-input-field" id="proj-status">
                             <option value="незапочнат">незапочнат</option>
                             <option value="чернова">чернова</option>
                             <option value="завършен">завършен</option>

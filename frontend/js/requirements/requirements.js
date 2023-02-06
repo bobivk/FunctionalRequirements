@@ -106,7 +106,6 @@ deleteProjectButton.addEventListener('click', (event) => {
 
 const saveProjectButton = document.getElementById("save-project-btn");
 saveProjectButton.addEventListener('click', (event) => {
-    document.getElementById('project').setAttribute('contenteditable', 'false');
     const data = {};
     const fields = document.querySelectorAll('.project-input');
     fields.forEach(field => {
@@ -125,10 +124,9 @@ saveProjectButton.addEventListener('click', (event) => {
                 alert("Нужни са администраторски права за промяна на този проект");
             }
             else if (response.status == 200) {
-                //location.reload();
+                location.reload();
             }
         });
-    //notInEditMode();
 
     event.preventDefault();
 });
@@ -219,6 +217,10 @@ function closeEditRequirementsModal() {
 
 function openProjectModal() {
     document.getElementById("project-modal").style.display = "block";
+    const name = document.getElementById("project-name").innerText.split(".");
+    document.getElementById("project-input-number").value = name[0];
+    document.getElementById("project-input-name").value = name[1];
+    document.getElementById("project-input-description").value = document.getElementById("project-description").innerText;
 }
 
 function closeRequirementsModal() {
@@ -243,10 +245,6 @@ function notInEditMode() {
     document.getElementById("delete-project").style.display = "inline-block";
     document.getElementById("save-project").style.display = "none";
     document.getElementById("close-edit-project").style.display = "none";
-}
-
-function saveProject() {
-    
 }
 
 function attachDeleteRequirementListener(deleteRequirementButton, id) {
