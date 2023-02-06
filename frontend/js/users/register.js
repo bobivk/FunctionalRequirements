@@ -102,6 +102,7 @@ function switchToSignIn() {
     title.innerHTML = "Вход";
     signUpBtn.classList.add("disable");
     signInBtn.classList.remove("disable");
+    document.getElementById("email-error").style.display = "none";
     disablePasswordChecks();
 }
 
