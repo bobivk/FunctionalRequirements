@@ -68,7 +68,10 @@ const projects = fetch("http://localhost/FunctionalRequirements/backend/api/proj
 
             projectsTableBody.appendChild(projectRow);
             projects.push(project);
-        })
+        });
+        document.getElementById("numberOfProjects").innerHTML = projects.length;
+        fetchRequirementCount("Функционално", document.getElementById("numberOfFuncRequirements"));
+        fetchRequirementCount("Нефункционално", document.getElementById("numberOfNonFuncRequirements"));
         return projects;
     });
 
@@ -76,5 +79,17 @@ const projects = fetch("http://localhost/FunctionalRequirements/backend/api/proj
 function attachListener(item, projectId) {
     item.addEventListener('click', (event) => {
         location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.html?id=' + projectId; //open page of this project with its id
+    });
+}
+
+
+
+function fetchRequirementCount(type, element) {
+    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements-count.php?type=" + type)
+    .then((response) => {
+        return response.json();
+    })
+    .then((count) => {
+        element.innerHTML = count;
     });
 }

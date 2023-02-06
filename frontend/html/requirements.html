@@ -33,6 +33,7 @@
                 <td>User Story</td>
                 <td>Описание</td>
                 <td>Тагове</td>
+                <td>Тип</td>
             </th>
         </table>
     </div>
@@ -42,32 +43,40 @@
             <form id="form-container">
                 <h1>Ново изискване</h1>
 
-                <label for="name">Име</label>
+            
+
+            <label for="type">Тип:</label>
+            <select name="type" class="requirement-input" id="type">
+                <option value="Функционално">Функционално</option>
+                <option value="Нефункционално">Нефункционално</option>
+            </select>
+
+                <label for="name">Име:</label>
                 <input type="text" class="requirement-input" placeholder="Име на изискването" name="name" required>
 
-                <label for="priority">Приоритет</label>
+                <label for="priority">Приоритет:</label>
                 <select name="priority" class="requirement-input" id="priority">
-                <option value="MUST_HAVE">MUST HAVE</option>
-                <option value="NICE_TO_HAVE">NICE TO HAVE</option>
-                <option value="IMPROVEMENT">IMPROVEMENT</option>
+                    <option value="MUST_HAVE">MUST HAVE</option>
+                    <option value="NICE_TO_HAVE">NICE TO HAVE</option>
+                    <option value="IMPROVEMENT">IMPROVEMENT</option>
             </select>
 
-                <label for="layer">Слой</label>
+                <label for="layer">Слой:</label>
                 <select name="layer" class="requirement-input" id="layer">
-                <option value="BUSINESS">Бизнес логика</option>
-                <option value="CLIENT">Клиентски</option>
-                <option value="ROUTING">Рутиране</option>
-                <option value="DATABASE">Бази данни</option>
-                <option value="TEST/INSTALL">Тестване/инсталиране</option>
+                    <option value="Бизнес логика">Бизнес логика</option>
+                    <option value="Клиентски">Клиентски</option>
+                    <option value="Рутиране">Рутиране</option>
+                    <option value="Бази данни">Бази данни</option>
+                    <option value="Тестване/Инсталиране">Тестване/Инсталиране</option>
             </select>
 
-                <label for="story">User story</label>
+                <label for="story">User story:</label>
                 <input type="text" class="requirement-input" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
 
-                <label for="description">Описание</label>
+                <label for="description">Описание:</label>
                 <input type="text" class="requirement-input" placeholder="Описание на изискването" name="description" required>
 
-                <label for="tags">Тагове</label>
+                <label for="tags">Тагове:</label>
                 <input type="text" class="requirement-input" placeholder="Въведете име на изискването" name="tags">
 
                 <div class="add-requirement-btns">

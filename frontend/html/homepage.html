@@ -26,11 +26,11 @@
                         <span>Табло</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-clipboard-list"></span>
+                    <a href=""><span class="las la-question"></span>
                         <span>Функционални изисквания</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-clipboard-list"></span>
+                    <a href=""><span class="las la-question"></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
             </ul>
@@ -53,9 +53,8 @@
                 <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
                 <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
                 <div>
-                    <h4>John Doe</h4>
-                    <!-- should change this too; directly take it from the db as user role?-->
-                    <small>User</small>
+                    <h4 id="userName"></h4>
+                    <small id="userRole"></small>
                 </div>
             </div>
         </header>
@@ -64,8 +63,7 @@
             <div class="tiles">
                 <div class="single-tile">
                     <div>
-                        <!-- take number of projects from db? -->
-                        <h1>54</h1>
+                        <h1 id="numberOfProjects"></h1>
                         <span>Проекти</span>
                     </div>
                     <div>
@@ -75,8 +73,7 @@
 
                 <div class="single-tile">
                     <div>
-                        <!-- take number of projects from db? -->
-                        <h1>102</h1>
+                        <h1 id="numberOfFuncRequirements"></h1>
                         <span>Функционални изисквания</span>
                     </div>
                     <div>
@@ -86,8 +83,7 @@
 
                 <div class="single-tile">
                     <div>
-                        <!-- take number of projects from db? -->
-                        <h1>21</h1>
+                        <h1 id="numberOfNonFuncRequirements"></h1>
                         <span>Нефункционални изисквания</span>
                     </div>
                     <div>
@@ -101,7 +97,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3> Проекти </h3>
-                            <!-- трябва да се направи неактивен, ако юзър.роля==юзър; активен, ако юзър.роля==админ -->
                             <button onclick="openProjectForm()"> Добави проект <i class="fa-regular fa-square-plus"></i></button>
                         </div>
 

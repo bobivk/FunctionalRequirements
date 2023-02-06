@@ -1,5 +1,5 @@
 class Requirement {
-    constructor(id, name, projectId, priority, layer, story, number, description, tags) {
+    constructor(id, name, projectId, priority, layer, story, number, description, tags, type) {
         this.id = id;
         this.name = name;
         this.projectId = projectId;
@@ -9,6 +9,7 @@ class Requirement {
         this.number = number;
         this.description = description;
         this.tags = tags;
+        this.type = type;
     }
 }
 const urlSearchParams = new URLSearchParams(window.location.search);
@@ -43,14 +44,14 @@ let project = fetch("http://localhost/FunctionalRequirements/backend/api/project
 
 fetchRequirements();
 
-const requirementForm = document.getElementById('requirement-form');
-requirementForm.addEventListener('submit', (event) => {
+const requirementButton = document.getElementById('add-requirement-btn');
+requirementButton.addEventListener('click', (event) => {
     const data = {};
-    const fields = requirementForm.querySelectorAll('input');
+    const fields = requirementButton.querySelectorAll('.requirement-input');
     fields.forEach(field => {
         data[field.name] = field.value;
     });
-
+    data["project_id"] = params.id;
     fetch('http://localhost/FunctionalRequirements/backend/api/requirements/save-requirement.php', {
             method: 'POST',
             headers: {
@@ -59,9 +60,8 @@ requirementForm.addEventListener('submit', (event) => {
             body: JSON.stringify(data)
         })
         .then((response) => {
-            console.log(response.json());
+            closeModal();
         });
-    event.preventDefault();
 });
 
 const deleteProjectButton = document.getElementById("delete-project");
@@ -118,21 +118,26 @@ saveProjectButton.addEventListener('click', (event) => {
 });
 //same for delete requirement when we have the buttons.
 
-const addRequirementButton = document.getElementById("add-requirement-btn");
-addRequirementButton.addEventListener('click', (event) => {
-    let requirementInput = document.querySelectorAll("requirement-input");
-    fetch('http://localhost/FunctionalRequirements/backend/requirements/save-requirement.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: json.stringify(requirementInput)
-        })
-        .then((response) => {
-            console.log(response.json());
-            fetchRequirements();
-        })
-})
+// const addRequirementButton = document.getElementById("add-requirement-btn");
+// addRequirementButton.addEventListener('click', (event) => {
+//     let fields = document.querySelectorAll("requirement-input");
+//     const data = {};
+//     fields.forEach(field => {
+//         data[field.name] = field.value;
+//     });
+   
+//     fetch('http://localhost/FunctionalRequirements/backend/requirements/save-requirement.php', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(data)
+//         })
+//         .then((response) => {
+//             console.log(response.json());
+//             fetchRequirements();
+//         })
+// })
 
 function fetchRequirements() {
     fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?id=" + params.id)
@@ -142,8 +147,8 @@ function fetchRequirements() {
         .then((data) => {
             let requirements = [];
             data.forEach((req) => {
-                //id, name, projectId, priority, layer, story, number, description, tags
-                let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.number, req.description, req.tags);
+                //id, name, projectId, priority, layer, story, number, description, tags, type
+                let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.number, req.description, req.tags, req.type);
                 requirements.push(requirement);
             });
             let requirementsTable = document.getElementById("functional-requirements");
@@ -156,6 +161,7 @@ function fetchRequirements() {
                 let story = document.createElement("td");
                 let description = document.createElement("td");
                 let tags = document.createElement("td");
+                let type = document.createElement("type");
 
                 number.innerHTML = requirement.number;
                 name.innerHTML = requirement.name;
@@ -164,6 +170,7 @@ function fetchRequirements() {
                 story.innerHTML = requirement.story;
                 description.innerHTML = requirement.description;
                 tags.innerHTML = requirement.tags;
+                type.innerHTML = requirement.type;
 
                 requirementRow.appendChild(number);
                 requirementRow.appendChild(name);
@@ -172,6 +179,7 @@ function fetchRequirements() {
                 requirementRow.appendChild(story);
                 requirementRow.appendChild(description);
                 requirementRow.appendChild(tags);
+                requirementRow.appendChild(type);
 
                 requirementsTable.appendChild(requirementRow);
             });
