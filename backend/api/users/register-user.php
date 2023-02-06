@@ -33,8 +33,7 @@ function validateUserData($user_data) {
 
     $userData = json_decode(file_get_contents("php://input"), true);
 
-    //validation
-    if (isset($userData) && $userData) {
+    if (isset($userData)) {
 
         $valid = validateUserData($userData);
         if ($valid["isValid"]) {
@@ -67,22 +66,21 @@ function validateUserData($user_data) {
                 $userRoleId = 2;//getUserRoleId($connection);
                 $passwordHash = password_hash($userData["password"], PASSWORD_DEFAULT);
                 $insertSql = "INSERT INTO users (username, email, role_id, password) VALUES (:username, :email, :role_id, :password)";
-                $insertStatement = $connection->prepare($sql);
-                var_dump(array("username" => $userData["username"], "email" => $userData["email"], "role_id" => $userRoleId, "password" => $passwordHash));
-                //$insertStatement -> execute(array("username" => $userData["username"], "email" => $userData["email"], "role_id" => $userRoleId, "password" => $passwordHash));
+                $insertStatement = $connection->prepare($insertSql);
+                $insertStatement -> execute(array("username" => $userData["username"], "email" => $userData["email"], "role_id" => $userRoleId, "password" => $passwordHash));
                 http_response_code(201); //201 created
                 echo json_encode([
                     "message" => "Registration successful."
                 ]);
             }
         } catch (PDOException $ex) {
-            http_response_code(500);
+            http_response_code(402);
             echo json_encode(["message" => $ex->getMessage()]);
         }
     } else {
         http_response_code(400);
         echo json_encode([
-            "message" => "Невалидни данни"
+            "message" => "Invalid data."
         ]);
     }
     echo json_encode($userData);

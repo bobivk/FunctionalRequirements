@@ -3,7 +3,6 @@
 
     // $projectData = json_decode(file_get_contents("php://input"), true); 
     $userInput = json_decode(file_get_contents("php://input"), true);
-    var_dump(["input" =>$userInput]);
     if(isset($userInput) && $userInput["email"] && $userInput["password"]) {
         try {
             $user = login($userInput);
@@ -15,7 +14,6 @@
                 $_SESSION["user"] = $user; //запазваме данните за потребителя в сесията, за да не трябва да се логва отново при следващи извиквания
                 setcookie('email', $userInput['email'], time() + 6000, '/');
                 setcookie('password', $userInput['password'], time() + 6000, '/');
-                var_dump($user);
                 http_response_code(200);
                 echo json_encode(["message" => "Login success.", "username" => $user["username"]]);
             }
@@ -39,7 +37,9 @@
                 $userFromDb = $statement->fetchAll(PDO::FETCH_ASSOC)[0]; //fetch_assoc връща данните само като асоциативен списък, иначе дублира - асоциативен и индексиран
                 $passwordFromDb = $userFromDb["password"];
                 $inputPassword = $userInput["password"];
+                var_dump(["input"=>$inputPassword]);
                 $isPasswordValid = password_verify($inputPassword, $passwordFromDb);
+                var_dump(["valid"=>$isPasswordValid]);
                 if($isPasswordValid){
                     return $userFromDb;
                 } else {
