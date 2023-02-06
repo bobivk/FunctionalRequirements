@@ -126,3 +126,8 @@ button:hover {
 .password-check div.disable {
     display: none;
 }
+
+.registration-success {
+    display:none;
+    color:#eaeaea;
+}

@@ -1,16 +1,15 @@
 <?php
 require_once("../../db/db.php");
 //    session_start();
-        try{
+        try {
             $userData = json_decode(file_get_contents("php://input"), true);
             $db = new DB();
             $connection = $db->getConnection();
             $sql = "SELECT username, email FROM users WHERE username=:username OR email=:email";
             $statement = $connection -> prepare($sql);
             $statement -> execute(["username" => $userData["username"], "email" => $userData["email"]]);
-            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
             $exists = false;
-            while ($user = $results) {
+            while ($user = $statement->fetch(PDO::FETCH_ASSOC)) {
                 if($user["email"] == $userData["email"]) {
                     $exists = true;
                     echo json_encode(array("exists" => true, "sameUsername"=> false, "sameEmail"=> true));

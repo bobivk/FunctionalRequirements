@@ -3,42 +3,22 @@ const signInBtn = document.getElementById("signInBtn");
 const nameField = document.getElementById("nameField");
 const title = document.getElementById("title");
 
-function getAndDisableAllPasswordChecks() {
-    const check0 = document.getElementById("check0");
-    const check1 = document.getElementById("check1");
-    const check2 = document.getElementById("check2");
-    const check3 = document.getElementById("check3");
-    const check4 = document.getElementById("check4");
-
-    check0.style.display = "none";
-    check1.style.display = "none";
-    check2.style.display = "none";
-    check3.style.display = "none";
-    check4.style.display = "none";
+function disablePasswordChecks() {
+    document.querySelectorAll(".password-check-field").forEach((element) =>{
+        element.style.display = "none";
+    });
 }
 
-function getAndEnableAllPasswordChecks() {
-    const check0 = document.getElementById("check0");
-    const check1 = document.getElementById("check1");
-    const check2 = document.getElementById("check2");
-    const check3 = document.getElementById("check3");
-    const check4 = document.getElementById("check4");
-
-    check0.style.display = "block";
-    check1.style.display = "block";
-    check2.style.display = "block";
-    check3.style.display = "block";
-    check4.style.display = "block";
+function enablePasswordChecks() {
+    document.querySelectorAll(".password-check-field").forEach((element) =>{
+        element.style.display = "block";
+    });
 }
 
 signUpBtn.addEventListener('click', (event) => {
     if (signUpBtn.classList.contains("disable")) {
         //if clicked while disabled, enable
-        nameField.style.maxHeight = "60px";
-        title.innerHTML = "Регистрация";
-        signUpBtn.classList.remove("disable");
-        signInBtn.classList.add("disable");
-        getAndEnableAllPasswordChecks();
+        switchToSignUp();
         return;
     }
     //if enabled, try register
@@ -57,11 +37,65 @@ signUpBtn.addEventListener('click', (event) => {
                 body: JSON.stringify(data)
             })
             .then((response) => {
-                // location.reload();
+                if(response.status == 400) {
+                    alert("Невалидни данни.");
+                } else if(response.status == 500) {
+                    alert("Възникна грешка, моля опитайте отново.");
+                    location.reload();
+                } else if(response.status == 201){
+                    document.getElementById("registration-success").style.display = "block";
+                    switchToSignIn();
+                }
             })
     }
     event.preventDefault();
 });
+
+signInBtn.addEventListener('click', (event) => {
+    if (signInBtn.classList.contains("disable")) {
+        //if clicked while disabled, enable
+        switchToSignIn();
+        return;
+    }
+    const data = {};
+    const fields = document.querySelectorAll('input');
+
+    fields.forEach(field => {
+        data[field.name] = field.value;
+    });
+
+    fetch("http://localhost/FunctionalRequirements/backend/api/users/login.php", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.status == 401) {
+                //грешен email или парола.
+            } else {
+                location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
+            }
+        });
+    event.preventDefault();
+});
+
+function switchToSignUp() {
+    nameField.style.maxHeight = "60px";
+    title.innerHTML = "Регистрация";
+    signUpBtn.classList.remove("disable");
+    signInBtn.classList.add("disable");
+    enablePasswordChecks();
+}
+
+function switchToSignIn() {
+    nameField.style.maxHeight = "0";
+    title.innerHTML = "Вход";
+    signUpBtn.classList.add("disable");
+    signInBtn.classList.remove("disable");
+    disablePasswordChecks();
+}
 
 function isEmailValid(email) {
     if (email == null || email == "" || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/.test(email)) {
@@ -140,35 +174,3 @@ function userExists(data) {
             return false;
         });
 }
-
-
-signInBtn.addEventListener('click', (event) => {
-    if (signInBtn.classList.contains("disable")) {
-        //if clicked while disabled, enable
-        nameField.style.maxHeight = "0";
-        title.innerHTML = "Вход";
-        signUpBtn.classList.add("disable");
-        signInBtn.classList.remove("disable");
-        getAndDisableAllPasswordChecks();
-        return;
-    }
-    const data = {};
-    const fields = document.querySelectorAll('input');
-
-    fields.forEach(field => {
-        data[field.name] = field.value;
-    });
-
-    fetch("http://localhost/FunctionalRequirements/backend/api/login.php", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
-        });
-
-    event.preventDefault();
-});

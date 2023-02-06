@@ -37,19 +37,19 @@
                     <div class="error" id="password-uppercase-error"></div>
                     <div class="error" id="password-lowercase-error"></div>
                     <div class="password-check">
-                        <div id="check0" class="disable">
+                        <div id="check0" class="disable password-check-field">
                             <i class="fa fa-check-circle"></i> <span> Дължина поне 6 символа.</span>
                         </div>
-                        <div id="check1" class="disable">
+                        <div id="check1" class="disable password-check-field">
                             <i class="fa fa-check-circle"></i> <span> Дължина най-много 10 символа.</span>
                         </div>
-                        <div id="check2" class="disable">
+                        <div id="check2" class="disable password-check-field">
                             <i class="fa fa-check-circle"></i> <span> Съдържа малки букви.</span>
                         </div>
-                        <div id="check3" class="disable">
+                        <div id="check3" class="disable password-check-field">
                             <i class="fa fa-check-circle"></i> <span> Съдържа главни букви.</span>
                         </div>
-                        <div id="check4" class="disable">
+                        <div id="check4" class="disable password-check-field">
                             <i class="fa fa-check-circle"></i> <span> Съдържа цифри.</span>
                         </div>
                     </div>
@@ -59,7 +59,11 @@
                 <div class="btn-field">
                     <button type="button" class="disable" id="signUpBtn">Регистрирай ме</button>
                     <button type="button" id="signInBtn">Вход</button>
-                 </div>
+                </div>
+                <div class="registration-success" id="registration-success">
+                    <h4>Успешна регистрация!</h4>
+                    <h4>Моля, влезте в профила си.</h4>
+                </div>
             </form>
             <div class="error" id="username-exists-error"></div>
             <div class="error" id="email-exists-error"></div>

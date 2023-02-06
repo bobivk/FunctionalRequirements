@@ -119,28 +119,6 @@ saveProjectButton.addEventListener('click', (event) => {
         });
     event.preventDefault();
 });
-//same for delete requirement when we have the buttons.
-
-// const addRequirementButton = document.getElementById("add-requirement-btn");
-// addRequirementButton.addEventListener('click', (event) => {
-//     let fields = document.querySelectorAll("requirement-input");
-//     const data = {};
-//     fields.forEach(field => {
-//         data[field.name] = field.value;
-//     });
-   
-//     fetch('http://localhost/FunctionalRequirements/backend/requirements/save-requirement.php', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(data)
-//         })
-//         .then((response) => {
-//             console.log(response.json());
-//             fetchRequirements();
-//         })
-// })
 
 function fetchRequirements() {
     fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?projectId=" + params.projectId)
