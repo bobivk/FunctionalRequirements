@@ -17,7 +17,7 @@
                 echo json_encode(["message" => "Проектът е променен успешно."]);
             } catch(PDOException $exc) {
                 http_response_code(500);
-                echo ["message" => "Грешка при запазване на проект."];
+                echo json_encode(["message" => $exc->getMessage()]);
             }
     //     } else {
     //         http_response_code(403);

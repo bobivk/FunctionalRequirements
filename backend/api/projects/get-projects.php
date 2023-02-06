@@ -12,7 +12,7 @@
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $exc) {
             http_response_code(500);
-            echo ["message" => "Грешка при взимане на проекти."];
+            echo json_encode(["message" => $exc->getMessage()]);
         }
         http_response_code(200);
         echo json_encode($rows);

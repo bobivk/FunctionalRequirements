@@ -78,7 +78,7 @@ const projects = fetch("http://localhost/FunctionalRequirements/backend/api/proj
 
 function attachListener(item, projectId) {
     item.addEventListener('click', (event) => {
-        location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.html?id=' + projectId; //open page of this project with its id
+        location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.html?projectId=' + projectId; //open page of this project with its id
     });
 }
 

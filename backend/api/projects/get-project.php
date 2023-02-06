@@ -5,7 +5,7 @@
     // if(isset($_SESSION["user"])) {
         $db = new DB();
         $connection = $db->getConnection();
-        $project_id = $_GET["id"];
+        $project_id = $_GET["projectId"];
         if (isset($project_id)) {
             $sql = "SELECT * FROM projects where id = :id";
             try {
@@ -16,7 +16,7 @@
                 echo json_encode($project);
             } catch(PDOException $exc) {
                 http_response_code(500);
-                echo ["message" => $exc->getMessage()];
+                echo json_encode(["message" => $exc->getMessage()]);
             }
         } else {
             http_response_code(400);

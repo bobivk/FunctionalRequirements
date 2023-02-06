@@ -1,29 +1,28 @@
 <?php
 require_once("../../db/db.php");
-require_once("../../db/is-admin.php");
     session_start();
 
-    if(isset($_SESSION["user"])){
+    //if(isset($_SESSION["user"])){
         $db = new DB();
-        $adminCheck = new AdminCheck();
+        //$adminCheck = new AdminCheck();
         $connection = $db->getConnection();
-        if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
-            $requirementId = $_DELETE["id"];
+        //if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
+            $requirementId = $_GET["id"];
             try {
-                $sql = "DELETE FROM requirements WHERE id = ?";
+                $sql = "DELETE FROM requirements WHERE id = :id";
                 $statement = $connection -> prepare($sql);
-                $statement -> execute($requirementId);
+                $statement -> execute(array("id" => $requirementId));
                 http_response_code(201);
                 echo json_encode(["message" => "Проектът е изтрит успешно."]);
             } catch(PDOException $exc) {
                 http_response_code(500);
-                echo ["message" => "Грешка при изтриване на изискване."];
+                echo json_encode(["message" => $exc->getMessage()]);
             }
-        } else {
-            http_response_code(403);
-            echo json_encode(["message" => "Невалидни права за достъп - потребителят не е администратор"]);
-        }
-    } else {
-        http_response_code(401);
-    }
+    //     } else {
+    //         http_response_code(403);
+    //         echo json_encode(["message" => "Невалидни права за достъп - потребителят не е администратор"]);
+    //     }
+    // } else {
+    //     http_response_code(401);
+    // }
 ?>

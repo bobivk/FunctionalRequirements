@@ -1,7 +1,7 @@
 <?php
 require_once("../../db/db.php");
     session_start();
-    $project_id = $_GET["id"];
+    $project_id = $_GET["projectId"];
         try {
             $db = new DB();
             $connection = $db->getConnection();
@@ -11,7 +11,7 @@ require_once("../../db/db.php");
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $exc) {
             http_response_code(500);
-            echo ["message" => $exc->getMessage()];
+            echo json_encode(["message" => $exc->getMessage()]);
         }
         http_response_code(200);
         echo json_encode($rows);

@@ -10,7 +10,7 @@ require_once("../../db/db.php");
             $count = $statement->fetchColumn();
         } catch(PDOException $exc) {
             http_response_code(500);
-            echo ["message" => $exc->getMessage()];
+            echo json_encode(["message" => $exc->getMessage()]);
         }
         http_response_code(200);
         echo json_encode($count);

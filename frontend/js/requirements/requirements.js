@@ -15,7 +15,7 @@ class Requirement {
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 
-let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?id=" + params.id)
+let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?projectId=" + params.projectId)
     .then((response) => {
         return response.json();
     })
@@ -47,11 +47,11 @@ fetchRequirements();
 const requirementButton = document.getElementById('add-requirement-btn');
 requirementButton.addEventListener('click', (event) => {
     const data = {};
-    const fields = requirementButton.querySelectorAll('.requirement-input');
+    const fields = document.querySelectorAll('.requirement-input');
     fields.forEach(field => {
         data[field.name] = field.value;
     });
-    data["project_id"] = params.id;
+    data["project_id"] = params.projectId;
     fetch('http://localhost/FunctionalRequirements/backend/api/requirements/save-requirement.php', {
             method: 'POST',
             headers: {
@@ -61,7 +61,9 @@ requirementButton.addEventListener('click', (event) => {
         })
         .then((response) => {
             closeModal();
+            location.reload();
         });
+        event.preventDefault();
 });
 
 const deleteProjectButton = document.getElementById("delete-project");
@@ -70,7 +72,7 @@ deleteProjectButton.addEventListener('click', (event) => {
     let sureToDelete = confirm("Сигурни ли сте, че искате да изтриете този проект?");
     if (sureToDelete) {
         let ableToDelete = true;
-        fetch('http://localhost/FunctionalRequirements/backend/api/requirements/delete-project-requirements.php?id=' + params.id, {
+        fetch('http://localhost/FunctionalRequirements/backend/api/requirements/delete-requirements-of-project.php?projectId=' + params.projectId, {
             method: 'DELETE'
         }).then((response) => {
             if (response.status == 403) {
@@ -78,10 +80,11 @@ deleteProjectButton.addEventListener('click', (event) => {
             }
         });
         if (ableToDelete) {
-            fetch('http://localhost/FunctionalRequirements/backend/api/projects/delete-project.php?id=' + params.id, {
+            fetch('http://localhost/FunctionalRequirements/backend/api/projects/delete-project.php?projectId=' + params.projectId, {
                     method: 'DELETE'
                 })
                 .then((response) => {
+                    //message проектът е изтрит успешно
                     location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
                 });
         } else {
@@ -140,7 +143,7 @@ saveProjectButton.addEventListener('click', (event) => {
 // })
 
 function fetchRequirements() {
-    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?id=" + params.id)
+    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?projectId=" + params.projectId)
         .then((response) => {
             return response.json();
         })

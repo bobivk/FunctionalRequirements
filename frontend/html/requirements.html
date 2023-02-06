@@ -12,6 +12,53 @@
 </head>
 
 <body>
+
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="lab la-accusoft"></span> <span>Проекти</span></h2>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="" class="active"><span class="las la-igloo"></span>
+                        <span>Табло</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="las la-clipboard-list"></span>
+                        <span>Функционални изисквания</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="las la-clipboard-list"></span>
+                        <span>Нефункционални изисквания</span></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <header>
+        <h2>
+            <label for="nav-toggle">
+                <span class="las la-bars"></span>
+            </label> Меню
+        </h2>
+        <div class="search-wrapper">
+            <span class="las la-search"></span>
+            <input type="search" id="search" data-search placeholder="Търсене">
+        </div>
+
+        <div class="user-wrapper">
+            <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
+            <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
+            <div>
+                <h4>John Doe</h4>
+                <!-- should change this too; directly take it from the db as user role?-->
+                <small>User</small>
+            </div>
+        </div>
+    </header>
+
     <div id="project">
         <h2 id="project-name"></h2>
         <p id="project-description"></p>
@@ -77,7 +124,7 @@
                 <input type="text" class="requirement-input" placeholder="Описание на изискването" name="description" required>
 
                 <label for="tags">Тагове:</label>
-                <input type="text" class="requirement-input" placeholder="Въведете име на изискването" name="tags">
+                <input type="text" class="requirement-input" placeholder="Напр. #login" name="tags">
 
                 <div class="add-requirement-btns">
                     <button id="add-requirement-btn" type="submit" class="btn">Добави <i class="fa-solid fa-plus"></i></button>

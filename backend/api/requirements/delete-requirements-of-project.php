@@ -1,6 +1,5 @@
 <?php
-    require_once("../../db/db.php");
-    //require_once("../users/is-admin.php");
+require_once("../../db/db.php");
     session_start();
 
     //if(isset($_SESSION["user"])){
@@ -8,14 +7,13 @@
         //$adminCheck = new AdminCheck();
         $connection = $db->getConnection();
         //if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
-            $project_id = $_GET["projectId"];
+            $projectId = $_GET["projectId"];
             try {
-                $sql = "DELETE FROM projects WHERE id = :id";
+                $sql = "DELETE FROM requirements WHERE project_id = :project_id";
                 $statement = $connection -> prepare($sql);
-                $statement -> execute(["id" => $project_id]);
-                http_response_code(204);
+                $statement -> execute(array("project_id" => $projectId));
+                http_response_code(201);
                 echo json_encode(["message" => "Проектът е изтрит успешно."]);
-                //delete requirements for this project first
             } catch(PDOException $exc) {
                 http_response_code(500);
                 echo json_encode(["message" => $exc->getMessage()]);
