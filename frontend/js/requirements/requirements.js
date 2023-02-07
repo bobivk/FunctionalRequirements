@@ -130,7 +130,7 @@ saveProjectButton.addEventListener('click', (event) => {
 
     event.preventDefault();
 });
-
+let allRequirements = [];
 
 function fetchRequirements() {
     fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?projectId=" + params.projectId)
@@ -142,62 +142,9 @@ function fetchRequirements() {
             data.forEach((req) => {
                 let requirement = new Requirement(req.id, req.name, req.project_id, req.priority, req.layer, req.story, req.description, req.tags, req.type);
                 requirements.push(requirement);
+                allRequirements.push(requirement);
             });
-            let requirementsTable = document.getElementById("functional-requirements");
-            requirements.forEach((requirement) => {
-                let requirementRow = document.createElement("tr");
-                requirementRow.id = "requirement-" + requirement.id;
-
-                let name = document.createElement("td");
-                let priority = document.createElement("td");
-                let layer = document.createElement("td");
-                let story = document.createElement("td");
-                let description = document.createElement("td");
-                let tags = document.createElement("td");
-                let type = document.createElement("td");
-                let action = document.createElement("td");
-
-                let btns = document.createElement("div");
-                btns.id = "action-btns";
-                let editBtn = document.createElement("button");
-                editBtn.id = "edit-requirement";
-                let deleteBtn = document.createElement("button");
-                deleteBtn.id = "delete-requirement";
-              
-                let iconEdit = document.createElement("i");
-                iconEdit.classList.add("las");
-                iconEdit.classList.add("la-edit");
-                let iconDelete = document.createElement("i");
-                iconDelete.classList.add("las");
-                iconDelete.classList.add("la-trash-alt");
-                //attachEditRequirementListener(editBtn, requirement);
-                attachDeleteRequirementListener(deleteBtn, requirement.id);
-                editBtn.appendChild(iconEdit);
-                deleteBtn.appendChild(iconDelete);
-                btns.appendChild(editBtn);
-                btns.appendChild(deleteBtn);
-                action.appendChild(btns);
-
-                name.innerHTML = requirement.name;
-                priority.innerHTML = requirement.priority;
-                layer.innerHTML = requirement.layer;
-                story.innerHTML = requirement.story;
-                description.innerHTML = requirement.description;
-                tags.innerHTML = requirement.tags;
-                type.innerHTML = requirement.type;
-
-                requirementRow.appendChild(name);
-                requirementRow.appendChild(priority);
-                requirementRow.appendChild(layer);
-                requirementRow.appendChild(story);
-                requirementRow.appendChild(description);
-                requirementRow.appendChild(tags);
-                requirementRow.appendChild(type);
-                requirementRow.appendChild(action);
-
-
-                requirementsTable.appendChild(requirementRow);
-            });
+            fillTable(requirements);
         });
 
 }
@@ -264,6 +211,118 @@ function attachDeleteRequirementListener(deleteRequirementButton, id) {
     })
 }
 
+
+function logout() {
+    location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
+}
+
+window.addEventListener("load", () => {
+    document.querySelectorAll(".table-sort-btn")
+    .forEach((button) => {
+      button.addEventListener("click", (e) => {
+        resetButtons(e);
+        if (e.target.getAttribute("data-dir") == "desc") {
+          sortData(allRequirements, e.target.id.split("-")[1], "desc");
+          e.target.setAttribute("data-dir", "asc");
+        } else {
+          sortData(allRequirements, e.target.id.split("-")[1], "asc");
+          e.target.setAttribute("data-dir", "desc");
+        }
+        
+      });
+    });
+  });
+
+  const resetButtons = (event) => {
+    document.querySelectorAll(".table-sort-btn")
+    .forEach((button) => {
+      if (button !== event.target) {
+        button.removeAttribute("data-dir");
+      }
+    });
+  };
+
+  const sortData = (data, param, direction = "asc") => {
+    const sortedData =
+      direction == "asc"
+        ? [...data].sort(function (a, b) {
+            if (a[param] < b[param]) {
+              return -1;
+            }
+            if (a[param] > b[param]) {
+              return 1;
+            }
+            return 0;
+          })
+        : [...data].sort(function (a, b) {
+            if (b[param] < a[param]) {
+              return -1;
+            }
+            if (b[param] > a[param]) {
+              return 1;
+            }
+            return 0;
+          });
+    fillTable(sortedData);
+  };
+
+  const fillTable = (requirements) => {
+    document.getElementById("requirements-table-body").innerHTML = '';
+    requirements.forEach((requirement) => {
+        let requirementRow = document.createElement("tr");
+        requirementRow.id = "requirement-" + requirement.id;
+
+        let name = document.createElement("td");
+        let priority = document.createElement("td");
+        let layer = document.createElement("td");
+        let story = document.createElement("td");
+        let description = document.createElement("td");
+        let tags = document.createElement("td");
+        let type = document.createElement("td");
+        let action = document.createElement("td");
+
+        let btns = document.createElement("div");
+        btns.id = "action-btns";
+        let editBtn = document.createElement("button");
+        editBtn.id = "edit-requirement";
+        let deleteBtn = document.createElement("button");
+        deleteBtn.id = "delete-requirement";
+      
+        let iconEdit = document.createElement("i");
+        iconEdit.classList.add("las");
+        iconEdit.classList.add("la-edit");
+        let iconDelete = document.createElement("i");
+        iconDelete.classList.add("las");
+        iconDelete.classList.add("la-trash-alt");
+        //attachEditRequirementListener(editBtn, requirement);
+        attachDeleteRequirementListener(deleteBtn, requirement.id);
+        editBtn.appendChild(iconEdit);
+        deleteBtn.appendChild(iconDelete);
+        btns.appendChild(editBtn);
+        btns.appendChild(deleteBtn);
+        action.appendChild(btns);
+
+        name.innerHTML = requirement.name;
+        priority.innerHTML = requirement.priority;
+        layer.innerHTML = requirement.layer;
+        story.innerHTML = requirement.story;
+        description.innerHTML = requirement.description;
+        tags.innerHTML = requirement.tags;
+        type.innerHTML = requirement.type;
+
+        requirementRow.appendChild(name);
+        requirementRow.appendChild(priority);
+        requirementRow.appendChild(layer);
+        requirementRow.appendChild(story);
+        requirementRow.appendChild(description);
+        requirementRow.appendChild(tags);
+        requirementRow.appendChild(type);
+        requirementRow.appendChild(action);
+
+
+        document.getElementById("requirements-table-body").appendChild(requirementRow);
+    });
+  };
 // function attachEditRequirementListener(editRequirementButton, requirement) {
 //     //fill in input from requirement object
 //     editRequirementButton.addEventListener('click', (event) => {

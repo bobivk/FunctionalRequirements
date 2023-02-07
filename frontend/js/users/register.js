@@ -165,3 +165,7 @@ function checkPassword() {
     }
 
 }
+
+function logout() {
+    location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
+}

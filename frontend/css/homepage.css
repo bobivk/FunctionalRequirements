@@ -351,7 +351,8 @@ tr td:last-child {
 }
 
 #add-project-btn,
-#cancel-add-project-btn {
+#cancel-add-project-btn,
+#logout-btn {
     background: var(--text-on-dark-background);
     border-radius: 10px;
     color: var(--main-color);
@@ -363,7 +364,8 @@ tr td:last-child {
 }
 
 #add-project-btn:hover,
-#cancel-add-project-btn:hover {
+#cancel-add-project-btn:hover,
+#logout-btn:hover {
     transition: background 1s;
     background-color: #6601B0;
     color: #fff;
@@ -585,4 +587,8 @@ li .active-hover {
 li a .active-hover {
     color: var(--main-color);
     transition: background 0.2s;
+}
+
+#logout-btn{
+    border:#270047 2px solid;
 }

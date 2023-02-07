@@ -40,3 +40,7 @@
 tr[data-href] {
     cursor: pointer;
 }
+
+#logout-btn{
+    border:#270047 2px solid;
+}

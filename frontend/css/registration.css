@@ -142,3 +142,7 @@ button:hover {
     color:#eaeaea;
     margin-top: 2rem;
 }
+
+#logout-btn{
+    border:#270047 2px solid;
+}

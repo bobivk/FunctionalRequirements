@@ -355,3 +355,20 @@ img {
     margin-left: auto;
     margin-right: auto;
 }
+
+#logout-btn{
+    border:#270047 2px solid;
+    background: var(--text-on-dark-background);
+    border-radius: 10px;
+    color: var(--main-color);
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#logout-btn:hover {
+    transition: background 1s;
+    background-color: #6601B0;
+    color: #fff;
+}

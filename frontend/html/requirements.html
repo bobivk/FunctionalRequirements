@@ -53,6 +53,7 @@
                 <div>
                     <h4 id="userName"></h4>
                     <small id="userRole"></small>
+                    <button id="logout-btn" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Изход</button>
                 </div>
             </div>
         </header>
@@ -89,14 +90,14 @@
                             <table width="100%" id="functional-requirements">
                                 <thead>
                                     <tr>
-                                        <td>Име</td>
-                                        <td>Приоритет</td>
-                                        <td>Слой</td>
-                                        <td>User Story</td>
-                                        <td>Описание</td>
-                                        <td>Тагове</td>
-                                        <td>Тип</td>
-                                        <td>Действие</td>
+                                        <td class="table-sort-btn req-th" id="req-name">Име</td>
+                                        <td class="table-sort-btn req-th" id="req-priority">Приоритет</td>
+                                        <td class="table-sort-btn req-th" id="req-layer">Слой</td>
+                                        <td class="table-sort-btn req-th" id="req-story">User Story</td>
+                                        <td class="table-sort-btn req-th" id="req-description">Описание</td>
+                                        <td class="table-sort-btn req-th" id="req-tags">Тагове</td>
+                                        <td class="table-sort-btn req-th" id="req-type">Тип</td>
+                                        <td class="req-th">Действие</td>
                                     </tr>
                                 </thead>
                                 <tbody id="requirements-table-body"></tbody>

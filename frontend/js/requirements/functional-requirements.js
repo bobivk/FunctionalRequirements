@@ -18,3 +18,7 @@ menuItems.forEach((item) => {
         item.firstElementChild.classList.remove("active-hover");
     });
 });
+
+function logout() {
+    location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
+}
