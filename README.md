@@ -20,5 +20,8 @@
 1. Поставете проекта в папка htdocs, намираща се в папката, където е инсталиран XAMPP
 2. Отворете XAMPP Control panel
 3. От контролния панел стартирайте MySQL и Apache
-4. Отворете уеб браузър по избор
-5. Отворете този адрес в браузъра: http://localhost/FunctionalRequirements/frontend/html/register.html
+4. От контролния панел, срещу MySQL натиснете Admin, което ще отвори браузър
+5. От phpMyAdmin, отидете на New от навигацията отляво, за да създадете база с име functionalrequirements
+6. От Import от менюто отгоре, заредете файла functionalrequirements.sql, съдържащ се в backend/db папката
+7. Отворете уеб браузър по избор
+8. Отворете този адрес в браузъра: http://localhost/FunctionalRequirements/frontend/html/register.html
