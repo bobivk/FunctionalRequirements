@@ -122,3 +122,31 @@ menuItems.forEach((item) => {
 function logout() {
     location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
 }
+
+//import
+let fileReader = new FileReader();
+let picker = document.getElementById("picker");
+picker.onchange = () => fileReader.readAsText(picker.files[0]);
+fileReader.onloadend = () => {
+    let csv = reader.result;
+    let rows = csv.split("\r\n");
+
+}
+
+//export
+const projectsTable = document.getElementById("project-table");
+const btnExportToCsv = document.getElementById("export-projects-btn");
+
+btnExportToCsv.addEventListener("click", () => {
+    const exporter = new TableCSVExporter(projectsTable);
+    const csvOutput = exporter.convertToCSV();
+    const csvBlob = new Blob([csvOutput], { type: "text/csv" });
+    const blobUrl = URL.createObjectURL(csvBlob);
+    const anchorElement = document.createElement("a")
+    anchorElement.href = blobUrl;
+    anchorElement.download = "projects.csv";
+    anchorElement.click()
+    setTimeout(() => {
+        URL.revokeObjectURL(blobUrl);
+    }, 500);
+});

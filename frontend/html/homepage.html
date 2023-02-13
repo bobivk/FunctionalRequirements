@@ -98,11 +98,12 @@
                         <div class="card-header">
                             <h3> Проекти </h3>
                             <button onclick="openProjectForm()"> <i class="fa-regular fa-square-plus"></i> Добави проект</button>
+                            <button id="export-projects-btn"> <i class="fa-regular fa-square-plus"></i> Експорт</button>
                         </div>
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table width="100%">
+                                <table id="project-table" width="100%">
                                     <thead>
                                         <tr>
                                             <td>№</td>
@@ -156,5 +157,6 @@
 </body>
 <script src="../js/homepage.js" defer></script>
 <script src="../js/project.js" defer></script>
+<script src="../js/TableCsvExporter.js" defer></script>
 
 </html>

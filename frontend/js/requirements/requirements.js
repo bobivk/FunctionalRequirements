@@ -13,30 +13,31 @@ class Requirement {
 }
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
+let project = {};
 
-let project = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?projectId=" + params.projectId)
+fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?projectId=" + params.projectId)
     .then((response) => {
         return response.json();
     })
     .then((projectJson) => {
-        let projectObj = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description, projectJson.status);
+        project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description, projectJson.status);
         let projectName = document.getElementById("project-name");
-        projectName.innerHTML = projectObj.number + ". " + projectObj.name;
+        projectName.innerHTML = project.number + ". " + project.name;
         let projectDesc = document.getElementById("project-description");
-        projectDesc.innerHTML = projectObj.description;
+        projectDesc.innerHTML = project.description;
         let projectStatus = document.getElementById("project-status");
 
         const projectStatusColor = document.createElement("span");
         projectStatusColor.classList.add("status");
-        if (projectObj.status == "незапочнат") {
+        if (project.status == "незапочнат") {
             projectStatusColor.classList.add("grey");
-        } else if (projectObj.status == "чернова") {
+        } else if (project.status == "чернова") {
             projectStatusColor.classList.add("purple");
         } else {
             projectStatusColor.classList.add("light-purple");
         }
         projectStatus.appendChild(projectStatusColor);
-        projectStatus.innerHTML += projectObj.status;
+        projectStatus.innerHTML += project.status;
     });
 
 // if (isAdmin()) {
@@ -323,6 +324,27 @@ window.addEventListener("load", () => {
         document.getElementById("requirements-table-body").appendChild(requirementRow);
     });
   };
+
+//export
+const requirementsTable = document.getElementById("functional-requirements");
+const btnExportToCsv = document.getElementById("export-requirements-btn");
+
+btnExportToCsv.addEventListener("click", () => {
+    const exporter = new TableCSVExporter(requirementsTable);
+    const csvOutput = exporter.convertToCSV();
+    const csvBlob = new Blob([csvOutput], { type: "text/csv" });
+    const blobUrl = URL.createObjectURL(csvBlob);
+    const anchorElement = document.createElement("a")
+    anchorElement.href = blobUrl;
+    anchorElement.download = "requirements_" + project.number + ".csv";
+    anchorElement.click()
+    setTimeout(() => {
+        URL.revokeObjectURL(blobUrl);
+    }, 500);
+});
+
+
+
 // function attachEditRequirementListener(editRequirementButton, requirement) {
 //     //fill in input from requirement object
 //     editRequirementButton.addEventListener('click', (event) => {
