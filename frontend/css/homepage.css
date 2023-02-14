@@ -261,7 +261,7 @@ thead tr {
     border-bottom: 2px solid #f0f0f0;
 }
 
-thead th {
+thead tr {
     font-weight: 700;
 }
 
@@ -281,6 +281,8 @@ td .status {
 
 tr td:last-child {
     width: fit-content;
+    text-align: left;
+    width: 10rem;
 }
 
 .status.purple {
