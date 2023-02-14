@@ -133,19 +133,9 @@ function logout() {
     location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
 }
 
-//import
-// let fileReader = new FileReader();
-// let picker = document.getElementById("picker");
-// picker.onchange = () => fileReader.readAsText(picker.files[0]);
-// fileReader.onloadend = () => {
-//     let csv = reader.result;
-//     let rows = csv.split("\r\n");
-
-// }
-
 document.getElementById("import-form").addEventListener('submit', (event) => {
     const projectFile = document.getElementById("project-import-file").files[0];
-    const formData = new FormData()
+    const formData = new FormData();
     formData.append('files[]', projectFile)
     fetch("http://localhost/FunctionalRequirements/backend/api/projects/import-projects.php", {
       method: 'POST',

@@ -1,5 +1,5 @@
 class TableCSVExporter {
-    constructor (table, includeHeaders = true) {
+    constructor (table, includeHeaders = false) {
         this.table = table;
         this.rows = Array.from(table.querySelectorAll("tr"));
 
