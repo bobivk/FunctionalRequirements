@@ -5,24 +5,29 @@ require_once("../../db/db.php");
 /**
     * Check if CSV File has been sent successfully otherwise return error
     */
-if(isset($_FILES['fileData']) && !empty($_FILES['fileData']['tmp_name'])){
+var_dump(["FILES" => $_FILES['files']]);
+if(isset($_FILES['files']) && !empty($_FILES['files']['tmp_name'])){
  
     // Read CSV File
-    $csv_file = fopen($_FILES['fileData']['tmp_name'], "r"); 
- 
+    $csv_file = fopen($_FILES['tmp_name'], "r"); 
+    var_dump($csv_file);
     // Row Iteration
     $rowCount = 0;
  
     //Data to insert for batch insertion
     $data = [];
+
+    $db = new DB();
+    $connection = $db->getConnection();
  
     // Read CSV Data by row
     while(($row = fgetcsv($csv_file, 1000, ",")) !== FALSE){
         if($rowCount > 0){
             //Sanitizing Data
-            $number = addslashes($conn->real_escape_string($row[0]));
-            $name = addslashes($conn->real_escape_string($row[1]));
-            $description = addslashes($conn->real_escape_string($row[2]));
+            $number = addslashes($connection->real_escape_string($row[0]));
+            $name = addslashes($connection->real_escape_string($row[1]));
+            $description = addslashes($connection->real_escape_string($row[2]));
+            $status = addslashes($connection->real_escape_string($row[3]));
  
             // Add Row data to insert value
             $data[] =  "('{$number}', '{$name}', '{$description}', '{$status})";
@@ -39,12 +44,19 @@ if(isset($_FILES['fileData']) && !empty($_FILES['fileData']['tmp_name'])){
     if(count($data) > 0) {
         // Convert Data values from array to string w/ comma seperator
         $insert_values = implode(", ", $data);
+        var_dump(["insert values" => $insert_values]);
  
         //MySQL INSERT Statement
-        $insert_sql = "INSERT INTO projects (number = :number, name= :name, description= :description, status = :status) VALUES {$insert_values}";
+        $insert_sql = "INSERT INTO projects (number, name, description, status) VALUES {$insert_values}";
  
+        var_dump(["insert sql" => $insert_sql]);
+        // $sql = "INSERT INTO projects (name, number, description, status) VALUES (:name, :number, :description, :status)";
+        // $statement = $connection -> prepare($sql);
+        // $statement -> execute(array("name" => $projectData["name"], "number" => $projectData["number"], "description" => $projectData["description"], "status" => $projectData["status"]));
+
         // Execute Insertion
-        $insert = $conn->query($insert_sql);
+        //$connection->prepare
+        $insert = $connection->query($insert_sql);
  
         if($insert){
             // Data Insertion is successful
@@ -53,7 +65,7 @@ if(isset($_FILES['fileData']) && !empty($_FILES['fileData']['tmp_name'])){
         }else{
             // Data Insertion has failed
             $_SESSION['status'] = 'error';
-            $_SESSION['message'] = 'Import Failed! Error: '. $conn->error;
+            $_SESSION['message'] = 'Import Failed! Error: '. $connection->error;
         }
     } else {
         $_SESSION['status'] = 'error';
@@ -64,8 +76,5 @@ if(isset($_FILES['fileData']) && !empty($_FILES['fileData']['tmp_name'])){
     $_SESSION['status'] = 'error';
     $_SESSION['message'] = 'CSV File Data is missing.';
 }
-$conn->close();
  
-header('location: ./');
-exit;
 ?>

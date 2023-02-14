@@ -84,6 +84,10 @@
                         <div class="error" id="admin-required-error"></div>
                         <button id="create-requirement-btn" class="action-button" onclick="openRequirementsModal()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
                         <button id="export-requirements-btn"> <i class="fa-regular fa-square-plus"></i> Експорт</button>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="file-input"/>
+                            <button type="submit" name="import-btn" onclick="importProjects()">Импорт</button>
+                        </form>
                     </div>
 
                     <div class="card-body">
@@ -125,9 +129,9 @@
 
                         <label for="priority">Приоритет:</label>
                         <select name="priority" class="requirement-input form-input-field" id="priority">
-                            <option value="MUST_HAVE">MUST HAVE</option>
-                            <option value="NICE_TO_HAVE">NICE TO HAVE</option>
-                            <option value="IMPROVEMENT">IMPROVEMENT</option>
+                            <option value="Must Have">Must Have</option>
+                            <option value="Nice To Have">Nice To Have</option>
+                            <option value="Improvement">Improvement</option>
                         </select>
 
                         <label for="layer">Слой:</label>

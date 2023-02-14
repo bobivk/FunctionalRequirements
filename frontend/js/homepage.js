@@ -7,6 +7,16 @@ function closeForm() {
     document.getElementById("modal").style.display = "none";
 }
 
+
+function openImportModal() {
+    document.getElementById("import-modal").style.display = "block";
+}
+
+function closeImportModal() {
+    document.getElementById("import-form").reset();
+    document.getElementById("import-modal").style.display = "none";
+}
+
 document.getElementById("project-form").addEventListener('submit', (event) => {
     const fields = document.querySelectorAll(".project-input");
     const data = {};
@@ -124,14 +134,28 @@ function logout() {
 }
 
 //import
-let fileReader = new FileReader();
-let picker = document.getElementById("picker");
-picker.onchange = () => fileReader.readAsText(picker.files[0]);
-fileReader.onloadend = () => {
-    let csv = reader.result;
-    let rows = csv.split("\r\n");
+// let fileReader = new FileReader();
+// let picker = document.getElementById("picker");
+// picker.onchange = () => fileReader.readAsText(picker.files[0]);
+// fileReader.onloadend = () => {
+//     let csv = reader.result;
+//     let rows = csv.split("\r\n");
 
-}
+// }
+
+document.getElementById("import-form").addEventListener('submit', (event) => {
+    const projectFile = document.getElementById("project-import-file").files[0];
+    const formData = new FormData()
+    formData.append('files[]', projectFile)
+    fetch("http://localhost/FunctionalRequirements/backend/api/projects/import-projects.php", {
+      method: 'POST',
+      body: formData,
+    }).then((response) => {
+      console.log(response)
+    });
+    event.preventDefault();
+});
+
 
 //export
 const projectsTable = document.getElementById("project-table");

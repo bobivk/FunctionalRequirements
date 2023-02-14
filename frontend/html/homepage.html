@@ -99,6 +99,7 @@
                             <h3> Проекти </h3>
                             <button onclick="openProjectForm()"> <i class="fa-regular fa-square-plus"></i> Добави проект</button>
                             <button id="export-projects-btn"> <i class="fa-regular fa-square-plus"></i> Експорт</button>
+                            <button id="import-btn" onclick="openImportModal()"> Импорт</button>
                         </div>
 
                         <div class="card-body">
@@ -120,7 +121,7 @@
                 </div>
 
                 <div id="modal">
-                    <div id="add-project-modal">
+                    <div class="modal" id="add-project-modal">
                         <h2>Добави проект</h2>
                         <div>
                             <form id="project-form" class="form-container">
@@ -152,6 +153,19 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="import-modal" class="modal">
+                    <h2>Импорт на проекти</h2>
+                    <div>
+                        <h4>Изберете .csv файл с проекти</h4>
+                        <form id="import-form" action="" method="post" enctype="multipart/form-data">
+                            <input type="file" id="project-import-file"/>
+                            <button id="import-chosen-file-btn">Import</button>
+                            <button id="cancel-import-btn" type="button" class="btn cancel" onclick="closeImportModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                        </form>
+                    </div>
+                </div>
+
         </main>
         </div>
 </body>
