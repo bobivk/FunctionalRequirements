@@ -72,7 +72,7 @@ requirementButton.addEventListener('click', (event) => {
         })
         .then((response) => {
             closeRequirementsModal();
-            location.reload();
+            //location.reload();
         });
         event.preventDefault();
 });
@@ -125,7 +125,7 @@ saveProjectButton.addEventListener('click', (event) => {
                 alert("Нужни са администраторски права за промяна на този проект");
             }
             else if (response.status == 200) {
-                location.reload();
+                //location.reload();
             }
         });
 

@@ -83,12 +83,9 @@
                         <h3> Изисквания </h3>
                         <div class="error" id="admin-required-error"></div>
                         <div class="card-header-btns">
-                            <form action="" method="post" enctype="multipart/form-data">
-                                <input type="file" name="file" id="file-input"/>
-                                <button id="create-requirement-btn" class="action-button" onclick="openRequirementsModal()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
-                                <button type="submit" name="import-btn" onclick="importProjects()"> Импорт</button>
-                                <button id="export-requirements-btn" name="import-btn" onclick="importProjects()"> <i class="fa-solid fa-download"></i> Експорт</button>
-                            </form>
+                            <button id="create-requirement-btn" class="action-button" onclick="openRequirementsModal()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
+                            <button onclick="importProjects()"> Импорт</button>
+                            <button id="export-requirements-btn" onclick="exportRequirements()"> <i class="fa-solid fa-download"></i> Експорт</button>
                         </div>
                     </div>
 
@@ -155,7 +152,7 @@
                         <input type="text" class="requirement-input form-input-field" placeholder="Напр. #login" name="tags">
 
                         <div class="add-requirement-btns">
-                            <button id="add-requirement-btn" type="submit" class="btn action-button"><i class="fa-solid fa-plus"></i> Добави</button>
+                            <button id="add-requirement-btn" class="btn action-button"><i class="fa-solid fa-plus"></i> Добави</button>
                             <button id="cancel-add-requirement-btn" type="button" class="btn cancel action-button" onclick="closeRequirementsModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
                         </div>
                     </form>

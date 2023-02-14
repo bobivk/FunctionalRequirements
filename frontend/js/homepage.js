@@ -47,7 +47,7 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
 
 let projectsTableBody = document.getElementById("project-table-body");
 
-const projects = fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects.php")
+fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects.php")
     .then((response) => {
         return response.json();
     })
@@ -65,6 +65,11 @@ const projects = fetch("http://localhost/FunctionalRequirements/backend/api/proj
             const projectNameTd = document.createElement("td");
             projectNameTd.innerHTML = project.name;
             projectRow.appendChild(projectNameTd);
+
+            const projectDescriptionTd = document.createElement("td");
+            projectDescriptionTd.innerHTML = project.description;
+            projectRow.appendChild(projectDescriptionTd);
+
             const projectStatusTd = document.createElement("td");
             const projectStatusColor = document.createElement("span");
             projectStatusColor.classList.add("status");
