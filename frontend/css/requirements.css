@@ -685,7 +685,7 @@ header {
     font-family: 'Poppins', sans-serif;
 }
 
-#project-modal h2 {
+#project-modal h2, #req-modal h2, #edit-req-modal h2 {
     text-align: center;
     color: #f0f0f0;
 }
