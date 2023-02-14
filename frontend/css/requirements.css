@@ -221,6 +221,11 @@ main {
     background: #fff;
     border-radius: 5px;
     padding-bottom: .5rem;
+    overflow: hidden;
+}
+
+#project-description {
+    overflow: hidden;
 }
 
 .card-header {
@@ -236,6 +241,7 @@ main {
 
 .card-header-btns {
     align-items: right;
+    justify-content: space-around;
 }
 
 .card-header button {
@@ -247,6 +253,7 @@ main {
     border: 1px solid var(--main-color);
     cursor: pointer;
     font-weight: bold;
+    margin: 0.2rem;
 }
 
 .card-header button:hover {
