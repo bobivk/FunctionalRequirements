@@ -294,7 +294,7 @@ tr td:last-child {
     background: #735c86;
 }
 
-#add-project-modal {
+#add-project-modal, #import-modal {
     z-index: 1;
     border-radius: 20px;
     width: 90%;
@@ -316,12 +316,18 @@ tr td:last-child {
     margin-top: 2rem;
 }
 
-#add-project-modal h2 {
+#add-project-modal h2,
+#import-modal h2 {
     text-align: center;
     color: #f0f0f0;
 }
 
-#add-project-modal h2::after {
+#import-modal div h4 {
+    margin-bottom: 1.5rem;
+}
+
+#add-project-modal h2::after,
+#import-modal h2::after {
     content: '';
     width: 30px;
     height: 4px;
@@ -347,7 +353,8 @@ tr td:last-child {
     border-radius: 5px;
 }
 
-.add-project-btns {
+.add-project-btns, 
+.import-modal-btns {
     margin-top: 2rem;
     justify-content: space-between;
     width: 100%;
@@ -356,7 +363,9 @@ tr td:last-child {
 
 #add-project-btn,
 #cancel-add-project-btn,
-#logout-btn {
+#logout-btn,
+#import-chosen-file-btn,
+#cancel-import-btn {
     background: var(--text-on-dark-background);
     border-radius: 10px;
     color: var(--main-color);
@@ -369,7 +378,9 @@ tr td:last-child {
 
 #add-project-btn:hover,
 #cancel-add-project-btn:hover,
-#logout-btn:hover {
+#logout-btn:hover,
+#import-chosen-file-btn:hover,
+#cancel-import-btn:hover {
     transition: background 1s;
     background-color: #6601B0;
     color: #fff;
@@ -411,7 +422,8 @@ form textarea {
         width: calc(100% - 70px);
         left: 70px;
     }
-    #add-project-modal {
+    #add-project-modal,
+    #import-modal {
         z-index: 1;
         border-radius: 20px;
         width: 80%;
@@ -437,7 +449,8 @@ form textarea {
     .recent-grid {
         grid-template-columns: 60% 40%;
     }
-    #add-project-modal {
+    #add-project-modal,
+    #import-modal {
         z-index: 1;
         border-radius: 20px;
         width: 80%;
@@ -521,7 +534,8 @@ form textarea {
     #nav-toggle:checked~.main-content {
         margin-left: 0rem !important;
     }
-    #add-project-modal {
+    #add-project-modal,
+    #import-modal {
         z-index: 1;
         border-radius: 20px;
         width: 80%;
@@ -546,7 +560,8 @@ form textarea {
     }
 }
 
-#modal {
+#modal, 
+#modal-import-project {
     display: none;
     position: fixed;
     z-index: 100;

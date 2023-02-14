@@ -9,12 +9,12 @@ function closeForm() {
 
 
 function openImportModal() {
-    document.getElementById("import-modal").style.display = "block";
+    document.getElementById("modal-import-project").style.display = "block";
 }
 
 function closeImportModal() {
     document.getElementById("import-form").reset();
-    document.getElementById("import-modal").style.display = "none";
+    document.getElementById("modal-import-project").style.display = "none";
 }
 
 document.getElementById("project-form").addEventListener('submit', (event) => {
