@@ -261,7 +261,7 @@ thead tr {
     border-bottom: 2px solid #f0f0f0;
 }
 
-thead td {
+thead th {
     font-weight: 700;
 }
 
@@ -280,8 +280,7 @@ td .status {
 }
 
 tr td:last-child {
-    display: flex;
-    align-items: center;
+    width: fit-content;
 }
 
 .status.purple {
