@@ -82,12 +82,14 @@
                     <div class="card-header">
                         <h3> Изисквания </h3>
                         <div class="error" id="admin-required-error"></div>
-                        <button id="create-requirement-btn" class="action-button" onclick="openRequirementsModal()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
-                        <button id="export-requirements-btn"> <i class="fa-regular fa-square-plus"></i> Експорт</button>
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <input type="file" name="file" id="file-input"/>
-                            <button type="submit" name="import-btn" onclick="importProjects()">Импорт</button>
-                        </form>
+                        <div class="card-header-btns">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <input type="file" name="file" id="file-input"/>
+                                <button id="create-requirement-btn" class="action-button" onclick="openRequirementsModal()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
+                                <button type="submit" name="import-btn" onclick="importProjects()"> Импорт</button>
+                                <button id="export-requirements-btn" name="import-btn" onclick="importProjects()"> <i class="fa-solid fa-download"></i> Експорт</button>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="card-body">

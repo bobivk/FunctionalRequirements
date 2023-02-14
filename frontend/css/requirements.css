@@ -234,6 +234,10 @@ main {
     border-bottom: 1px solid #f0f0f0;
 }
 
+.card-header-btns {
+    align-items: right;
+}
+
 .card-header button {
     background: var(--main-color);
     border-radius: 10px;
