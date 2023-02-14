@@ -295,13 +295,16 @@ window.addEventListener("load", () => {
         let iconDelete = document.createElement("i");
         iconDelete.classList.add("las");
         iconDelete.classList.add("la-trash-alt");
-        //attachEditRequirementListener(editBtn, requirement);
+        
+        attachEditRequirementListener(editBtn, requirement);
         attachDeleteRequirementListener(deleteBtn, requirement.id);
+
         editBtn.appendChild(iconEdit);
         deleteBtn.appendChild(iconDelete);
         btns.appendChild(editBtn);
         btns.appendChild(deleteBtn);
         action.appendChild(btns);
+
 
         name.innerHTML = requirement.name;
         priority.innerHTML = requirement.priority;
@@ -345,48 +348,48 @@ btnExportToCsv.addEventListener("click", () => {
 
 
 
-// function attachEditRequirementListener(editRequirementButton, requirement) {
-//     //fill in input from requirement object
-//     editRequirementButton.addEventListener('click', (event) => {
-//         const nameInput = document.getElementById("edit-req-name");
-//         nameInput.innerHTML = requirement.name;
-//         const typeInput = document.getElementById("edit-req-type");
-//         typeInput.innerHTML = requirement.type;
-//         const priorityInput = document.getElementById("edit-req-priority");
-//         priorityInput.innerHTML = requirement.priority;
-//         const layerInput = document.getElementById("edit-req-layer");
-//         layerInput.innerHTML = requirement.layer;
-//         const descriptionInput = document.getElementById("edit-req-description");
-//         descriptionInput.innerHTML = requirement.description;
-//         const storyInput = document.getElementById("edit-req-story");
-//         storyInput.innerHTML = requirement.story;
-//         //id, name, projectId, priority, layer, story, description, tags, type
-//         openEditRequirementsModal();
-//     });
+function attachEditRequirementListener(editRequirementButton, requirement) {
+    //fill in input from requirement object
+    editRequirementButton.addEventListener('click', (event) => {
+        const nameInput = document.getElementById("edit-req-name");
+        nameInput.innerHTML = requirement.name;
+        const typeInput = document.getElementById("edit-req-type");
+        typeInput.innerHTML = requirement.type;
+        const priorityInput = document.getElementById("edit-req-priority");
+        priorityInput.innerHTML = requirement.priority;
+        const layerInput = document.getElementById("edit-req-layer");
+        layerInput.innerHTML = requirement.layer;
+        const descriptionInput = document.getElementById("edit-req-description");
+        descriptionInput.innerHTML = requirement.description;
+        const storyInput = document.getElementById("edit-req-story");
+        storyInput.innerHTML = requirement.story;
+        //id, name, projectId, priority, layer, story, description, tags, type
+        openEditRequirementsModal();
+    });
     
-// }
+}
 
-// const editSaveRequirementButton = document.getElementById("edit-save-requirement-btn")
-// editSaveRequirementButton.addEventListener('click' , (event) => {
-//     const data = {};
-//     const fields = document.querySelectorAll('.requirement-input');
-//     fields.forEach(field => {
-//         data[field.name] = field.value;
-//     });
-//     fetch("http://localhost/FunctionalRequirements/backend/api/requirements/update-requirement.php?id=" + id, {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     .then((response) => {
-//         if(response.status == 200) {
-//             document.getElementById("req-deleted-msg").style.display = "block";
-//             let requirementRow = document.getElementById("requirement-"+id);
-//             requirementRow.parentElement.removeChild(requirementRow);
-//             location.reload();
-//         }
-//         //handle error status codes
-//     })
-// })
+const editSaveRequirementButton = document.getElementById("edit-save-requirement-btn")
+editSaveRequirementButton.addEventListener('click' , (event) => {
+    const data = {};
+    const fields = document.querySelectorAll('.requirement-input');
+    fields.forEach(field => {
+        data[field.name] = field.value;
+    });
+    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/update-requirement.php?id=" + id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then((response) => {
+        if(response.status == 200) {
+            document.getElementById("req-deleted-msg").style.display = "block";
+            let requirementRow = document.getElementById("requirement-"+id);
+            requirementRow.parentElement.removeChild(requirementRow);
+            location.reload();
+        }
+        //handle error status codes
+    })
+})

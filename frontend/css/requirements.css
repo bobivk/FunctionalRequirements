@@ -302,7 +302,9 @@ td {
 }
 
 /*add new requirement pop-up */
-#req-modal, #project-modal {
+#req-modal, 
+#project-modal, 
+#edit-req-modal {
     display: none;
     position: fixed;
     z-index: 100;
@@ -314,7 +316,7 @@ td {
     transition: opacity 300ms ease-in-out;
 }
 
-#requirement-form {
+#requirement-form, #requirement-edit-form {
     /* , #project-form { */
     z-index: 1;
     border-radius: 20px;
@@ -333,12 +335,12 @@ td {
     font-family: 'Poppins', sans-serif;
 }
 
-#requirement-form, #project-form h2 {
+#requirement-form h2, #requirement-edit-form h2 {
     text-align: center;
     color: #f0f0f0;
 }
 
-#requirement-form h2::after {
+#requirement-form h2::after, #requirement-edit-form h2::after {
     content: '';
     width: 30px;
     height: 4px;
@@ -365,6 +367,7 @@ td {
 #save-project-btn,
 #cancel-save-project-btn,
 #edit-save-requirement-btn,
+#cancel-edit-requirement-btn,
 #cancel-save-requirement-btn,
 #logout-btn {
     background: var(--text-on-dark-background);
@@ -408,7 +411,8 @@ td {
 
 
 /* project-info */
-.modify-project-info-btns {
+.modify-project-info-btns,
+.edit-requirement-btns {
     display: inline-block;
     margin-top: 1rem;
     margin-left: 1rem;
@@ -440,6 +444,8 @@ td {
 #edit-project:hover,
 #save-project:hover,
 #close-edit-project:hover,
+#save-project-btn:hover,
+#cancel-save-project-btn:hover,
 #edit-save-requirement-btn:hover,
 #cancel-edit-requirement-btn:hover  {
     transition: background 1s;
@@ -447,7 +453,7 @@ td {
     color: #fff;
 }
 
-.requirement-input, .project-input {
+.requirement-input, .project-input, .requirement-edit-input {
     width: 100%;
     padding-top: 1%;
     padding-bottom: 1%;
