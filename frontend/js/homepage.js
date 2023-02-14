@@ -124,14 +124,14 @@ function logout() {
 }
 
 //import
-let fileReader = new FileReader();
-let picker = document.getElementById("picker");
-picker.onchange = () => fileReader.readAsText(picker.files[0]);
-fileReader.onloadend = () => {
-    let csv = reader.result;
-    let rows = csv.split("\r\n");
+// let fileReader = new FileReader();
+// let picker = document.getElementById("picker");
+// picker.onchange = () => fileReader.readAsText(picker.files[0]);
+// fileReader.onloadend = () => {
+//     let csv = reader.result;
+//     let rows = csv.split("\r\n");
 
-}
+// }
 
 //export
 const projectsTable = document.getElementById("project-table");
