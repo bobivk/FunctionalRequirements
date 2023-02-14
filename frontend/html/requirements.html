@@ -84,8 +84,8 @@
                         <div class="error" id="admin-required-error"></div>
                         <div class="card-header-btns">
                             <button id="create-requirement-btn" class="action-button" onclick="openRequirementsModal()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
-                            <button onclick="importProjects()"> Импорт</button>
-                            <button id="export-requirements-btn" onclick="exportRequirements()"> <i class="fa-solid fa-download"></i> Експорт</button>
+                            <button onclick="importProjects()"><i class="fa-solid fa-upload"></i> Импорт</button>
+                            <button id="export-requirements-btn" onclick="exportRequirements()"><i class="fa-solid fa-download"></i> Експорт</button>
                         </div>
                     </div>
 
@@ -199,7 +199,7 @@
                         <input type="text" id="edit-req-tags" class="requirement-edit-input form-input-field" placeholder="Напр. #login" name="tags">
 
                         <div class="edit-requirement-btns">
-                            <button id="edit-save-requirement-btn" type="submit" class="btn  action-button"><i class="las la-save"></i></i> Запази</button>
+                            <button id="edit-save-requirement-btn" class="btn  action-button"><i class="las la-save"></i></i> Запази</button>
                             <button id="cancel-edit-requirement-btn" type="button" class="btn cancel action-button" onclick="closeEditRequirementsModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
                         </div>
                     </form>
@@ -228,7 +228,7 @@
                         </select>
 
                         <div class="add-requirement-btns">
-                            <button id="save-project-btn" type="submit" class="btn action-button"><i class="las la-save"></i></i> Запази</button>
+                            <button id="save-project-btn" class="btn action-button"><i class="las la-save"></i></i> Запази</button>
                             <button id="cancel-save-project-btn" onclick="closeProjectModal()" type="button" class="btn cancel action-button"><i class="fa-solid fa-xmark"></i> Затвори</button>
                         </div>
                     </form>

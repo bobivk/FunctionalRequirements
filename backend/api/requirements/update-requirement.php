@@ -13,11 +13,11 @@ require_once("../../db/db.php");
                 http_response_code(400);
                 echo json_encode(["message" => "One or more empty required fields."]);
             }
-            $sql = "UPDATE requirements SET name = :name, priority = :priority, layer = :layer, story= :story, description= :description, tags= :tags, type= :type WHERE id= :id";
+            $sql = "UPDATE requirements SET name = :name, priority = :priority, layer = :layer, story= :story, description= :description, tags= :tags, type= :type WHERE id= :requirementId";
             try {
                 $statement = $connection -> prepare($sql);
                 $statement -> execute(array("name" => $reqData["name"], "priority" => $reqData["priority"],"layer" => $reqData["layer"],
-                    "story" => $reqData["story"],"description" => $reqData["description"],"tags" => $reqData["tags"], "type" => $reqData["type"], "id" => $reqData["id"]));
+                    "story" => $reqData["story"],"description" => $reqData["description"],"tags" => $reqData["tags"], "type" => $reqData["type"], "requirementId" => $reqData["requirementId"]));
                 http_response_code(200);
                 echo json_encode(["message" => "Изискването е променено успешно."]);
             } catch(PDOException $exc) {
