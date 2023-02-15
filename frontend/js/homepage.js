@@ -46,51 +46,21 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
 });
 
 let projectsTableBody = document.getElementById("project-table-body");
+let allProjects = [];
 
 fetch("../../backend/api/projects/get-projects.php")
     .then((response) => {
         return response.json();
     })
     .then((data) => {
-        let projects = [];
         data.forEach((projectJson) => {
             let project = new Project(projectJson.id, projectJson.name, projectJson.number, projectJson.description, projectJson.status);
-            let projectRow = document.createElement("tr");
-            attachListener(projectRow, project.id);
-
-            const projectNumberTd = document.createElement("td");
-            projectNumberTd.innerHTML = project.number;
-            projectRow.appendChild(projectNumberTd);
-
-            const projectNameTd = document.createElement("td");
-            projectNameTd.innerHTML = project.name;
-            projectRow.appendChild(projectNameTd);
-
-            const projectDescriptionTd = document.createElement("td");
-            projectDescriptionTd.innerHTML = project.description;
-            projectRow.appendChild(projectDescriptionTd);
-
-            const projectStatusTd = document.createElement("td");
-            const projectStatusColor = document.createElement("span");
-            projectStatusColor.classList.add("status");
-            if (project.status == "незапочнат") {
-                projectStatusColor.classList.add("grey");
-            } else if (project.status == "чернова") {
-                projectStatusColor.classList.add("purple");
-            } else {
-                projectStatusColor.classList.add("light-purple");
-            }
-            projectStatusTd.appendChild(projectStatusColor);
-            projectStatusTd.innerHTML += project.status;
-            projectRow.appendChild(projectStatusTd);
-
-            projectsTableBody.appendChild(projectRow);
-            projects.push(project);
+            allProjects.push(project);
         });
-        document.getElementById("numberOfProjects").innerHTML = projects.length;
+        fillProjectsTable(allProjects);
+        document.getElementById("numberOfProjects").innerHTML = allProjects.length;
         fetchRequirementCount("Функционално", document.getElementById("numberOfFuncRequirements"));
         fetchRequirementCount("Нефункционално", document.getElementById("numberOfNonFuncRequirements"));
-        return projects;
     });
 
 
@@ -279,3 +249,91 @@ function setListeners(div){
    }
 
    //add members in projects table last column
+
+//sort projects
+
+window.addEventListener("load", () => {
+    document.querySelectorAll(".table-sort-btn")
+    .forEach((button) => {
+      button.addEventListener("click", (e) => {
+        resetButtons(e);
+        if (e.target.getAttribute("data-dir") == "desc") {
+          sortData(allProjects, e.target.id.split("-")[1], "desc");
+          e.target.setAttribute("data-dir", "asc");
+        } else {
+          sortData(allProjects, e.target.id.split("-")[1], "asc");
+          e.target.setAttribute("data-dir", "desc");
+        }
+        
+      });
+    });
+  });
+
+const resetButtons = (event) => {
+    document.querySelectorAll(".table-sort-btn")
+    .forEach((button) => {
+      if (button !== event.target) {
+        button.removeAttribute("data-dir");
+      }
+    });
+  };
+
+const sortData = (data, param, direction = "asc") => {
+    const sortedData =
+      direction == "asc"
+        ? [...data].sort(function (a, b) {
+            if (a[param] < b[param]) {
+              return -1;
+            }
+            if (a[param] > b[param]) {
+              return 1;
+            }
+            return 0;
+          })
+        : [...data].sort(function (a, b) {
+            if (b[param] < a[param]) {
+              return -1;
+            }
+            if (b[param] > a[param]) {
+              return 1;
+            }
+            return 0;
+          });
+    fillProjectsTable(sortedData);
+  };
+
+const fillProjectsTable = (data) => {
+    document.getElementById("project-table-body").innerHTML = '';
+        data.forEach((projectData) => {
+            let projectRow = document.createElement("tr");
+            attachListener(projectRow, projectData.id);
+
+            const projectNumberTd = document.createElement("td");
+            projectNumberTd.innerHTML = projectData.number;
+            projectRow.appendChild(projectNumberTd);
+
+            const projectNameTd = document.createElement("td");
+            projectNameTd.innerHTML = projectData.name;
+            projectRow.appendChild(projectNameTd);
+
+            const projectDescriptionTd = document.createElement("td");
+            projectDescriptionTd.innerHTML = projectData.description;
+            projectRow.appendChild(projectDescriptionTd);
+
+            const projectStatusTd = document.createElement("td");
+            const projectStatusColor = document.createElement("span");
+            projectStatusColor.classList.add("status");
+            if (projectData.status == "незапочнат") {
+                projectStatusColor.classList.add("grey");
+            } else if (projectData.status == "чернова") {
+                projectStatusColor.classList.add("purple");
+            } else {
+                projectStatusColor.classList.add("light-purple");
+            }
+            projectStatusTd.appendChild(projectStatusColor);
+            projectStatusTd.innerHTML += projectData.status;
+            projectRow.appendChild(projectStatusTd);
+
+            projectsTableBody.appendChild(projectRow);
+        });
+};

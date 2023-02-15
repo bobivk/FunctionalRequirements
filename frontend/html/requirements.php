@@ -208,9 +208,9 @@ require_once("../../backend/session.php");
 
                         <label for="priority">Приоритет:</label>
                         <select name="priority" class="requirement-edit-input form-input-field" id="edit-req-priority">
-                            <option value="MUST_HAVE">MUST HAVE</option>
-                            <option value="NICE_TO_HAVE">NICE TO HAVE</option>
-                            <option value="IMPROVEMENT">IMPROVEMENT</option>
+                            <option value="Must Have">Must Have</option>
+                            <option value="Nice To Have">Nice To Have</option>
+                            <option value="Improvement">Improvement</option>
                         </select>
 
                         <label for="layer">Слой:</label>

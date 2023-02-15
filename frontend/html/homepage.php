@@ -122,10 +122,10 @@ require_once("../../backend/session.php");
                                 <table id="project-table" width="100%" class="projects-table">
                                     <thead>
                                         <tr>
-                                            <td>№</td>
-                                            <td>Име на проект</td>
-                                            <td>Описание</td>
-                                            <td>Статус</td>
+                                            <td class="table-sort-btn" id="project-number">№</td>
+                                            <td class="table-sort-btn" id="project-name">Име на проект</td>
+                                            <td class="table-sort-btn" id="project-description">Описание</td>
+                                            <td class="table-sort-btn" id="project-status">Статус</td>
                                         </tr>
                                     </thead>
                                     <tbody id="project-table-body"> </tbody>
