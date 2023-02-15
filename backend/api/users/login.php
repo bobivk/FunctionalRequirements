@@ -12,11 +12,6 @@
                 $_SESSION["username"] = $user["username"];
                 $_SESSION["userId"] = $user["id"];
                 $_SESSION["userRoleId"] = $user["role_id"];
-            //     // setcookie('email', $userInput['email'], time() + 6000, '/');
-            //     // setcookie('password', $userInput['password'], time() + 6000, '/');
-            //     http_response_code(200);
-            //     echo json_encode(["message" => "Login success.", "username" => $user["username"]]);
-            //echo "<script>console.log('Debug Objects: " . $userFromDb . "' );</script>";
             http_response_code(200);
         }
         } catch (Error $ex) {
@@ -40,12 +35,7 @@
                 $passwordFromDb = $userFromDb["password"];
                 $inputPassword = $userInput["password"];
                 $isPasswordValid = password_verify($inputPassword, $passwordFromDb);
-                if($isPasswordValid) {
-                    // $tokenHash = bin2hex(random_bytes(8));
-                    // $expires = time() + 60 * 60 * 24 * 30;
-                    //$token = new TokenManager();
-                    //$token->createToken($tokenHash, $userFromDb["id"], $expires);
-                    //setcookie('remember', $tokenHash, $expires, '/');              
+                if($isPasswordValid) {           
                     return $userFromDb;
                 } else {
                     return null;

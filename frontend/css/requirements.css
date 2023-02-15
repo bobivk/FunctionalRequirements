@@ -155,11 +155,12 @@ header label span {
 
 .user-wrapper {
     display: flex;
-    align-items: center;
-    text-align: center;
+    align-items: left;
+    text-align: left;
 }
 
 #accountIcon {
+    margin-top: 1rem;
     margin-right: 0.5rem;
 }
 

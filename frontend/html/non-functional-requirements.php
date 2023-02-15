@@ -46,13 +46,8 @@ require_once("../../backend/session.php");
                     <span class="las la-bars"></span>
                 </label> Меню
             </h2>
-            <!-- <div class="search-wrapper">
-                <span class="las la-search"></span>
-                <input type="search" id="search" data-search placeholder="Търсене">
-            </div> -->
-
+            
             <div class="user-wrapper">
-                <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
                 <?php if($_SESSION['userRoleId'] == 1) {
                                 echo '<i class="fa-solid fa-user-gear" id="accountIcon"></i>';
                             } else {echo '<i class="fa-solid fa-user-graduate" id="accountIcon"></i>';}
