@@ -82,7 +82,7 @@ signInBtn.addEventListener('click', (event) => {
                 document.getElementById("wrong-credentials-msg").style.display = "block";
                 //грешен email или парола.
             } else if(response.status == 200) {
-                location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
+                location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.php';
             }
         });
     event.preventDefault();
@@ -167,5 +167,5 @@ function checkPassword() {
 }
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
+    location = "http://localhost/FunctionalRequirements/backend/logout.php";
 }

@@ -96,7 +96,7 @@ deleteProjectButton.addEventListener('click', (event) => {
                 })
                 .then((response) => {
                     //message проектът е изтрит успешно
-                    location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
+                    location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.php';
                 });
         } else {
             alert("Нужни са администраторски права за изтриване на този проект.");
@@ -208,14 +208,14 @@ function attachDeleteRequirementListener(deleteRequirementButton, id) {
                     document.getElementById("req-deleted-msg").style.display = "none";
                 }, "3000");
             }
-            else alert("Could not delete requirement.");
+            else alert("Нужни са администраторски права за триене на изискване.");
         })
     })
 }
 
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
+    location = "http://localhost/FunctionalRequirements/backend/logout.php";
 }
 
 window.addEventListener("load", () => {

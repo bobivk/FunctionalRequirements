@@ -1,3 +1,6 @@
+<?php
+require_once("../../backend/session.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +24,7 @@
         <div class="sidebar-menu">
             <ul>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.html" ><span class="las la-igloo"></span>
+                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.php" ><span class="las la-igloo"></span>
                         <span>Табло</span></a>
                 </li>
                 <li class="list active">
@@ -29,7 +32,7 @@
                         <span>Функционални изисквания</span></a>
                 </li>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.html"><span class="las la-question"></span>
+                    <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.php"><span class="las la-question"></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
             </ul>
@@ -52,8 +55,12 @@
                 <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
                 <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
                 <div>
-                    <h4 id="userName"></h4>
-                    <small id="userRole"></small>
+                    <h4 id="userName"><?php echo $_SESSION['username'];?></h4>
+                    <small id="userRole">
+                        <?php if($_SESSION['userRoleId'] == 1) {
+                                echo 'Администратор';
+                            } else {echo 'Студент';} ?>
+                    </small>
                     <button id="logout-btn" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Изход</button>
                 </div>
             </div>

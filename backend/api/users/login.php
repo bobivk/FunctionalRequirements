@@ -1,7 +1,6 @@
 <?php
     require_once("../../db/db.php");
-
-    // $projectData = json_decode(file_get_contents("php://input"), true); 
+    session_start(); //създава session cookie
     $userInput = json_decode(file_get_contents("php://input"), true);
     if(isset($userInput) && isset($userInput["email"]) && isset($userInput["password"])) {
         try {
@@ -9,14 +8,17 @@
             if(!isset($user)) {
                 http_response_code(404);
                 echo json_encode(["message" => "No user found with the credentials."]);
-            } else {
-                session_start(); //създава session cookie
-                $_SESSION["user"] = $user; //запазваме данните за потребителя в сесията, за да не трябва да се логва отново при следващи извиквания
-                setcookie('email', $userInput['email'], time() + 6000, '/');
-                setcookie('password', $userInput['password'], time() + 6000, '/');
-                http_response_code(200);
-                echo json_encode(["message" => "Login success.", "username" => $user["username"]]);
-            }
+             } else {
+                $_SESSION["username"] = $user["username"];
+                $_SESSION["userId"] = $user["id"];
+                $_SESSION["userRoleId"] = $user["role_id"];
+            //     // setcookie('email', $userInput['email'], time() + 6000, '/');
+            //     // setcookie('password', $userInput['password'], time() + 6000, '/');
+            //     http_response_code(200);
+            //     echo json_encode(["message" => "Login success.", "username" => $user["username"]]);
+            //echo "<script>console.log('Debug Objects: " . $userFromDb . "' );</script>";
+            http_response_code(200);
+        }
         } catch (Error $ex) {
             http_response_code(500);
             echo json_encode(["message" => $ex->getMessage()]);
@@ -37,10 +39,13 @@
                 $userFromDb = $statement->fetchAll(PDO::FETCH_ASSOC)[0]; //fetch_assoc връща данните само като асоциативен списък, иначе дублира - асоциативен и индексиран
                 $passwordFromDb = $userFromDb["password"];
                 $inputPassword = $userInput["password"];
-                var_dump(["input"=>$inputPassword]);
                 $isPasswordValid = password_verify($inputPassword, $passwordFromDb);
-                var_dump(["valid"=>$isPasswordValid]);
-                if($isPasswordValid){
+                if($isPasswordValid) {
+                    // $tokenHash = bin2hex(random_bytes(8));
+                    // $expires = time() + 60 * 60 * 24 * 30;
+                    //$token = new TokenManager();
+                    //$token->createToken($tokenHash, $userFromDb["id"], $expires);
+                    //setcookie('remember', $tokenHash, $expires, '/');              
                     return $userFromDb;
                 } else {
                     return null;

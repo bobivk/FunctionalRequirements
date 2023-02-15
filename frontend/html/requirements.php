@@ -1,3 +1,7 @@
+<?php
+require_once("../../backend/session.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,15 +25,15 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.html" class="active"><span class="las la-igloo"></span>
+                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.php" class="active"><span class="las la-igloo"></span>
                         <span>Табло</span></a>
                 </li>
                 <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/functional-requirements.html"><span class="las la-question"></span></span>
+                    <a href="http://localhost/FunctionalRequirements/frontend/html/functional-requirements.php"><span class="las la-question"></span></span>
                         <span>Функционални изисквания</span></a>
                 </li>
                 <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.html"><span class="las la-question"></span></span>
+                    <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.php"><span class="las la-question"></span></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
             </ul>
@@ -51,8 +55,12 @@
             <div class="user-wrapper">
                 <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
                 <div>
-                    <h4 id="userName"></h4>
-                    <small id="userRole"></small>
+                    <h4 id="userName"><?php echo $_SESSION['username'];?></h4>
+                    <small id="userRole">
+                        <?php if($_SESSION['userRoleId'] == 1) {
+                                echo 'Администратор';
+                            } else {echo 'Студент';} ?>
+                    </small>
                     <button id="logout-btn" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Изход</button>
                 </div>
             </div>

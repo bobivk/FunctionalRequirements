@@ -96,7 +96,7 @@ fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects
 
 function attachListener(item, projectId) {
     item.addEventListener('click', (event) => {
-        location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.html?projectId=' + projectId; //open page of this project with its id
+        location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.php?projectId=' + projectId; //open page of this project with its id
     });
 }
 
@@ -135,7 +135,7 @@ menuItems.forEach((item) => {
 
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
+    location = "http://localhost/FunctionalRequirements/backend/logout.php";
 }
 
 document.getElementById("import-form").addEventListener('submit', (event) => {
