@@ -616,3 +616,7 @@ li a .active-hover {
     margin-left: .5rem;
     border:#270047 2px solid;
 }
+
+i {
+    margin-right: 0.2rem;
+}

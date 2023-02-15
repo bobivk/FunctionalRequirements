@@ -88,6 +88,24 @@ require_once("../../backend/session.php");
                 <p id="project-status"></p>
             </div>
         </div>
+
+        <div class="card team-members">
+            <div class="team-member-btns">
+                <button id="add-member" class="action-button" onclick="addMember()"><i class="fa-solid fa-user-plus"></i> Запиши се</button>
+                <button id="remove-member" class="action-button" onclick="removeMember()"><i class="fa-solid fa-user-minus"></i> Отпиши се</button>
+            </div>
+
+            <div id="team">
+                <div class="card-header">
+                    <h3 id="team-title">Екип:</h3>
+                </div>
+                
+                <div clas="card-body" id="members-list">
+                    <ul id="members">
+                    </ul>                    
+                </div>
+            </div>
+        </div>
         
         <h4 class="deleted-msg" id="req-deleted-msg">Изискването е изтрито успешно.</h4>
 

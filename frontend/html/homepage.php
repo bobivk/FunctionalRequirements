@@ -126,9 +126,11 @@ require_once("../../backend/session.php");
                                             <td>Име на проект</td>
                                             <td>Описание</td>
                                             <td>Статус</td>
+                                            <td>Екип</td>
                                         </tr>
                                     </thead>
-                                    <tbody id="project-table-body"></tbody>
+                                    <tbody id="project-table-body"> </tbody>
+
                                 </table>
                             </div>
                         </div>

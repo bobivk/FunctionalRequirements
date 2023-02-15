@@ -14,8 +14,10 @@ class Requirement {
 const urlSearchParams = new URLSearchParams(window.location.search);
 const params = Object.fromEntries(urlSearchParams.entries());
 let project = {};
+getProjectData();
 
-fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.php?projectId=" + params.projectId)
+function getProjectData() {
+    fetch("../../backend/api/projects/get-project.php?projectId=" + params.projectId)
     .then((response) => {
         return response.json();
     })
@@ -37,21 +39,29 @@ fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-project.
             projectStatusColor.classList.add("light-purple");
         }
         projectStatus.appendChild(projectStatusColor);
-        projectStatus.innerHTML += project.status;
+        projectStatus.innerHTML += project.status;        
     });
 
-// if (isAdmin()) {
-//     document.getElementById("edit-project").style.display = "block";
-//     document.getElementById("delete-project").style.display = "block";
-//     document.getElementById("save-project").style.display = "block";
-//     //for each requirement row display edit/delete buttons
-// }
+    fetch("../../backend/api/projects/get-users-for-project.php?projectId=" + params.projectId)
+    .then((response) => {
+        if(response.status == 200) {
+            return response.json();
+        }
+    })
+    .then((usersJson) => {
+            usersJson.forEach((user) => {
+                let userList = document.getElementById("members");
+                let userElement = document.createElement("li");
 
-// async function isAdmin() {
-//     const response = await fetch("http://localhost/FunctionalRequirements/backend/api/users/is-admin.php");
-//     const data = await response.json();
-//     return data["isAdmin"];
-// }
+                let icon = document.createElement("i"); //<i class="fa-solid fa-user"></i>
+                icon.classList.add("fa-solid");
+                icon.classList.add("fa-user");
+                userElement.appendChild(icon);
+                userElement.innerHTML += user.username;
+                userList.appendChild(userElement);
+            });
+    });
+}
 
 fetchRequirements();
 
@@ -63,7 +73,7 @@ requirementButton.addEventListener('click', (event) => {
         data[field.name] = field.value;
     });
     data["project_id"] = params.projectId;
-    fetch('http://localhost/FunctionalRequirements/backend/api/requirements/save-requirement.php', {
+    fetch('../../backend/api/requirements/save-requirement.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +91,7 @@ function deleteProject() {
     let sureToDelete = confirm("Сигурни ли сте, че искате да изтриете този проект?");
     if (sureToDelete) {
         let ableToDelete = true;
-        fetch('http://localhost/FunctionalRequirements/backend/api/requirements/delete-requirements-of-project.php?projectId=' + params.projectId, {
+        fetch('../../backend/api/requirements/delete-requirements-of-project.php?projectId=' + params.projectId, {
             method: 'DELETE'
         }).then((response) => {
             if (response.status == 403) {
@@ -89,12 +99,11 @@ function deleteProject() {
             }
         });
         if (ableToDelete) {
-            fetch('http://localhost/FunctionalRequirements/backend/api/projects/delete-project.php?projectId=' + params.projectId, {
+            fetch('../../backend/api/projects/delete-project.php?projectId=' + params.projectId, {
                     method: 'DELETE'
                 })
                 .then((response) => {
-                    //message проектът е изтрит успешно
-                    location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.php';
+                    location = './homepage.php';
                 });
         } else {
             alert("Нужни са администраторски права за изтриване на този проект.");
@@ -110,7 +119,7 @@ saveProjectButton.addEventListener('click', (event) => {
         data[field.name] = field.value;
     });
     data["projectId"] = params.projectId;
-    fetch('http://localhost/FunctionalRequirements/backend/api/projects/update-project.php', {
+    fetch('../../backend/api/projects/update-project.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -131,7 +140,7 @@ saveProjectButton.addEventListener('click', (event) => {
 let allRequirements = [];
 
 function fetchRequirements() {
-    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements.php?projectId=" + params.projectId)
+    fetch("../../backend/api/requirements/get-requirements.php?projectId=" + params.projectId)
         .then((response) => {
             return response.json();
         })
@@ -204,7 +213,7 @@ function notInEditMode() {
 
 function attachDeleteRequirementListener(deleteRequirementButton, id) {
     deleteRequirementButton.addEventListener('click' , (event) => {
-        fetch("http://localhost/FunctionalRequirements/backend/api/requirements/delete-requirement.php?id=" + id)
+        fetch("../../backend/api/requirements/delete-requirement.php?id=" + id)
         .then((response) => {
             if(response.status == 201) {
                 document.getElementById("req-deleted-msg").style.display = "block";
@@ -221,7 +230,7 @@ function attachDeleteRequirementListener(deleteRequirementButton, id) {
 
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/backend/logout.php";
+    location = "../../backend/logout.php";
 }
 
 window.addEventListener("load", () => {
@@ -342,7 +351,7 @@ document.getElementById("import-req-form").addEventListener('submit', (event) =>
     const reqFile = document.getElementById("requirements-import-file").files[0];
     const formData = new FormData();
     formData.append('files[]', reqFile)
-    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/import-requirements.php?projectId=" + params.projectId, {
+    fetch("../../backend/api/requirements/import-requirements.php?projectId=" + params.projectId, {
       method: 'POST',
       body: formData,
     }).then((response) => {
@@ -411,7 +420,7 @@ editSaveRequirementButton.addEventListener('click' , (event) => {
         data[field.name] = field.value;
     });
     data["requirementId"] = document.getElementById("edit-req-modal").getAttribute("requirement-id");
-    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/update-requirement.php", {
+    fetch("../../backend/api/requirements/update-requirement.php", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -422,7 +431,6 @@ editSaveRequirementButton.addEventListener('click' , (event) => {
         if(response.status == 200) {
             location.reload();
         }
-        //handle error status codes
     })
 });
 
@@ -526,4 +534,40 @@ function setListeners(div){
     nxtColWidth = undefined;
     curColWidth = undefined;
     });
-   }
+}
+
+//add member to project
+function addMember() {
+     let members = document.getElementById("members").children;
+     if(members.length < 4) {
+         fetch("../../backend/api/projects/add-user-to-project.php?projectId=" + params.projectId, {
+             method: 'PUT',
+             headers: {
+                 'Content-Type': 'application/json'
+             }
+         }).then((response) => {
+             if(response.status == 200) {
+                 location.reload();
+             }
+         });
+     } else {
+         alert("Лимит на участници в проекта е достигнат! Изберете друг проект.");
+     }
+     
+}
+
+//remove member from project
+function removeMember() {
+     fetch("../../backend/api/projects/remove-user-from-project.php?projectId=" + params.projectId, {
+         method: 'PUT',
+         headers: {
+             'Content-Type': 'application/json'
+         }
+     }).then((response) => {
+         if(response.status == 200) {
+            location.reload();
+         } else if (response.status == 400) {
+            alert("Вие не участвате в този проект.");
+         }
+     });
+}

@@ -224,6 +224,14 @@ main {
     padding-bottom: .5rem;
 }
 
+.team-members {
+    margin-top: 2rem;
+}
+
+i {
+    margin-right: 0.2rem;
+}
+
 #project-description {
     word-break: break-all;
     padding-right: 1rem;
@@ -427,7 +435,8 @@ td {
 
 /* project-info */
 .modify-project-info-btns,
-.edit-requirement-btns {
+.edit-requirement-btns,
+.team-member-btns {
     display: inline-block;
     margin-top: 1rem;
     margin-left: 1rem;
@@ -442,7 +451,9 @@ td {
 #delete-project,
 #edit-project,
 #save-project,
-#close-edit-project {
+#close-edit-project,
+#add-member,
+#remove-member {
     background: var(--main-color);
     border-radius: 10px;
     color: var(--text-on-dark-background);
@@ -464,7 +475,9 @@ td {
 #edit-save-requirement-btn:hover,
 #cancel-edit-requirement-btn:hover,
 #import-chosen-req-file-btn:hover,
-#cancel-import-req-btn:hover  {
+#cancel-import-req-btn:hover,
+#add-member:hover,
+#remove-member:hover  {
     transition: background 1s;
     background-color: #6601B0;
     color: #fff;
@@ -752,21 +765,3 @@ header {
     
     /* content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpolygon points='4 0,8 8,0 8' fill='%23818688'/%3E%3C/svg%3E"); */
 }
-
-/* .req-th {
-    font-weight: bold;
-    height: inherit;
-    padding: 0;
-}
-
-.req-th {
-    cursor: pointer;
-    cursor: pointer;
-    font: inherit;
-    height: 100%;
-    margin: 0;
-    min-width: max-content;
-    padding: 0.5rem 1rem;
-    position: relative;
-    text-align: left;
-} */

@@ -326,6 +326,9 @@ figcaption {
     color:#270047;
 }
 
+i {
+    margin-right: 0.2rem;
+}
 
 img {
     display: block;

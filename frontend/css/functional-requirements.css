@@ -331,3 +331,7 @@ li a .active-hover {
     background-color: #6601B0;
     color: #fff;
 }
+
+i {
+    margin-right: 0.2rem;
+}

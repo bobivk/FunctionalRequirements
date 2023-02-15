@@ -277,3 +277,6 @@ function setListeners(div){
     curColWidth = undefined;
     });
    }
+
+   //add members in projects table last column
+   
