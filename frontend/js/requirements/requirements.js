@@ -77,9 +77,7 @@ requirementButton.addEventListener('click', (event) => {
         event.preventDefault();
 });
 
-const deleteProjectButton = document.getElementById("delete-project");
-deleteProjectButton.addEventListener('click', (event) => {
-    console.log("deleting");
+function deleteProject() {
     let sureToDelete = confirm("Сигурни ли сте, че искате да изтриете този проект?");
     if (sureToDelete) {
         let ableToDelete = true;
@@ -102,8 +100,7 @@ deleteProjectButton.addEventListener('click', (event) => {
             alert("Нужни са администраторски права за изтриване на този проект.");
         }
     }
-    event.preventDefault();
-});
+}
 
 const saveProjectButton = document.getElementById("save-project-btn");
 saveProjectButton.addEventListener('click', (event) => {
@@ -180,6 +177,15 @@ function closeRequirementsModal() {
 function closeProjectModal() {
     document.getElementById("form-container").reset();
     document.getElementById("project-modal").style.display = "none";
+}
+
+function openImportReqModal() {
+    document.getElementById("modal-import-requirements").style.display = "block";
+}
+
+function closeImportModal() {
+    document.getElementById("import-req-form").reset();
+    document.getElementById("modal-import-requirements").style.display = "none";
 }
 
 function inEditMode() {
@@ -331,8 +337,29 @@ window.addEventListener("load", () => {
     });
   };
 
-//export
-const requirementsTable = document.getElementById("functional-requirements");
+//import requirements
+document.getElementById("import-req-form").addEventListener('submit', (event) => {
+    const reqFile = document.getElementById("requirements-import-file").files[0];
+    const formData = new FormData();
+    formData.append('files[]', reqFile)
+    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/import-requirements.php?projectId=" + params.projectId, {
+      method: 'POST',
+      body: formData,
+    }).then((response) => {
+      if(response.status == 400) {
+        alert("Файлът не е във валиден формат.");
+      }
+      if(response.status == 201) {
+        document.getElementById("import-req-form").reset();
+        location.reload();
+      }
+    });
+    event.preventDefault();
+});
+
+
+//export requirements
+const requirementsTable = document.getElementById("requirements-table-body");
 const btnExportToCsv = document.getElementById("export-requirements-btn");
 
 btnExportToCsv.addEventListener("click", () => {

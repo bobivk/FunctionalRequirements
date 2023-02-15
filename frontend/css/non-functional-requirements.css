@@ -336,6 +336,7 @@ img {
 }
 
 #logout-btn{
+    margin-left: .5rem;
     border:#270047 2px solid;
     background: var(--text-on-dark-background);
     border-radius: 10px;

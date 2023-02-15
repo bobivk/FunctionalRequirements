@@ -2,11 +2,9 @@
 require_once("../../db/db.php");
     session_start();
 
-    //if(isset($_SESSION["user"])){
+    if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"]) && $_SESSION["userRoleId"] == 1) {
         $db = new DB();
-        //$adminCheck = new AdminCheck();
         $connection = $db->getConnection();
-        //if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
             $projectId = $_GET["projectId"];
             try {
                 $sql = "DELETE FROM requirements WHERE project_id = :project_id";
@@ -18,11 +16,8 @@ require_once("../../db/db.php");
                 http_response_code(500);
                 echo json_encode(["message" => $exc->getMessage()]);
             }
-    //     } else {
-    //         http_response_code(403);
-    //         echo json_encode(["message" => "Невалидни права за достъп - потребителят не е администратор"]);
-    //     }
-    // } else {
-    //     http_response_code(401);
-    // }
+        } else {
+            http_response_code(403);
+            echo json_encode(["message" => "Невалидни права за достъп - потребителят не е администратор"]);
+        }
 ?>

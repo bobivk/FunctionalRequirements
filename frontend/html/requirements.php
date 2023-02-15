@@ -72,8 +72,12 @@ require_once("../../backend/session.php");
     <main>
         <div class="card" >
             <div class="modify-project-info-btns">
-                <button id="delete-project" class="action-button"><i class="las la-trash-alt"></i> Изтрий проект</button>
-                <button id="edit-project" class="action-button" onclick="openProjectModal()"><i class="las la-edit"></i> Редактирай проект</button>
+            <?php if($_SESSION['userRoleId'] == 1) {
+                            echo "<button id='delete-project' class='action-button' onclick='deleteProject()'><i class='las la-trash-alt'></i> Изтрий проект</button>
+                            <button id='edit-project' class='action-button' onclick='openProjectModal()'><i class='las la-edit'></i> Редактирай проект</button>";
+            }
+            ?>
+                
             </div>
             <div id="project">
                 <div class="card-header">
@@ -95,8 +99,8 @@ require_once("../../backend/session.php");
                         <div class="error" id="admin-required-error"></div>
                         <div class="card-header-btns">
                             <button id="create-requirement-btn" class="action-button" onclick="openRequirementsModal()"><i class="fa-regular fa-square-plus"></i> Добави изискване</button>
-                            <button onclick="importProjects()"><i class="fa-solid fa-upload"></i> Импорт</button>
-                            <button id="export-requirements-btn" onclick="exportRequirements()"><i class="fa-solid fa-download"></i> Експорт</button>
+                            <button onclick="openImportReqModal()"><i class="fa-solid fa-upload"></i> Импорт</button>
+                            <button id="export-requirements-btn"><i class="fa-solid fa-download"></i> Експорт</button>
                         </div>
                     </div>
 
@@ -245,6 +249,22 @@ require_once("../../backend/session.php");
                     </form>
                 </div>
             </div>
+
+            <div id="modal-import-requirements">
+                    <div id="import-modal-req">
+                        <h2>Импорт на изискване</h2>
+                        <div>
+                            <h4>Изберете .csv файл с изисквания:</h4>
+                            <form id="import-req-form" action="" method="post" enctype="multipart/form-data">
+                                <input type="file" id="requirements-import-file"/>
+                                <div class="import-req-modal-btns">
+                                    <button id="import-chosen-req-file-btn"> <i class="fa-solid fa-upload"></i> Импорт</button>
+                                    <button id="cancel-import-req-btn" type="button" class="btn cancel" onclick="closeImportModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
     </main>
 
 </body>

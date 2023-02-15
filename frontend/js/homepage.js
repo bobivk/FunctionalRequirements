@@ -138,6 +138,7 @@ function logout() {
     location = "http://localhost/FunctionalRequirements/backend/logout.php";
 }
 
+//import projects
 document.getElementById("import-form").addEventListener('submit', (event) => {
     const projectFile = document.getElementById("project-import-file").files[0];
     const formData = new FormData();
@@ -146,14 +147,20 @@ document.getElementById("import-form").addEventListener('submit', (event) => {
       method: 'POST',
       body: formData,
     }).then((response) => {
-      console.log(response)
+        if(response.status == 400) {
+            alert("Файлът не е във валиден формат.");
+        }
+        if(response.status == 201) {
+            document.getElementById("import-req-form").reset();
+            location.reload();
+        }
     });
     event.preventDefault();
 });
 
 
-//export
-const projectsTable = document.getElementById("project-table");
+//export projects
+const projectsTable = document.getElementById("project-table-body");
 const btnExportToCsv = document.getElementById("export-projects-btn");
 
 btnExportToCsv.addEventListener("click", () => {

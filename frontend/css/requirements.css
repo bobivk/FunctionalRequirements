@@ -312,7 +312,8 @@ td {
 /*add new requirement pop-up */
 #req-modal, 
 #project-modal, 
-#edit-req-modal {
+#edit-req-modal,
+#modal-import-requirements {
     display: none;
     position: fixed;
     z-index: 100;
@@ -324,7 +325,7 @@ td {
     transition: opacity 300ms ease-in-out;
 }
 
-#requirement-form, #requirement-edit-form {
+#requirement-form, #requirement-edit-form, #import-modal-req {
     /* , #project-form { */
     z-index: 1;
     border-radius: 20px;
@@ -343,12 +344,16 @@ td {
     font-family: 'Poppins', sans-serif;
 }
 
-#requirement-form h2, #requirement-edit-form h2 {
+#requirement-form h2, #requirement-edit-form h2, #import-modal-req h2 {
     text-align: center;
     color: #f0f0f0;
 }
 
-#requirement-form h2::after, #requirement-edit-form h2::after {
+#import-modal-req div h4 {
+    margin-bottom: 1.5rem;
+}
+
+#requirement-form h2::after, #requirement-edit-form h2::after, #import-modal-req h2::after {
     content: '';
     width: 30px;
     height: 4px;
@@ -362,7 +367,7 @@ td {
     margin-bottom:2rem;
 }
 
-.add-requirement-btns, .edit-requirement-btns {
+.add-requirement-btns, .edit-requirement-btns, .import-req-modal-btns {
     display: inline-block;
     margin-top: 2rem;
     justify-content: space-between;
@@ -377,6 +382,8 @@ td {
 #edit-save-requirement-btn,
 #cancel-edit-requirement-btn,
 #cancel-save-requirement-btn,
+#import-chosen-req-file-btn,
+#cancel-import-req-btn,
 #logout-btn {
     background: var(--text-on-dark-background);
     border-radius: 10px;
@@ -455,7 +462,9 @@ td {
 #save-project-btn:hover,
 #cancel-save-project-btn:hover,
 #edit-save-requirement-btn:hover,
-#cancel-edit-requirement-btn:hover  {
+#cancel-edit-requirement-btn:hover,
+#import-chosen-req-file-btn:hover,
+#cancel-import-req-btn:hover  {
     transition: background 1s;
     background-color: #6601B0;
     color: #fff;
@@ -477,7 +486,7 @@ td {
     border: 3px solid #735c86;
 }
 
-#form-container {
+#form-container, #import-form {
     margin-top: 2rem;
 }
 
@@ -693,7 +702,7 @@ header {
     font-family: 'Poppins', sans-serif;
 }
 
-#project-modal h2, #req-modal h2, #edit-req-modal h2 {
+#project-modal h2, #req-modal h2, #edit-req-modal h2, #modal-import-requirements h2 {
     text-align: center;
     color: #f0f0f0;
 }
@@ -717,6 +726,7 @@ header {
 }
 
 #logout-btn{
+    margin-left: .5rem;
     border:#270047 2px solid;
 }
 
@@ -743,7 +753,7 @@ header {
     /* content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpolygon points='4 0,8 8,0 8' fill='%23818688'/%3E%3C/svg%3E"); */
 }
 
-.req-th {
+/* .req-th {
     font-weight: bold;
     height: inherit;
     padding: 0;
@@ -759,4 +769,4 @@ header {
     padding: 0.5rem 1rem;
     position: relative;
     text-align: left;
-}
+} */

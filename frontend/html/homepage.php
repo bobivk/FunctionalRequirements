@@ -107,8 +107,12 @@ require_once("../../backend/session.php");
                         <div class="card-header">
                             <h3> Проекти </h3>
                             <div class="card-header-btns">
-                                <button onclick="openProjectForm()"> <i class="fa-regular fa-square-plus"></i> Добави проект</button>
-                                <button id="import-btn" onclick="openImportModal()"> <i class="fa-solid fa-upload"></i> Импорт</button>
+                            <?php if($_SESSION['userRoleId'] == 1) {
+                            echo "<button onclick='openProjectForm()'> <i class='fa-regular fa-square-plus'></i> Добави проект</button>
+                            <button id='import-btn' onclick='openImportModal()'> <i class='fa-solid fa-upload'></i> Импорт</button>";
+                        } 
+                ?>
+                                
                                 <button id="export-projects-btn"> <i class="fa-solid fa-download"></i> Експорт</button>
                             </div>
                         </div>

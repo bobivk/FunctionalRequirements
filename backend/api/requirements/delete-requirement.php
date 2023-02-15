@@ -4,9 +4,7 @@ require_once("../../db/db.php");
 
     if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"]) && $_SESSION["userRoleId"] == 1) {
         $db = new DB();
-        //$adminCheck = new AdminCheck();
         $connection = $db->getConnection();
-        //if ($adminCheck->isAdmin($_SESSION["user"]["role_id"])) {
             $requirementId = $_GET["id"];
             try {
                 $sql = "DELETE FROM requirements WHERE id = :id";

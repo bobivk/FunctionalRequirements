@@ -613,5 +613,6 @@ li a .active-hover {
 }
 
 #logout-btn{
+    margin-left: .5rem;
     border:#270047 2px solid;
 }

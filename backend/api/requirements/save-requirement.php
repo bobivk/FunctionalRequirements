@@ -2,10 +2,9 @@
 require_once("../../db/db.php");
     session_start();
 
-    // if(isset($_SESSION["user"])){
+    if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
         $db = new DB();
         $connection = $db->getConnection();
-        //if (isAdmin($_SESSION["user"]["role_id"])) {
             $reqData = json_decode(file_get_contents("php://input"), true);
             if(!isset($reqData["name"]) || $reqData["name"] == "" ||
             !isset($reqData["projectId"]) || $reqData["projectId"] == "" ||
@@ -29,11 +28,8 @@ require_once("../../db/db.php");
                 http_response_code(500);
                 echo json_encode(["message" => $exc->getMessage()]);
             }
-    //     } else {
-    //         http_response_code(403);
-    //         echo json_encode(["message" => "Невалидни права за достъп - потребителят не е администратор"]);
-    //     }
-    // } else {
-    //     http_response_code(401);
-    // }
+        } else {
+            http_response_code(403);
+            echo json_encode(["message" => "Невалидни права за достъп - потребителят не е администратор"]);
+        }
 ?>

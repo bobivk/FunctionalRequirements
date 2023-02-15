@@ -2,7 +2,7 @@
     require_once("../../db/db.php");
     session_start();
 
-    //if(isset($_SESSION["user"])) {
+    if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
         try{
             $db = new DB();
             $connection = $db->getConnection();
@@ -16,9 +16,9 @@
         }
         http_response_code(200);
         echo json_encode($rows);
-    // } else {
-    //     http_response_code(401);
-    //     echo json_encode(["message" => "Невалидни права за достъп"]);
-    // }
+    } else {
+        http_response_code(401);
+        echo json_encode(["message" => "Невалидни права за достъп"]);
+    }
 
 ?>

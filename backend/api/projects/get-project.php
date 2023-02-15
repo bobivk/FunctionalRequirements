@@ -2,7 +2,7 @@
     require_once("../../db/db.php");
     session_start();
 
-    // if(isset($_SESSION["user"])) {
+    if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
         $db = new DB();
         $connection = $db->getConnection();
         $project_id = $_GET["projectId"];
@@ -23,9 +23,9 @@
             echo json_encode(["message" => "id е празно"]);
         }
        
-    // } else {
-    //     http_response_code(401);
-    //     echo json_encode(["message" => "Невалидни права за достъп"]);
-    // }
+    } else {
+        http_response_code(401);
+        echo json_encode(["message" => "Невалидни права за достъп"]);
+    }
 
 ?>
