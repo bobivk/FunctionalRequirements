@@ -2,7 +2,7 @@
 require_once("../../db/db.php");
     session_start();
 
-    if(isset($_SESSION["userId"]) && isset($_SESSION["roleId"]) && $_SESSION["roleId"] == 1) {
+    if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"]) && $_SESSION["userRoleId"] == 1) {
         $db = new DB();
         //$adminCheck = new AdminCheck();
         $connection = $db->getConnection();
