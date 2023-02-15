@@ -54,21 +54,21 @@ function validateUserData($user_data) {
             while ($user = $statement->fetch(PDO::FETCH_ASSOC)) {
                 if($user["email"] == $userData["email"]) {
                     $exists = true;
-                    http_response_code(409); //conflict - already exists
+                    http_response_code(409); //conflict - already exists with same email
                     echo json_encode(array("exists" => true, "sameUsername"=> false, "sameEmail"=> true));
                 } else if($user["username"] == $userData["username"]) {
                     $exists = true;
-                    http_response_code(409); //conflict - already exists
+                    http_response_code(409); //conflict - already exists with same username
                     echo json_encode(array("exists" => true, "sameUsername"=> true, "sameEmail"=> false));
                 }
             }
             if (!$exists) {
-                $userRoleId = 2;//getUserRoleId($connection);
+                $userRoleId = 2;
                 $passwordHash = password_hash($userData["password"], PASSWORD_DEFAULT);
                 $insertSql = "INSERT INTO users (username, email, role_id, password) VALUES (:username, :email, :role_id, :password)";
                 $insertStatement = $connection->prepare($insertSql);
                 $insertStatement -> execute(array("username" => $userData["username"], "email" => $userData["email"], "role_id" => $userRoleId, "password" => $passwordHash));
-                http_response_code(201); //201 created
+                http_response_code(201);
                 echo json_encode([
                     "message" => "Registration successful."
                 ]);

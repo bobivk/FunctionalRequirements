@@ -20,5 +20,5 @@ menuItems.forEach((item) => {
 });
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/backend/logout.php";
+    location = "../../backend/logout.php";
 }

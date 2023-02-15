@@ -24,11 +24,11 @@ require_once("../../backend/session.php");
         <div class="sidebar-menu">
             <ul>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.php" ><span class="las la-igloo"></span>
+                    <a href="./homepage.php" ><span class="las la-igloo"></span>
                         <span>Табло</span></a>
                 </li>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/functional-requirements.php"><span class="las la-question"></span>
+                    <a href="./functional-requirements.php"><span class="las la-question"></span>
                         <span>Функционални изисквания</span></a>
                 </li>
                 <li class="list active">

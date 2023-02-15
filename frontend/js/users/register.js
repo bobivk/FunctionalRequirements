@@ -29,7 +29,7 @@ signUpBtn.addEventListener('click', (event) => {
     });
 
     if (isEmailValid(data.email) && isPasswordValid(data.password)) {
-        fetch('http://localhost/FunctionalRequirements/backend/api/users/register-user.php', {
+        fetch('../../backend/api/users/register-user.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ signInBtn.addEventListener('click', (event) => {
         data[field.name] = field.value;
     });
 
-    fetch("http://localhost/FunctionalRequirements/backend/api/users/login.php", {
+    fetch("../../backend/api/users/login.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ signInBtn.addEventListener('click', (event) => {
                 document.getElementById("wrong-credentials-msg").style.display = "block";
                 //грешен email или парола.
             } else if(response.status == 200) {
-                location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.php';
+                location = './homepage.php';
             }
         });
     event.preventDefault();
@@ -167,5 +167,5 @@ function checkPassword() {
 }
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/backend/logout.php";
+    location = "../../backend/logout.php";
 }

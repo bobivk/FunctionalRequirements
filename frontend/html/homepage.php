@@ -28,11 +28,11 @@ require_once("../../backend/session.php");
                         <span>Табло</span></a>
                 </li>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/functional-requirements.php"><span class="las la-question"></span>
+                    <a href="./functional-requirements.php"><span class="las la-question"></span>
                         <span>Функционални изисквания</span></a>
                 </li>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.php"><span class="las la-question"></span>
+                    <a href="./non-functional-requirements.php"><span class="las la-question"></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
             </ul>
@@ -126,7 +126,6 @@ require_once("../../backend/session.php");
                                             <td>Име на проект</td>
                                             <td>Описание</td>
                                             <td>Статус</td>
-                                            <td>Екип</td>
                                         </tr>
                                     </thead>
                                     <tbody id="project-table-body"> </tbody>

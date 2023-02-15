@@ -358,7 +358,7 @@ document.getElementById("import-req-form").addEventListener('submit', (event) =>
       if(response.status == 400) {
         alert("Файлът не е във валиден формат.");
       }
-      if(response.status == 201) {
+      if(response.status == 200) {
         document.getElementById("import-req-form").reset();
         location.reload();
       }

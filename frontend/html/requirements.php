@@ -25,15 +25,15 @@ require_once("../../backend/session.php");
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.php" class="active"><span class="las la-igloo"></span>
+                    <a href="./homepage.php" class="active"><span class="las la-igloo"></span>
                         <span>Табло</span></a>
                 </li>
                 <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/functional-requirements.php"><span class="las la-question"></span></span>
+                    <a href="./functional-requirements.php"><span class="las la-question"></span></span>
                         <span>Функционални изисквания</span></a>
                 </li>
                 <li>
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.php"><span class="las la-question"></span></span>
+                    <a href="./non-functional-requirements.php"><span class="las la-question"></span></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
             </ul>

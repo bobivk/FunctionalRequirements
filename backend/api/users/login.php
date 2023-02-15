@@ -31,7 +31,7 @@
             $statement = $connection -> prepare($sql);
             $statement -> execute(array("email" => $userInput["email"]));
             if($statement -> rowCount() === 1) {
-                $userFromDb = $statement->fetchAll(PDO::FETCH_ASSOC)[0]; //fetch_assoc връща данните само като асоциативен списък, иначе дублира - асоциативен и индексиран
+                $userFromDb = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
                 $passwordFromDb = $userFromDb["password"];
                 $inputPassword = $userInput["password"];
                 $isPasswordValid = password_verify($inputPassword, $passwordFromDb);

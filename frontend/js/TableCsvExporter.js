@@ -1,11 +1,11 @@
 class TableCSVExporter {
-    constructor (table, includeHeaders = false) {
+    constructor (table) {
         this.table = table;
         this.rows = Array.from(table.querySelectorAll("tr"));
 
-        if (!includeHeaders && this.rows[0].querySelectorAll("th").length) {
-            this.rows.shift();
-        }
+        // if (!includeHeaders && this.rows[0].querySelectorAll("th").length) {
+        //     this.rows.shift();
+        // }
     }
 
     convertToCSV () {

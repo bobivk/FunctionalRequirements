@@ -24,7 +24,7 @@ require_once("../../backend/session.php");
         <div class="sidebar-menu">
             <ul>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/homepage.php" ><span class="las la-igloo"></span>
+                    <a href="./homepage.php" ><span class="las la-igloo"></span>
                         <span>Табло</span></a>
                 </li>
                 <li class="list active">
@@ -32,7 +32,7 @@ require_once("../../backend/session.php");
                         <span>Функционални изисквания</span></a>
                 </li>
                 <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/non-functional-requirements.php"><span class="las la-question"></span>
+                    <a href="./non-functional-requirements.php"><span class="las la-question"></span>
                         <span>Нефункционални изисквания</span></a>
                 </li>
             </ul>

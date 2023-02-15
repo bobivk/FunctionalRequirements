@@ -26,7 +26,7 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
     const form = document.getElementById("project-form");
     const checked = form.querySelector('input[name=status]:checked');
     data["status"] = checked.value;
-    fetch("http://localhost/FunctionalRequirements/backend/api/projects/save-project.php", {
+    fetch("../../backend/api/projects/save-project.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ document.getElementById("project-form").addEventListener('submit', (event) => {
 
 let projectsTableBody = document.getElementById("project-table-body");
 
-fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects.php")
+fetch("../../backend/api/projects/get-projects.php")
     .then((response) => {
         return response.json();
     })
@@ -96,14 +96,14 @@ fetch("http://localhost/FunctionalRequirements/backend/api/projects/get-projects
 
 function attachListener(item, projectId) {
     item.addEventListener('click', (event) => {
-        location.href = 'http://localhost/FunctionalRequirements/frontend/html/requirements.php?projectId=' + projectId; //open page of this project with its id
+        location.href = './requirements.php?projectId=' + projectId; //open page of this project with its id
     });
 }
 
 
 
 function fetchRequirementCount(type, element) {
-    fetch("http://localhost/FunctionalRequirements/backend/api/requirements/get-requirements-count.php?type=" + type)
+    fetch("../../backend/api/requirements/get-requirements-count.php?type=" + type)
     .then((response) => {
         return response.json();
     })
@@ -135,7 +135,7 @@ menuItems.forEach((item) => {
 
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/backend/logout.php";
+    location = "../../backend/logout.php";
 }
 
 //import projects
@@ -143,15 +143,15 @@ document.getElementById("import-form").addEventListener('submit', (event) => {
     const projectFile = document.getElementById("project-import-file").files[0];
     const formData = new FormData();
     formData.append('files[]', projectFile)
-    fetch("http://localhost/FunctionalRequirements/backend/api/projects/import-projects.php", {
+    fetch("../../backend/api/projects/import-projects.php", {
       method: 'POST',
       body: formData,
     }).then((response) => {
         if(response.status == 400) {
             alert("Файлът не е във валиден формат.");
         }
-        if(response.status == 201) {
-            document.getElementById("import-req-form").reset();
+        if(response.status == 200) {
+            document.getElementById("import-form").reset();
             location.reload();
         }
     });
@@ -279,4 +279,3 @@ function setListeners(div){
    }
 
    //add members in projects table last column
-   

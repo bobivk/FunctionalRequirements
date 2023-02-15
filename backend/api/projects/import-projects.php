@@ -22,10 +22,10 @@ if(isset($_FILES['files']) && !empty($filename)) {
                 $statement -> execute(array("number" => $projectData[0], "name" => $projectData[1], "description" => $projectData[2], "status" => $projectData[3]));
 		        $result = $statement->fetchAll();
                 if(!isset($result)) {
-					http_response_code(400);
-		        } else {
-					http_response_code(200);
-				}
+		        http_response_code(400);
+		} else {
+			http_response_code(200);
+		}
 	        }
 	        fclose($file);
 	}
