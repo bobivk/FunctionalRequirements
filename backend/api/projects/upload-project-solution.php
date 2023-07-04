@@ -2,16 +2,15 @@
 require '../../../vendor/autoload.php';
 require_once("../../db/db.php");
 session_start();
-//use Aws\S3\S3Client;
+use Aws\S3\S3Client;
 
 if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
     $filename = $_FILES["files"]["tmp_name"][0];
     if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) //{
-    //Instantiate an Amazon S3 client.
-    // $s3Client = new S3Client([
-    //     'version' => 'latest',
-    //     'region'  => 'eu-central-1'
-    // ]);
+    $s3Client = new S3Client([
+        'version' => 'latest',
+        'region'  => 'eu-central-1'
+    ]);
         $project_id = $_POST["projectId"];
         // Check if file was uploaded without errors
             // $allowed = array("zip" => "file/zip", "rar" => "file/rar");
