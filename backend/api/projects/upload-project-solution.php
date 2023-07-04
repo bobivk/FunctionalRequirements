@@ -38,11 +38,10 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                     if(move_uploaded_file($_FILES["anyfile"]["tmp_name"], "upload/" . $filename)) {
                         $bucket = 'projects-functional-requirements';
                         $file_Path = __DIR__ . '/upload/'. $filename;
-                        $key = basename($file_Path);
                         try {
                             $result = $s3Client->putObject([
                                 'Bucket' => $bucket,
-                                'Key'    => $key,
+                                'Key'    => $project_id,
                                 'Body'   => fopen($file_Path, 'r'),
                                 'ACL'    => 'public-read', // make file 'public'
                             ]);
@@ -51,9 +50,9 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                             echo "File uploaded successfully. File path is: ". $file_url_in_s3;
                             $db = new DB();
                             $connection = $db->getConnection();
-                            $sql = "UPDATE projects SET file_s3_url=:file_s3_url where id = :project_id";
+                            $sql = "UPDATE projects SET solution_s3_url=:solution_s3_url where id = :project_id";
                             $statement = $connection -> prepare($sql);
-                            $statement -> execute(array("file_s3_url" => $file_url_in_s3, "project_id" => $project_id));
+                            $statement -> execute(array("solution_s3_url" => $file_url_in_s3, "project_id" => $project_id));
                             $statement->fetchAll();
                             http_response_code(200);
                             echo json_encode(["message" => "File saved successfully"]);

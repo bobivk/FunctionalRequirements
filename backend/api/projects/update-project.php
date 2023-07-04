@@ -19,7 +19,6 @@
                     }
                     $sql = "UPDATE projects SET name = :name, number = :number, description = :description, status = :status where id = :project_id";
                     $statement = $connection -> prepare($sql);
-                    echo($projectData);
                     $statement -> execute(array("name" => $projectData["name"], "number" => $projectData["number"], 
                         "description" => $projectData["description"], "status" => $projectData["status"], "project_id" => $projectData["projectId"]));
                     $statement->fetchAll();

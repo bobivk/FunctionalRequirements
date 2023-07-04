@@ -12,7 +12,6 @@
                 $statement -> execute(["id" => $project_id]);
                 http_response_code(204);
                 echo json_encode(["message" => "Проектът е изтрит успешно."]);
-                //delete requirements for this project first
             } catch(PDOException $exc) {
                 http_response_code(500);
                 echo json_encode(["message" => $exc->getMessage()]);
