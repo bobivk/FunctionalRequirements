@@ -38,13 +38,14 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                         $bucket = 'projects-functional-requirements';
                         //$file_Path = __DIR__ . '/upload/'. $filename;
                         // try {
-                            $result = $s3Client->putObject([
-                                'Bucket' => $bucket,
-                                'Key'    => 'new_object_key_232132132112',//$project_id . $filename,
-                                'SourceFile'   => './get-project.php',
-                                'ACL'    => 'public-read', // make file 'public'
-                            ]);
-                        //     echo $result;
+                            // $result = $s3Client->putObject([
+                            //     'Bucket' => $bucket,
+                            //     'Key'    => 'new_object_key_232132132112',//$project_id . $filename,
+                            //     'SourceFile'   => './get-project.php',
+                            //     'ACL'    => 'public-read', // make file 'public'
+                            // ]);
+                            $output = shell_exec('aws s3 cp README.md s3://projects-functional-requirements');
+                            echo $output;
                         // }
 //                            $file_url_in_s3 = $result->get('ObjectURL');
                 //             // save S3 URL to database
