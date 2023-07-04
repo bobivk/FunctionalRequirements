@@ -5,34 +5,34 @@ session_start();
 use Aws\S3\S3Client;
 
 if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
+    $filename = $_FILES["files"]["tmp_name"][0];
+    if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
     // Instantiate an Amazon S3 client.
     $s3Client = new S3Client([
         'version' => 'latest',
         'region'  => 'eu-central-1'
     ]);
     // Check if the form was submitted
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
         $project_id = $_POST["projectId"];
         // Check if file was uploaded without errors
-        if(isset($_FILES["anyfile"]) && $_FILES["anyfile"]["error"] == 0) {
-            $allowed = array("zip" => "file/zip", "rar" => "file/rar");
-            $filename = $_FILES["anyfile"]["name"];
-            $filetype = $_FILES["anyfile"]["type"];
-            $filesize = $_FILES["anyfile"]["size"];
+            // $allowed = array("zip" => "file/zip", "rar" => "file/rar");
+            // $filename = $_FILES["anyfile"]["name"];
+            // $filetype = $_FILES["anyfile"]["type"];
+            // $filesize = $_FILES["anyfile"]["size"];
             // Validate file extension
-            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            if(!array_key_exists($ext, $allowed)){
-                http_response_code(400);
-                echo json_encode(["message" => "Error: Please select a valid file format. Allowed formats: zip, rar"]);
-            }
+            // $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            // if(!array_key_exists($ext, $allowed)){
+            //     http_response_code(400);
+            //     echo json_encode(["message" => "Error: Please select a valid file format. Allowed formats: zip, rar"]);
+            // }
             // Validate file size - 10MB maximum
-            $maxsize = 10 * 1024 * 1024;
-            if($filesize > $maxsize) {
-                http_response_code(400);
-                echo json_encode(["message" => "Error: Maximum file size is 10 MB"]);
-            }
+            // $maxsize = 10 * 1024 * 1024;
+            // if($filesize > $maxsize) {
+            //     http_response_code(400);
+            //     echo json_encode(["message" => "Error: Maximum file size is 10 MB"]);
+            // }
             // Validate type of the file
-            if(in_array($filetype, $allowed)) {
+            //if(in_array($filetype, $allowed)) {
             // Check whether file exists before uploading it
                 // if(file_exists("upload/" . $filename)) {
                 //     echo $filename . " is already exists.";
@@ -66,13 +66,15 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                 //     } else {
                 //         echo "File is not uploaded";
                 //     }
-                // } 
-            } else{
+                // }
+                http_response_code(200);
+                echo json_encode(["message" => "great"]);
+            } else {
             echo "Error: There was a problem uploading your file. Please try again."; 
             }
         } else {
             echo "Error: " . $_FILES["anyfile"]["error"];
         }
-    }
-}
+//     }
+// }
 ?>

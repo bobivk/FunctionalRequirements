@@ -591,6 +591,7 @@ document.getElementById("import-project-sol-form").addEventListener('submit', (e
       method: 'POST',
       body: formData,
     }).then((response) => {
+      console.log(response)
       if(response.status == 400) {
         alert("Файлът не е във валиден формат.");
       }
