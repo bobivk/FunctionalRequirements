@@ -2,16 +2,16 @@
 require 'vendor/autoload.php';
 require_once("../../db/db.php");
 session_start();
-use Aws\S3\S3Client;
+//use Aws\S3\S3Client;
 
 if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
     $filename = $_FILES["files"]["tmp_name"][0];
     if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
     // Instantiate an Amazon S3 client.
-    $s3Client = new S3Client([
-        'version' => 'latest',
-        'region'  => 'eu-central-1'
-    ]);
+    // $s3Client = new S3Client([
+    //     'version' => 'latest',
+    //     'region'  => 'eu-central-1'
+    // ]);
     // Check if the form was submitted
         $project_id = $_POST["projectId"];
         // Check if file was uploaded without errors
@@ -70,10 +70,12 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                 http_response_code(200);
                 echo json_encode(["message" => "great"]);
             } else {
-            echo "Error: There was a problem uploading your file. Please try again."; 
+                http_response_code(418)
+                echo "Error: There was a problem uploading your file. Please try again."; 
             }
         } else {
-            echo "Error: " . $_FILES["anyfile"]["error"];
+            http_response_code(502);
+            echo "Error: " . $_FILES["files"]["error"];
         }
 //     }
 // }
