@@ -593,11 +593,11 @@ document.getElementById("import-project-sol-form").addEventListener('submit', (e
     }).then((response) => {
       console.log(response)
       if(response.status == 400) {
-        alert("Файлът не е във валиден формат.");
+        alert("Файлът не е във валиден формат. Файлът трябва да е в .zip или .rar формат и с максимален размер 10 MB.");
       }
       if(response.status == 200) {
         document.getElementById("import-project-sol-form").reset();
-        location.reload();
+        //location.reload();
       }
     });
     event.preventDefault();

@@ -2,17 +2,16 @@
 require '../../../vendor/autoload.php';
 require_once("../../db/db.php");
 session_start();
-//use Aws\S3\S3Client;
+use Aws\S3\S3Client;
 
-// if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
-//     $filename = $_FILES["files"]["tmp_name"][0];
-//     if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
-    // Instantiate an Amazon S3 client.
-    // $s3Client = new S3Client([
-    //     'version' => 'latest',
-    //     'region'  => 'eu-central-1'
-    // ]);
-    // Check if the form was submitted
+if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
+    $filename = $_FILES["files"]["tmp_name"][0];
+    if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
+    //Instantiate an Amazon S3 client.
+    $s3Client = new S3Client([
+        'version' => 'latest',
+        'region'  => 'eu-central-1'
+    ]);
         $project_id = $_POST["projectId"];
         // Check if file was uploaded without errors
             // $allowed = array("zip" => "file/zip", "rar" => "file/rar");
@@ -38,18 +37,19 @@ session_start();
                 //     echo $filename . " is already exists.";
                 // } else {
                 //     if(move_uploaded_file($_FILES["anyfile"]["tmp_name"], "upload/" . $filename)) {
-                //         $bucket = 'projects-functional-requirements';
-                //         $file_Path = __DIR__ . '/upload/'. $filename;
-                //         try {
-                //             $result = $s3Client->putObject([
-                //                 'Bucket' => $bucket,
-                //                 'Key'    => $project_id,
-                //                 'Body'   => fopen($file_Path, 'r'),
-                //                 'ACL'    => 'public-read', // make file 'public'
-                //             ]);
-                //             $file_url_in_s3 = $result->get('ObjectURL');
+                        $bucket = 'projects-functional-requirements';
+                        //$file_Path = __DIR__ . '/upload/'. $filename;
+                        try {
+                            $result = $s3Client->putObject([
+                                'Bucket' => $bucket,
+                                'Key'    => $project_id,
+                                'Body'   => fopen($filename, 'r'),
+                                'ACL'    => 'public-read', // make file 'public'
+                            ]);
+                            $file_url_in_s3 = $result->get('ObjectURL');
                 //             // save S3 URL to database
-                //             echo "File uploaded successfully. File path is: ". $file_url_in_s3;
+                http_response_code(200);
+                             echo "File uploaded successfully. File path is: ". $file_url_in_s3;
                 //             // $db = new DB();
                 //             // $connection = $db->getConnection();
                 //             // $sql = "UPDATE projects SET solution_s3_url=:solution_s3_url where id = :project_id";
@@ -77,6 +77,6 @@ session_start();
         //     http_response_code(502);
         //     echo "Error: " . $_FILES["files"]["error"];
         // }
-//     }
-// }
+    }
+}
 ?>
