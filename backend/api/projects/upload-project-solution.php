@@ -38,14 +38,14 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                 //     if(move_uploaded_file($_FILES["anyfile"]["tmp_name"], "upload/" . $filename)) {
                         $bucket = 'projects-functional-requirements';
                         //$file_Path = __DIR__ . '/upload/'. $filename;
-                        try {
-                            $result = $s3Client->putObject([
-                                'Bucket' => $bucket,
-                                'Key'    => $project_id,
-                                'Body'   => fopen($filename, 'r'),
-                                'ACL'    => 'public-read', // make file 'public'
-                            ]);
-                        }
+                        // try {
+                        //     $result = $s3Client->putObject([
+                        //         'Bucket' => $bucket,
+                        //         'Key'    => $project_id,
+                        //         'Body'   => fopen($filename, 'r'),
+                        //         'ACL'    => 'public-read', // make file 'public'
+                        //     ]);
+                        // }
 //                            $file_url_in_s3 = $result->get('ObjectURL');
                 //             // save S3 URL to database
                              //echo "File uploaded successfully. File path is: ";//. $file_url_in_s3;
