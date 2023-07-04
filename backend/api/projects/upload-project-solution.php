@@ -4,9 +4,9 @@ require_once("../../db/db.php");
 session_start();
 //use Aws\S3\S3Client;
 
-if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
-    $filename = $_FILES["files"]["tmp_name"][0];
-    if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
+// if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
+//     $filename = $_FILES["files"]["tmp_name"][0];
+//     if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
     // Instantiate an Amazon S3 client.
     // $s3Client = new S3Client([
     //     'version' => 'latest',
@@ -68,15 +68,15 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                 //     }
                 // }
                 http_response_code(200);
-                echo json_encode(["message" => "great"]);
-            } else {
-                http_response_code(418)
-                echo "Error: There was a problem uploading your file. Please try again."; 
-            }
-        } else {
-            http_response_code(502);
-            echo "Error: " . $_FILES["files"]["error"];
-        }
+                echo json_encode(["message" => "great, ". $project_id, " files: " => $_FILES]);
+        //     } else {
+        //         http_response_code(418)
+        //         echo "Error: There was a problem uploading your file. Please try again."; 
+        //     }
+        // } else {
+        //     http_response_code(502);
+        //     echo "Error: " . $_FILES["files"]["error"];
+        // }
 //     }
 // }
 ?>
