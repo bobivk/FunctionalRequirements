@@ -586,20 +586,30 @@ function removeMember() {
 document.getElementById("import-project-sol-form").addEventListener('submit', (event) => {
     const reqFile = document.getElementById("project-sol-import-file").files[0];
     const formData = new FormData();
-    formData.append('files[]', reqFile)
-    fetch("../../backend/api/projects/upload-project-solution.php?projectId=" + params.projectId, {
-      method: 'POST',
-      body: formData,
-    }).then((response) => {
-      console.log(response)
-      if(response.status == 400) {
-        alert("Файлът не е във валиден формат. Файлът трябва да е в .zip или .rar формат и с максимален размер 10 MB.");
-      }
-      if(response.status == 200) {
-        document.getElementById("import-project-sol-form").reset();
-        //location.reload();
-      }
-    });
+    const fs = require("fs");
+const aws = require("aws-sdk");
+const s3Client = new aws.S3();
+const Bucket = 'projects-functional-requirements';
+const stream = fs.createReadStream(reqFile);
+const Key = stream.path;
+
+const response = s3Client.upload({Bucket, Key, Body: stream}).promise();
+console.log(response);
+
+    // formData.append('files[]', reqFile)
+    // fetch("../../backend/api/projects/upload-project-solution.php?projectId=" + params.projectId, {
+    //   method: 'POST',
+    //   body: formData,
+    // }).then((response) => {
+    //   console.log(response)
+    //   if(response.status == 400) {
+    //     alert("Файлът не е във валиден формат. Файлът трябва да е в .zip или .rar формат и с максимален размер 10 MB.");
+    //   }
+    //   if(response.status == 200) {
+    //     document.getElementById("import-project-sol-form").reset();
+    //     //location.reload();
+    //   }
+    // });
     event.preventDefault();
 });
 
