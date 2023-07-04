@@ -40,16 +40,16 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                         $bucket = 'projects-functional-requirements';
                         //$file_Path = __DIR__ . '/upload/'. $filename;
                         try {
-                            $result = $s3Client->putObject([
-                                'Bucket' => $bucket,
-                                'Key'    => $project_id,
-                                'Body'   => fopen($filename, 'r'),
-                                'ACL'    => 'public-read', // make file 'public'
-                            ]);
-                            $file_url_in_s3 = $result->get('ObjectURL');
+                            // $result = $s3Client->putObject([
+                            //     'Bucket' => $bucket,
+                            //     'Key'    => $project_id,
+                            //     'Body'   => fopen($filename, 'r'),
+                            //     'ACL'    => 'public-read', // make file 'public'
+                            // ]);
+//                            $file_url_in_s3 = $result->get('ObjectURL');
                 //             // save S3 URL to database
                 http_response_code(200);
-                             echo "File uploaded successfully. File path is: ". $file_url_in_s3;
+                             echo "File uploaded successfully. File path is: ";//. $file_url_in_s3;
                 //             // $db = new DB();
                 //             // $connection = $db->getConnection();
                 //             // $sql = "UPDATE projects SET solution_s3_url=:solution_s3_url where id = :project_id";
