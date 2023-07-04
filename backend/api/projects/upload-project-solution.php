@@ -1,5 +1,5 @@
 <?php
-//require 'vendor/autoload.php';
+require '../../../vendor/autoload.php';
 require_once("../../db/db.php");
 session_start();
 //use Aws\S3\S3Client;
