@@ -10,7 +10,11 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
     if(isset($_FILES['files']) && !empty($filename) && $filesize > 0) //{
     $s3Client = new S3Client([
         'version' => 'latest',
-        'region'  => 'eu-central-1'
+        'region'  => 'eu-central-1',
+        'credentials' => [
+            'key' => 'AKIAQ4TFYYGN3PN3LA22',
+            'secret' => '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'
+        ]
     ]);
         $project_id = $_POST["projectId"];
         // Check if file was uploaded without errors
