@@ -192,9 +192,18 @@ function openImportReqModal() {
     document.getElementById("modal-import-requirements").style.display = "block";
 }
 
+function openImportProjectSolModal() {
+    document.getElementById("modal-import-project-solution").style.display = "block";
+}
+
 function closeImportModal() {
     document.getElementById("import-req-form").reset();
     document.getElementById("modal-import-requirements").style.display = "none";
+}
+
+function closeImportProjectSolModal() {
+    document.getElementById("import-project-sol-form").reset();
+    document.getElementById("modal-import-project-solution").style.display = "none";
 }
 
 function inEditMode() {
@@ -571,3 +580,39 @@ function removeMember() {
          }
      });
 }
+
+
+//upload project solution
+document.getElementById("import-project-sol-form").addEventListener('submit', (event) => {
+    const reqFile = document.getElementById("project-sol-import-file").files[0];
+    const formData = new FormData();
+    formData.append('files[]', reqFile)
+    fetch("../../backend/api/projects/upload-project-solution.php?projectId=" + params.projectId, {
+      method: 'POST',
+      body: formData,
+    }).then((response) => {
+      if(response.status == 400) {
+        alert("Файлът не е във валиден формат.");
+      }
+      if(response.status == 200) {
+        document.getElementById("import-project-sol-form").reset();
+        location.reload();
+      }
+    });
+    event.preventDefault();
+});
+
+
+//remove project solution
+function removeProjectSolution() {
+    let sureToDelete = confirm("Сигурни ли сте, че искате да изтриете това решение?");
+    if (sureToDelete) {
+        fetch('../../backend/api/projects/delete-project-solution.php?projectId=' + params.projectId, {
+            method: 'DELETE'
+        })
+        .then((response) => {
+            location.reload();
+        });
+    }
+}
+

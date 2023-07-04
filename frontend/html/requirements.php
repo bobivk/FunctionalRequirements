@@ -73,8 +73,8 @@ require_once("../../backend/session.php");
         <div class="card" >
             <div class="modify-project-info-btns">
             <?php if($_SESSION['userRoleId'] == 1) {
-                            echo "<button id='delete-project' class='action-button' onclick='deleteProject()'><i class='las la-trash-alt'></i> Изтрий проект</button>
-                            <button id='edit-project' class='action-button' onclick='openProjectModal()'><i class='las la-edit'></i> Редактирай проект</button>";
+                        echo "<button id='delete-project' class='action-button' onclick='deleteProject()'><i class='las la-trash-alt'></i> Изтрий проект</button>
+                        <button id='edit-project' class='action-button' onclick='openProjectModal()'><i class='las la-edit'></i> Редактирай проект</button>";
             }
             ?>
                 
@@ -103,6 +103,19 @@ require_once("../../backend/session.php");
                 <div clas="card-body" id="members-list">
                     <ul id="members">
                     </ul>                    
+                </div>
+            </div>
+        </div>
+
+        <div class="card upload-project-solution-card">
+            <div class="upload-project-solution-btns">
+                <button id="upload-project-solution" class="action-button" onclick="openImportProjectSolModal()"><i class="fa-solid fa-upload"></i> Прикачи решение</button>
+                <button id="remove-project-solution" class="action-button" onclick="removeProjectSolution()"><i class="las la-trash-alt"></i> Премахни решение</button>
+            </div>
+
+            <div id="project-solution">
+                <div class="card-header">
+                    <h3 id="project-solution-title">Прикачено решение: //да се изкарва някакъв файл нейм?</h3>
                 </div>
             </div>
         </div>
@@ -142,147 +155,164 @@ require_once("../../backend/session.php");
                         </div>
                     </div>
                 </div>
-
             </div>
+        </div>
 
-            <div id="req-modal">
-                <div class="form-popup" id="requirement-form">
-                    <form id="form-container">
-                        <h2>Ново изискване</h2>
+        <div id="req-modal">
+            <div class="form-popup" id="requirement-form">
+                <form id="form-container">
+                    <h2>Ново изискване</h2>
 
-                        <label for="type">Тип:</label>
-                        <select name="type" class="requirement-input form-input-field" id="type">
-                            <option value="Функционално">Функционално</option>
-                            <option value="Нефункционално">Нефункционално</option>
+                    <label for="type">Тип:</label>
+                    <select name="type" class="requirement-input form-input-field" id="type">
+                        <option value="Функционално">Функционално</option>
+                        <option value="Нефункционално">Нефункционално</option>
+                    </select>
+
+                    <label for="name">Име:</label>
+                    <input type="text" class="requirement-input form-input-field" placeholder="Име на изискването" name="name" required>
+
+                    <label for="priority">Приоритет:</label>
+                    <select name="priority" class="requirement-input form-input-field" id="priority">
+                        <option value="Must Have">Must Have</option>
+                        <option value="Nice To Have">Nice To Have</option>
+                        <option value="Improvement">Improvement</option>
+                    </select>
+
+                    <label for="layer">Слой:</label>
+                    <select name="layer" class="requirement-input form-input-field" id="layer">
+                        <option value="Бизнес логика">Бизнес логика</option>
+                        <option value="Клиентски">Клиентски</option>
+                        <option value="Рутиране">Рутиране</option>
+                        <option value="Бази данни">Бази данни</option>
+                        <option value="Тестване/Инсталиране">Тестване/Инсталиране</option>
                         </select>
 
-                        <label for="name">Име:</label>
-                        <input type="text" class="requirement-input form-input-field" placeholder="Име на изискването" name="name" required>
+                    <label for="story">User story:</label>
+                    <input type="text" class="requirement-input form-input-field" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
 
-                        <label for="priority">Приоритет:</label>
-                        <select name="priority" class="requirement-input form-input-field" id="priority">
-                            <option value="Must Have">Must Have</option>
-                            <option value="Nice To Have">Nice To Have</option>
-                            <option value="Improvement">Improvement</option>
-                        </select>
+                    <label for="description">Описание:</label>
+                    <input type="text" class="requirement-input form-input-field" placeholder="Описание на изискването" name="description" required>
 
-                        <label for="layer">Слой:</label>
-                        <select name="layer" class="requirement-input form-input-field" id="layer">
-                            <option value="Бизнес логика">Бизнес логика</option>
-                            <option value="Клиентски">Клиентски</option>
-                            <option value="Рутиране">Рутиране</option>
-                            <option value="Бази данни">Бази данни</option>
-                            <option value="Тестване/Инсталиране">Тестване/Инсталиране</option>
-                         </select>
+                    <label for="tags">Тагове:</label>
+                    <input type="text" class="requirement-input form-input-field" placeholder="Напр. #login" name="tags">
 
-                        <label for="story">User story:</label>
-                        <input type="text" class="requirement-input form-input-field" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
-
-                        <label for="description">Описание:</label>
-                        <input type="text" class="requirement-input form-input-field" placeholder="Описание на изискването" name="description" required>
-
-                        <label for="tags">Тагове:</label>
-                        <input type="text" class="requirement-input form-input-field" placeholder="Напр. #login" name="tags">
-
-                        <div class="add-requirement-btns">
-                            <button id="add-requirement-btn" class="btn action-button"><i class="fa-solid fa-plus"></i> Добави</button>
-                            <button id="cancel-add-requirement-btn" type="button" class="btn cancel action-button" onclick="closeRequirementsModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
-                        </div>
-                    </form>
-                </div>    
-            </div>
-
-            <div id="edit-req-modal">
-                <div class="form-popup" id="requirement-edit-form">
-                    <form id="form-container">
-                        <h2>Редактирай изискване</h2>
-
-                        <label for="type">Тип:</label>
-                        <select name="type" class="requirement-edit-input form-input-field" id="edit-req-type">
-                            <option value="Функционално">Функционално</option>
-                            <option value="Нефункционално">Нефункционално</option>
-                        </select>
-
-                        <label for="name">Име:</label>
-                        <input type="text" id="edit-req-name" class="requirement-edit-input form-input-field" placeholder="Име на изискването" name="name" required>
-
-                        <label for="priority">Приоритет:</label>
-                        <select name="priority" class="requirement-edit-input form-input-field" id="edit-req-priority">
-                            <option value="Must Have">Must Have</option>
-                            <option value="Nice To Have">Nice To Have</option>
-                            <option value="Improvement">Improvement</option>
-                        </select>
-
-                        <label for="layer">Слой:</label>
-                        <select name="layer" class="requirement-edit-input form-input-field" id="edit-req-layer">
-                            <option value="Бизнес логика">Бизнес логика</option>
-                            <option value="Клиентски">Клиентски</option>
-                            <option value="Рутиране">Рутиране</option>
-                            <option value="Бази данни">Бази данни</option>
-                            <option value="Тестване/Инсталиране">Тестване/Инсталиране</option>
-                         </select>
-
-                        <label for="story">User story:</label>
-                        <input type="text" id="edit-req-story" class="requirement-edit-input form-input-field" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
-
-                        <label for="description">Описание:</label>
-                        <input type="text"  id="edit-req-description" class="requirement-edit-input form-input-field" placeholder="Описание на изискването" name="description" required>
-
-                        <label for="tags">Тагове:</label>
-                        <input type="text" id="edit-req-tags" class="requirement-edit-input form-input-field" placeholder="Напр. #login" name="tags">
-
-                        <div class="edit-requirement-btns">
-                            <button id="edit-save-requirement-btn" class="btn  action-button"><i class="las la-save"></i></i> Запази</button>
-                            <button id="cancel-edit-requirement-btn" type="button" class="btn cancel action-button" onclick="closeEditRequirementsModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
-            <div id="project-modal">
-                <div class="form-popup" id="project-form">
-                    <form id="form-container">
-                        <h2>Редактиране на проект</h2>
-                        <label for="number">Номер на тема:</label>
-                        <input type="text" id="project-input-number" class="project-input form-input-field" name="number" required>
-
-                        <label for="name">Име:</label>
-                        <input type="text" id="project-input-name" class="project-input form-input-field" placeholder="Име на проекта" name="name" required>
-
-                        <label for="description">Описание:</label>
-                        <input type="text" id="project-input-description" class="project-input form-input-field" placeholder="Описание на проекта" name="description" required>
-
-                        <label for="proj-status">Статус:</label>
-                        <select name="status" id="project-input-status" class="project-input form-input-field" id="proj-status">
-                            <option value="незапочнат">незапочнат</option>
-                            <option value="чернова">чернова</option>
-                            <option value="завършен">завършен</option>
-                        </select>
-
-                        <div class="add-requirement-btns">
-                            <button id="save-project-btn" class="btn action-button"><i class="las la-save"></i></i> Запази</button>
-                            <button id="cancel-save-project-btn" onclick="closeProjectModal()" type="button" class="btn cancel action-button"><i class="fa-solid fa-xmark"></i> Затвори</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div id="modal-import-requirements">
-                    <div id="import-modal-req">
-                        <h2>Импорт на изискване</h2>
-                        <div>
-                            <h4>Изберете .csv файл с изисквания:</h4>
-                            <form id="import-req-form" action="" method="post" enctype="multipart/form-data">
-                                <input type="file" id="requirements-import-file"/>
-                                <div class="import-req-modal-btns">
-                                    <button id="import-chosen-req-file-btn"> <i class="fa-solid fa-upload"></i> Импорт</button>
-                                    <button id="cancel-import-req-btn" type="button" class="btn cancel" onclick="closeImportModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="add-requirement-btns">
+                        <button id="add-requirement-btn" class="btn action-button"><i class="fa-solid fa-plus"></i> Добави</button>
+                        <button id="cancel-add-requirement-btn" type="button" class="btn cancel action-button" onclick="closeRequirementsModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
                     </div>
+                </form>
+            </div>    
+        </div>
+
+        <div id="edit-req-modal">
+            <div class="form-popup" id="requirement-edit-form">
+                <form id="form-container">
+                    <h2>Редактирай изискване</h2>
+
+                    <label for="type">Тип:</label>
+                    <select name="type" class="requirement-edit-input form-input-field" id="edit-req-type">
+                        <option value="Функционално">Функционално</option>
+                        <option value="Нефункционално">Нефункционално</option>
+                    </select>
+
+                    <label for="name">Име:</label>
+                    <input type="text" id="edit-req-name" class="requirement-edit-input form-input-field" placeholder="Име на изискването" name="name" required>
+
+                    <label for="priority">Приоритет:</label>
+                    <select name="priority" class="requirement-edit-input form-input-field" id="edit-req-priority">
+                        <option value="Must Have">Must Have</option>
+                        <option value="Nice To Have">Nice To Have</option>
+                        <option value="Improvement">Improvement</option>
+                    </select>
+
+                    <label for="layer">Слой:</label>
+                    <select name="layer" class="requirement-edit-input form-input-field" id="edit-req-layer">
+                        <option value="Бизнес логика">Бизнес логика</option>
+                        <option value="Клиентски">Клиентски</option>
+                        <option value="Рутиране">Рутиране</option>
+                        <option value="Бази данни">Бази данни</option>
+                        <option value="Тестване/Инсталиране">Тестване/Инсталиране</option>
+                        </select>
+
+                    <label for="story">User story:</label>
+                    <input type="text" id="edit-req-story" class="requirement-edit-input form-input-field" placeholder="Напр. 'Като нов потребител, искам да се регистрирам в сайта.'" name="story" required>
+
+                    <label for="description">Описание:</label>
+                    <input type="text"  id="edit-req-description" class="requirement-edit-input form-input-field" placeholder="Описание на изискването" name="description" required>
+
+                    <label for="tags">Тагове:</label>
+                    <input type="text" id="edit-req-tags" class="requirement-edit-input form-input-field" placeholder="Напр. #login" name="tags">
+
+                    <div class="edit-requirement-btns">
+                        <button id="edit-save-requirement-btn" class="btn  action-button"><i class="las la-save"></i></i> Запази</button>
+                        <button id="cancel-edit-requirement-btn" type="button" class="btn cancel action-button" onclick="closeEditRequirementsModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="project-modal">
+            <div class="form-popup" id="project-form">
+                <form id="form-container">
+                    <h2>Редактиране на проект</h2>
+                    <label for="number">Номер на тема:</label>
+                    <input type="text" id="project-input-number" class="project-input form-input-field" name="number" required>
+
+                    <label for="name">Име:</label>
+                    <input type="text" id="project-input-name" class="project-input form-input-field" placeholder="Име на проекта" name="name" required>
+
+                    <label for="description">Описание:</label>
+                    <input type="text" id="project-input-description" class="project-input form-input-field" placeholder="Описание на проекта" name="description" required>
+
+                    <label for="proj-status">Статус:</label>
+                    <select name="status" id="project-input-status" class="project-input form-input-field" id="proj-status">
+                        <option value="незапочнат">незапочнат</option>
+                        <option value="чернова">чернова</option>
+                        <option value="завършен">завършен</option>
+                    </select>
+
+                    <div class="add-requirement-btns">
+                        <button id="save-project-btn" class="btn action-button"><i class="las la-save"></i></i> Запази</button>
+                        <button id="cancel-save-project-btn" onclick="closeProjectModal()" type="button" class="btn cancel action-button"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-import-requirements">
+            <div id="import-modal-req">
+                <h2>Импорт на изискване</h2>
+                <div>
+                    <h4>Изберете .csv файл с изисквания:</h4>
+                    <form id="import-req-form" action="" method="post" enctype="multipart/form-data">
+                        <input type="file" id="requirements-import-file"/>
+                        <div class="import-req-modal-btns">
+                            <button id="import-chosen-req-file-btn"> <i class="fa-solid fa-upload"></i> Импорт</button>
+                            <button id="cancel-import-req-btn" type="button" class="btn cancel" onclick="closeImportModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </div>
+
+        <div id="modal-import-project-solution">
+            <div id="import-modal-project-sol">
+                <h2>Прикачи проект</h2>
+                <div>
+                    <h4>Изберете файл за прикачване:</h4>
+                    <form id="import-project-sol-form" action="" method="post" enctype="multipart/form-data">
+                        <input type="file" id="project-sol-import-file"/>
+                        <div class="import-project-sol-modal-btns">
+                            <button id="import-chosen-project-sol-file-btn"> <i class="fa-solid fa-upload"></i> Прикачи</button>
+                            <button id="cancel-import-project-sol-btn" type="button" class="btn cancel" onclick="closeImportProjectSolModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </main>
 
 </body>

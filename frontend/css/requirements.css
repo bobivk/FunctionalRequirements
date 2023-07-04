@@ -224,7 +224,8 @@ main {
     padding-bottom: .5rem;
 }
 
-.team-members {
+.team-members,
+.upload-project-solution-card {
     margin-top: 2rem;
 }
 
@@ -321,7 +322,8 @@ td {
 #req-modal, 
 #project-modal, 
 #edit-req-modal,
-#modal-import-requirements {
+#modal-import-requirements,
+#modal-import-project-solution {
     display: none;
     position: fixed;
     z-index: 100;
@@ -333,8 +335,7 @@ td {
     transition: opacity 300ms ease-in-out;
 }
 
-#requirement-form, #requirement-edit-form, #import-modal-req {
-    /* , #project-form { */
+#requirement-form, #requirement-edit-form, #import-modal-req, #import-modal-project-sol {
     z-index: 1;
     border-radius: 20px;
     width: 90%;
@@ -352,7 +353,7 @@ td {
     font-family: 'Poppins', sans-serif;
 }
 
-#requirement-form h2, #requirement-edit-form h2, #import-modal-req h2 {
+#requirement-form h2, #requirement-edit-form h2, #import-modal-req h2, #import-modal-project-sol h2 {
     text-align: center;
     color: #f0f0f0;
 }
@@ -361,7 +362,7 @@ td {
     margin-bottom: 1.5rem;
 }
 
-#requirement-form h2::after, #requirement-edit-form h2::after, #import-modal-req h2::after {
+#requirement-form h2::after, #requirement-edit-form h2::after, #import-modal-req h2::after, #import-modal-project-sol h2::after {
     content: '';
     width: 30px;
     height: 4px;
@@ -375,7 +376,7 @@ td {
     margin-bottom:2rem;
 }
 
-.add-requirement-btns, .edit-requirement-btns, .import-req-modal-btns {
+.add-requirement-btns, .edit-requirement-btns, .import-req-modal-btns, .import-project-sol-modal-btns {
     display: inline-block;
     margin-top: 2rem;
     justify-content: space-between;
@@ -392,7 +393,23 @@ td {
 #cancel-save-requirement-btn,
 #import-chosen-req-file-btn,
 #cancel-import-req-btn,
-#logout-btn {
+#logout-btn,
+#cancel-import-project-sol-btn,
+#import-chosen-project-sol-file-btn
+{
+    background: var(--text-on-dark-background);
+    border-radius: 10px;
+    color: var(--main-color);
+    font-size: .8rem;
+    padding: .5rem 1rem;
+    border: 1px solid #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#upload-project-solution,
+#remove-project-solution
+{
     background: var(--text-on-dark-background);
     border-radius: 10px;
     color: var(--main-color);
@@ -436,7 +453,8 @@ td {
 /* project-info */
 .modify-project-info-btns,
 .edit-requirement-btns,
-.team-member-btns {
+.team-member-btns,
+.upload-project-solution-btns {
     display: inline-block;
     margin-top: 1rem;
     margin-left: 1rem;
@@ -453,7 +471,9 @@ td {
 #save-project,
 #close-edit-project,
 #add-member,
-#remove-member {
+#remove-member,
+#upload-project-solution,
+#remove-project-solution {
     background: var(--main-color);
     border-radius: 10px;
     color: var(--text-on-dark-background);
@@ -477,7 +497,11 @@ td {
 #import-chosen-req-file-btn:hover,
 #cancel-import-req-btn:hover,
 #add-member:hover,
-#remove-member:hover  {
+#remove-member:hover,
+#upload-project-solution:hover,
+#remove-project-solution:hover,
+#cancel-import-project-sol-btn:hover,
+#import-chosen-project-sol-file-btn:hover {
     transition: background 1s;
     background-color: #6601B0;
     color: #fff;
@@ -715,7 +739,7 @@ header {
     font-family: 'Poppins', sans-serif;
 }
 
-#project-modal h2, #req-modal h2, #edit-req-modal h2, #modal-import-requirements h2 {
+#project-modal h2, #req-modal h2, #edit-req-modal h2, #modal-import-requirements h2, #modal-import-project-solution h2 {
     text-align: center;
     color: #f0f0f0;
 }
