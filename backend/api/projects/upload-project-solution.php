@@ -4,12 +4,9 @@ require_once("../../db/db.php");
 session_start();
 //use Aws\S3\S3Client;
 
-var_dump($_FILES);
-echo json_encode($_FILES);
-http_response_code(200);
-// if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
-//     $filename = $_FILES["files"]["tmp_name"][0];
-//     if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
+//if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
+    $filename = $_FILES["files"]["tmp_name"][0];
+    if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) //{
     //Instantiate an Amazon S3 client.
     // $s3Client = new S3Client([
     //     'version' => 'latest',
