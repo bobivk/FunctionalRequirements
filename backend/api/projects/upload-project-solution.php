@@ -44,7 +44,7 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                             //     'SourceFile'   => './get-project.php',
                             //     'ACL'    => 'public-read', // make file 'public'
                             // ]);
-                            $output = shell_exec('aws s3 cp README.md s3://projects-functional-requirements');
+                            $output = shell_exec('aws s3 cp ./save-project.php s3://projects-functional-requirements');
                             echo $output;
                         // }
 //                            $file_url_in_s3 = $result->get('ObjectURL');
