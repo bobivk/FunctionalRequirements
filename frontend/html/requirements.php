@@ -115,7 +115,7 @@ require_once("../../backend/session.php");
 
             <div id="project-solution">
                 <div class="card-header">
-                    <h3 id="project-solution-title">Прикачено решение: //да се изкарва някакъв файл нейм?</h3>
+                    <h3 id="project-solution-title">Прикачено решение: </h3>
                 </div>
             </div>
         </div>
