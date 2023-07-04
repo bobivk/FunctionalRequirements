@@ -14,14 +14,14 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
     ]);
         $project_id = $_POST["projectId"];
         // Check if file was uploaded without errors
-            $allowed = array("zip" => "file/zip", "rar" => "file/rar");
+            //$allowed = array("zip" => "file/zip", "rar" => "file/rar");
             // $filetype = $_FILES["anyfile"]["type"];
             // Validate file extension
-            $ext = pathinfo($filename, PATHINFO_EXTENSION);
-            if(!array_key_exists($ext, $allowed)){
-                http_response_code(400);
-                echo json_encode(["message" => "Error: Please select a valid file format. Allowed formats: zip, rar"]);
-            }
+            // $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            // if(!array_key_exists($ext, $allowed)){
+            //     http_response_code(400);
+            //     echo json_encode(["message" => "Error: Please select a valid file format. Allowed formats: zip, rar"]);
+            // }
             // Validate file size - 10MB maximum
             $maxsize = 10 * 1024 * 1024;
             if($filesize > $maxsize) {
@@ -29,7 +29,7 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                 echo json_encode(["message" => "Error: Maximum file size is 10 MB"]);
             }
             //Validate type of the file
-            if(in_array($filetype, $allowed)) {
+            //if(in_array($filetype, $allowed)) {
             // Check whether file exists before uploading it
                 // if(file_exists("upload/" . $filename)) {
                 //     echo $filename . " is already exists.";
