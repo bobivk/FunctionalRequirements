@@ -7,9 +7,9 @@ session_start();
 var_dump($_FILES);
 echo json_encode($_FILES);
 http_response_code(200);
-if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
-    $filename = $_FILES["files"]["tmp_name"][0];
-    if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
+// if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
+//     $filename = $_FILES["files"]["tmp_name"][0];
+//     if(isset($_FILES['files']) && !empty($filename) && $_FILES["files"]["size"] > 0) {
     //Instantiate an Amazon S3 client.
     // $s3Client = new S3Client([
     //     'version' => 'latest',
@@ -42,7 +42,7 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                 //     if(move_uploaded_file($_FILES["anyfile"]["tmp_name"], "upload/" . $filename)) {
                         $bucket = 'projects-functional-requirements';
                         //$file_Path = __DIR__ . '/upload/'. $filename;
-                        try {
+                        //try {
                             // $result = $s3Client->putObject([
                             //     'Bucket' => $bucket,
                             //     'Key'    => $project_id,
@@ -80,6 +80,6 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
         //     http_response_code(502);
         //     echo "Error: " . $_FILES["files"]["error"];
         // }
-    }
-}
+    //}
+//}
 ?>
