@@ -40,8 +40,8 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                         // try {
                             $result = $s3Client->putObject([
                                 'Bucket' => $bucket,
-                                'Key'    => $project_id . $filename,
-                                'SourceFile'   => 'get-project.php',
+                                'Key'    => 'new_object_key_232132132112',//$project_id . $filename,
+                                'SourceFile'   => './get-project.php',
                                 'ACL'    => 'public-read', // make file 'public'
                             ]);
                         //     echo $result;
