@@ -4,18 +4,32 @@ require_once("../../db/db.php");
 session_start();
 use Aws\S3\S3Client;
 
-if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
-    $filename = $_FILES["files"]["tmp_name"][0];
-    $filesize = $_FILES["files"]["size"];
-    if(isset($_FILES['files']) && !empty($filename) && $filesize > 0) //{
-    $s3Client = new S3Client([
-        'version' => 'latest',
-        'region'  => 'eu-central-1',
-        'credentials' => [
-            'key' => 'AKIAQ4TFYYGN3PN3LA22',
-            'secret' => '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'
-        ]
-    ]);
+//if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
+    // $filename = $_FILES["files"]["tmp_name"][0];
+    // $filesize = $_FILES["files"]["size"];
+    // if(isset($_FILES['files']) && !empty($filename) && $filesize > 0) //{
+    // $s3Client = new S3Client([
+    //     'version' => 'latest',
+    //     'region'  => 'eu-central-1',
+    //     'credentials' => [
+    //         'key' => 'AKIAQ4TFYYGN3PN3LA22',
+    //         'secret' => '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'
+    //     ]
+    // ]);
+$sharedConfig = [
+    'region' => 'eu-central-1',
+    'version' => 'latest'
+];
+
+// Create an SDK class used to share configuration across clients.
+$sdk = new Aws\Sdk($sharedConfig);
+
+// Use an Aws\Sdk class to create the S3Client object.
+$s3 = $sdk->createS3();
+$result = $s3->listBuckets();
+foreach ($result['Buckets'] as $bucket) {
+    echo $bucket['Name'] . "\n";
+}
         $project_id = $_POST["projectId"];
         // Check if file was uploaded without errors
             $allowed = array("zip" => "file/zip", "rar" => "file/rar");
@@ -42,14 +56,14 @@ if(isset($_SESSION["userId"]) && isset($_SESSION["userRoleId"])) {
                 //     if(move_uploaded_file($_FILES["anyfile"]["tmp_name"], "upload/" . $filename)) {
                         $bucket = 'projects-functional-requirements';
                         //$file_Path = __DIR__ . '/upload/'. $filename;
-                        try {
-                            $result = $s3Client->putObject([
-                                'Bucket' => $bucket,
-                                'Key'    => $project_id,
-                                'Body'   => "hello world",
-                                'ACL'    => 'public-read', // make file 'public'
-                            ]);
-                        }
+                        // try {
+                        //     $result = $s3Client->putObject([
+                        //         'Bucket' => $bucket,
+                        //         'Key'    => $project_id,
+                        //         'Body'   => "hello world",
+                        //         'ACL'    => 'public-read', // make file 'public'
+                        //     ]);
+                        // }
 //                            $file_url_in_s3 = $result->get('ObjectURL');
                 //             // save S3 URL to database
                              //echo "File uploaded successfully. File path is: ";//. $file_url_in_s3;
